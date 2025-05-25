@@ -226,3 +226,29 @@
   padding: 20px 30px;
   cursor: pointer;
 }
+
+/* ========== new arrivals section css ========== */
+
+.new_arrivals {
+  max-width: 1320px;
+  margin: auto;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.card_1 {
+  background-image: url(/images/homepage/box.svg);
+  height: 370px;
+  width: 370px;
+}
+
+.new_arrivals .card_1 button {
+  margin-top: 5%;
+  margin-left: 20px;
+  background-color: #262626;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 15px;
+  cursor: pointer;
+}
