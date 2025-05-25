@@ -234,15 +234,60 @@
   margin: auto;
   margin-bottom: 20px;
   display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Optional: spacing between cards */
 }
 
 .card_1 {
   background-image: url(/images/homepage/box.svg);
-  height: 370px;
-  width: 370px;
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 300px;
+  position: relative;
+  overflow: hidden;
 }
 
-.new_arrivals .card_1 button {
+/* Hidden hover cart initially */
+.card_1 .hover_cart {
+  display: none;
+  height: 200px;
+  width: 300px;
+  background-color: teal;
+  margin-top: 120px;
+  transition: all 0.8s ease;
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 20px;
+  box-sizing: border-box;
+  justify-content: flex-end;
+}
+
+/* Show hover cart on card hover */
+.card_1:hover .hover_cart {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+/* Price section */
+.card_price {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.card_price p {
+  font-size: 20px;
+}
+
+.card_price .price {
+  opacity: 0.7;
+}
+
+/* Offer badge */
+.new_arrivals .card_1 .offer_percent {
   margin-top: 5%;
   margin-left: 20px;
   background-color: #262626;
@@ -251,4 +296,26 @@
   font-weight: bold;
   padding: 5px 15px;
   cursor: pointer;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+/* Hover buttons */
+.new_arrivals .card_1 .hover_cart button {
+  background-color: #f5f5f3;
+  padding: 10px 30px;
+  cursor: pointer;
+  gap: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  text-align: right;
+}
+
+.new_arrivals .card_1 .hover_cart button:hover {
+  background-color: #e0e0dc;
+  transform: translateY(-2px);
 }
