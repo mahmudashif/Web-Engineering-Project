@@ -89,3 +89,54 @@
   background-position: center; /* Keep the focal point centered */
   background-repeat: no-repeat; /* Prevent tiling */
 }
+
+/* ========== hero section css ========== */
+
+.sale_offer {
+  max-width: 1320px;
+  margin: auto;
+  justify-content: center;
+  margin-top: 100px;
+  height: 780px;
+}
+
+.lights_bg {
+  height: 780px;
+  width: 780px;
+  background-image: url("/images/homepage/lights.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.lights_bg h2 {
+  position: absolute;
+  margin-top: 60%;
+  margin-left: 50px;
+  font-size: 50px;
+  text-transform: capitalize;
+  font-weight: bold;
+}
+
+.lights_bg p {
+  position: absolute;
+  margin-top: 70%;
+  margin-left: 50px;
+  font-size: 20px;
+}
+
+.lights_bg p span {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.lights_bg button {
+  margin-top: 80%;
+  margin-left: 50px;
+  background-color: #262626;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px 30px;
+}
