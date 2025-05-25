@@ -1,0 +1,15 @@
+/* ========== navbar css ========== */
+
+.nav_main_div {
+  max-width: 1320px;
+  margin: auto;
+  justify-content: space-between;
+  display: flex;
+}
+
+.nav_item {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  font-size: 20px;
+}
