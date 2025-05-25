@@ -155,10 +155,74 @@
   background-image: url(/images/homepage/watch.svg);
   height: 280px;
   width: 684px;
+  position: relative;
+}
+
+.watch_bg h2 {
+  position: absolute;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 10%;
+  margin-left: 50px;
+}
+
+.watch_bg p {
+  position: absolute;
+  margin-top: 18%;
+  margin-left: 50px;
+  font-size: 20px;
+}
+
+.watch_bg p span {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.watch_bg button {
+  margin-top: 26%;
+  margin-left: 50px;
+  background-color: #262626;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px 30px;
+  cursor: pointer;
 }
 
 .lamp_bg {
   background-image: url(/images/homepage/lamp.svg);
   height: 280px;
   width: 684px;
+  position: relative;
+}
+
+.lamp_bg h2 {
+  position: absolute;
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 10%;
+  margin-left: 50px;
+}
+
+.lamp_bg p {
+  position: absolute;
+  margin-top: 18%;
+  margin-left: 50px;
+  font-size: 20px;
+}
+
+.lamp_bg p span {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.lamp_bg button {
+  margin-top: 26%;
+  margin-left: 50px;
+  background-color: #262626;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 20px 30px;
+  cursor: pointer;
 }
