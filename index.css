@@ -475,3 +475,7 @@
   justify-content: space-between;
   margin-top: 40px;
 }
+.hover1:hover{
+background-color: azure;
+color: black;
+}
