@@ -319,3 +319,49 @@
   background-color: #e0e0dc;
   transform: translateY(-2px);
 }
+
+/* ========== phone of the year banner section css ========== */
+
+.phone_of_the_year_banner_main{
+  background-image: url("/images/homepage/banner_phone_of_the_year.svg");
+  background-size: cover;
+  background-position: center;
+  height: 370px;
+  width: 1320px;
+  margin: auto;
+  margin-top: 100px;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 100px;
+}
+
+.phone_of_the_year_banner{
+  position: absolute;
+  margin-top: 100px;
+  margin-left: 50%;
+}
+
+.phone_of_the_year_banner h3{
+  font-size: 40px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.phone_of_the_year_banner p{
+  width: 600px;
+  font-size: 20px;
+  opacity: 70%;
+  margin-bottom: 10px;
+}
+
+.phone_of_the_year_banner button{
+  margin-top: 5%;
+  background-color: #262626;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 15px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 5px;
+}
