@@ -322,7 +322,7 @@
 
 /* ========== phone of the year banner section css ========== */
 
-.phone_of_the_year_banner_main{
+.phone_of_the_year_banner_main {
   background-image: url("/images/homepage/banner_phone_of_the_year.svg");
   background-size: cover;
   background-position: center;
@@ -335,26 +335,26 @@
   margin-bottom: 100px;
 }
 
-.phone_of_the_year_banner{
+.phone_of_the_year_banner {
   position: absolute;
   margin-top: 100px;
   margin-left: 50%;
 }
 
-.phone_of_the_year_banner h3{
+.phone_of_the_year_banner h3 {
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
-.phone_of_the_year_banner p{
+.phone_of_the_year_banner p {
   width: 600px;
   font-size: 20px;
   opacity: 70%;
   margin-bottom: 10px;
 }
 
-.phone_of_the_year_banner button{
+.phone_of_the_year_banner button {
   margin-top: 5%;
   background-color: #262626;
   color: white;
@@ -364,4 +364,50 @@
   cursor: pointer;
   display: inline-block;
   border-radius: 5px;
+}
+
+/* ========== special offer section css ========== */
+
+.special_offer_heading {
+  font-size: 36px;
+  font-weight: bold;
+  max-width: 1320px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
+.special_offer_main {
+  max-width: 1320px;
+  margin: auto;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.special_offer_main .card_1 .offer_percent {
+  margin-top: 5%;
+  margin-left: 20px;
+  background-color: #262626;
+  color: white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 5px 15px;
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 5px;
+}
+
+.special_offer_main .card_1 .hover_cart button {
+  background-color: #f5f5f3;
+  padding: 10px 30px;
+  cursor: pointer;
+  gap: 10px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  text-align: right;
 }
