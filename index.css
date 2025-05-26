@@ -251,8 +251,21 @@
   /* Optional: spacing between cards */
 }
 
-.card_1 {
+/* cart image  */
+#cart1_img {
   background-image: url(/images/homepage/box.svg);
+}
+#cart2_img{
+  background-image: url(/images/homepage/clock.svg);
+}
+#cart3_img{
+  background-image: url(/images/homepage/bag.svg);
+}
+#cart4_img{
+  background-image: url(/images/homepage/cat.svg);
+}
+
+.card_1 {
   background-size: cover;
   background-position: center;
   height: 300px;
