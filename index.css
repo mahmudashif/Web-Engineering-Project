@@ -84,10 +84,14 @@
   width: 100%;
   height: 600px;
   /* Background image */
-  background-image: url("/images/homepage/banner.svg"); /* ← replace with your image */
-  background-size: cover; /* Fill the entire section */
-  background-position: center; /* Keep the focal point centered */
-  background-repeat: no-repeat; /* Prevent tiling */
+  background-image: url("/images/homepage/banner.svg");
+  /* ← replace with your image */
+  background-size: cover;
+  /* Fill the entire section */
+  background-position: center;
+  /* Keep the focal point centered */
+  background-repeat: no-repeat;
+  /* Prevent tiling */
 }
 
 /* ========== hero section css ========== */
@@ -243,7 +247,8 @@
   margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
-  gap: 20px; /* Optional: spacing between cards */
+  gap: 20px;
+  /* Optional: spacing between cards */
 }
 
 .card_1 {
@@ -453,4 +458,13 @@
 .footer_main .footer #list_item h2 {
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.footer_icon_main {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  gap: 15px;
+ margin-top: 24px;
+ margin-left: 85px;
 }
