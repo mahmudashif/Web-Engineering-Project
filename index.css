@@ -424,6 +424,9 @@
 
 .footer_main {
   background-color: #f5f5f3;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 60px;
 }
 
 .footer {
@@ -431,4 +434,23 @@
   margin: auto;
   display: flex;
   justify-content: space-between;
+}
+
+.footer_main .footer #list_item ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 21px;
+  opacity: 70%;
+}
+
+.footer_main .footer #list_item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer_main .footer #list_item h2 {
+  text-transform: uppercase;
+  font-weight: bold;
 }
