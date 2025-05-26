@@ -229,6 +229,14 @@
 
 /* ========== new arrivals section css ========== */
 
+.new_arrivals_heading {
+  font-size: 36px;
+  font-weight: bold;
+  max-width: 1320px;
+  margin: auto;
+  margin-bottom: 20px;
+}
+
 .new_arrivals {
   max-width: 1320px;
   margin: auto;
