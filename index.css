@@ -393,6 +393,19 @@
 }
 
 /* ========== special offer section css ========== */
+/* cart image */
+#cart1_img_special {
+  background-image: url(/images/homepage/cap.svg);
+}
+#cart2_img_special {
+  background-image: url(/images/homepage/table.svg);
+}
+#cart3_img_special {
+  background-image: url(/images/homepage/headphone.svg);
+}
+#cart4_img_special {
+  background-image: url(/images/homepage/sunglases.svg);
+}
 
 .special_offer_heading {
   font-size: 36px;
