@@ -490,6 +490,12 @@
   font-weight: bold;
 }
 
+.footer .address_main{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .footer_icon_main {
   height: 24px;
   width: 24px;
