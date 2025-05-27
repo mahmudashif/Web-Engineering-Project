@@ -255,13 +255,13 @@
 #cart1_img {
   background-image: url(/images/homepage/box.svg);
 }
-#cart2_img{
+#cart2_img {
   background-image: url(/images/homepage/clock.svg);
 }
-#cart3_img{
+#cart3_img {
   background-image: url(/images/homepage/bag.svg);
 }
-#cart4_img{
+#cart4_img {
   background-image: url(/images/homepage/cat.svg);
 }
 
@@ -392,6 +392,10 @@
   border-radius: 5px;
 }
 
+.phone_of_the_year_banner_shop_now_button:hover {
+  background-color: #434141;
+}
+
 /* ========== special offer section css ========== */
 /* cart image */
 #cart1_img_special {
@@ -500,8 +504,4 @@
   align-items: center;
   justify-content: space-between;
   margin-top: 40px;
-}
-.hover1:hover{
-background-color: azure;
-color: black;
 }
