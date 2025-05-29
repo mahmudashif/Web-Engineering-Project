@@ -1,0 +1,33 @@
+.about_main {
+  max-width: 1320px;
+  margin: auto;
+  margin-top: 80px;
+}
+
+.about_image {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.box_img {
+  background-image: url(/images/homepage/box.svg);
+  background-size: cover;
+  background-position: center;
+  width: 680px; /* adjust as needed */
+  height: 680px; /* adjust as needed */
+  position: relative; /* needed for absolute positioning of button */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.box_img button {
+  padding: 10px 20px;
+  background-color: teal;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
