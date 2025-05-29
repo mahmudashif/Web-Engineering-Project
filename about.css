@@ -39,3 +39,25 @@
 .box_img button:hover {
   background-color: darkcyan;
 }
+
+/* ========== about description part css ========== */
+
+.about_description h4 {
+  max-width: 1320px;
+  margin: auto;
+  margin-top: 20px;
+  font-size: 36px;
+  opacity: 70%;
+}
+
+.about_description .about_description_title_main {
+  display: flex;
+  max-width: 1320px;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.about_description .about_description_title {
+  margin-top: 40px;
+  width: 30%;
+}
