@@ -115,3 +115,28 @@ img {
   gap: 30px;
   justify-content: flex-end;
 }
+
+/* ========== navbar active status ========== */
+
+.nav_item a {
+  position: relative;
+  text-decoration: none;
+  color: black; /* default color */
+}
+
+.nav_item a.active {
+  color: teal;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.nav_item a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px; /* space between text and line */
+  height: 3px;
+  width: 100%;
+  background-color: teal;
+  border-radius: 2px;
+}
