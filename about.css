@@ -22,12 +22,18 @@
 }
 
 .box_img button {
-  padding: 10px 20px;
+  padding: 20px 40px;
   background-color: teal;
   color: white;
   border: none;
   border-radius: 5px;
   font-weight: bold;
+  font-size: 24px;
   cursor: pointer;
   transition: background-color 0.3s;
+  margin-top: 500px;
+}
+
+.box_img button:hover {
+  background-color: darkcyan;
 }
