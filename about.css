@@ -7,23 +7,25 @@
 .about_image {
   margin-top: 50px;
   margin-bottom: 50px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .box_img {
   background-image: url(/images/homepage/box.svg);
   background-size: cover;
   background-position: center;
-  width: 680px; /* adjust as needed */
-  height: 680px; /* adjust as needed */
-  position: relative; /* needed for absolute positioning of button */
+  width: 650px;
+  height: 650px;
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
 .box_img button {
-  padding: 20px 40px;
-  background-color: teal;
+  padding: 20px 30px;
+  background-color: #262626;
   color: white;
   border: none;
   border-radius: 5px;
