@@ -61,3 +61,13 @@
   margin-top: 40px;
   width: 30%;
 }
+
+.description_title {
+  font-size: 26px;
+  margin-bottom: 16px;
+}
+
+.description_product {
+  font-size: 20px;
+  opacity: 0.7;
+}
