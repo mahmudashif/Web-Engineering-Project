@@ -18,6 +18,12 @@ async function loadSharedComponents() {
     const navbarHtml = await navbarResponse.text();
     document.getElementById('navbar-placeholder').innerHTML = navbarHtml;
 
+    // Check if we're on the shop page and load search/filter
+    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+    if (currentPage === 'shop.html') {
+      await loadShopSearchFilter();
+    }
+
     // Load footer
     const footerResponse = await fetch('/shared/footer.html');
     const footerHtml = await footerResponse.text();
@@ -30,6 +36,26 @@ async function loadSharedComponents() {
     initializeMobileMenu();
   } catch (error) {
     console.error('Error loading shared components:', error);
+  }
+}
+
+// Function to load shop search filter component
+async function loadShopSearchFilter() {
+  try {
+    // Load search filter CSS
+    loadCSS('/shared/shop-search-filter.css');
+    
+    // Load search filter HTML
+    const searchFilterResponse = await fetch('/shared/shop-search-filter.html');
+    const searchFilterHtml = await searchFilterResponse.text();
+    
+    // Insert search filter after navbar
+    const navbarPlaceholder = document.getElementById('navbar-placeholder');
+    const searchFilterDiv = document.createElement('div');
+    searchFilterDiv.innerHTML = searchFilterHtml;
+    navbarPlaceholder.insertAdjacentElement('afterend', searchFilterDiv.firstElementChild);
+  } catch (error) {
+    console.error('Error loading shop search filter:', error);
   }
 }
 
