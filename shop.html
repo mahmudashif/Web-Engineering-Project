@@ -12,7 +12,348 @@
     <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
 
+    <!-- Shop Section -->
+    <section class="shop-section">
+      <div class="container">
+        <div class="shop-layout">
+          <!-- Sidebar Filters -->
+          <aside class="shop-sidebar">
+            <div class="filter-section">
+              <h3>Categories</h3>
+              <ul class="category-list">
+                <li><a href="#" class="active" onclick="filterProducts('all')">All Products</a></li>
+                <li><a href="#" onclick="filterProducts('smartphones')">Smartphones</a></li>
+                <li><a href="#" onclick="filterProducts('laptops')">Laptops</a></li>
+                <li><a href="#" onclick="filterProducts('headphones')">Headphones</a></li>
+                <li><a href="#" onclick="filterProducts('smartwatches')">Smart Watches</a></li>
+                <li><a href="#" onclick="filterProducts('accessories')">Accessories</a></li>
+              </ul>
+            </div>
+            
+            <div class="filter-section">
+              <h3>Price Range</h3>
+              <div class="price-ranges">
+                <label class="price-option">
+                  <input type="checkbox" name="price" value="0-100">
+                  <span>$0 - $100</span>
+                </label>
+                <label class="price-option">
+                  <input type="checkbox" name="price" value="100-500">
+                  <span>$100 - $500</span>
+                </label>
+                <label class="price-option">
+                  <input type="checkbox" name="price" value="500-1000">
+                  <span>$500 - $1000</span>
+                </label>
+                <label class="price-option">
+                  <input type="checkbox" name="price" value="1000+">
+                  <span>$1000+</span>
+                </label>
+              </div>
+            </div>
+          </aside>
+
+          <!-- Main Content -->
+          <main class="shop-main">
+            <!-- Sort & Filter Bar -->
+            <div class="shop-controls">
+              <div class="results-count">
+                <span>Showing <strong>24</strong> products</span>
+              </div>
+              <div class="sort-controls">
+                <select class="sort-select">
+                  <option value="default">Sort by: Default</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                  <option value="name">Name: A to Z</option>
+                  <option value="rating">Rating: High to Low</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="products-grid">
+              <!-- Smartphones -->
+              <div class="product-card" data-category="smartphones">
+                <div class="product-image">
+                  <div class="image-placeholder">📱</div>
+                  <div class="product-badges">
+                    <span class="badge new">New</span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h4>iPhone 15 Pro</h4>
+                  <p class="product-description">Latest flagship smartphone with titanium design</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-count">(127)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$1,199</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <div class="product-card" data-category="smartphones">
+                <div class="product-image">
+                  <div class="image-placeholder">📱</div>
+                  <div class="product-badges">
+                    <span class="badge sale">Sale</span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h4>Samsung Galaxy S24</h4>
+                  <p class="product-description">Premium Android smartphone with AI features</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating-count">(89)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$899</span>
+                    <span class="old-price">$1,099</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <!-- Laptops -->
+              <div class="product-card" data-category="laptops">
+                <div class="product-image">
+                  <div class="image-placeholder">💻</div>
+                </div>
+                <div class="product-info">
+                  <h4>MacBook Pro 16"</h4>
+                  <p class="product-description">Professional laptop with M3 Pro chip</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-count">(156)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$2,499</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <div class="product-card" data-category="laptops">
+                <div class="product-image">
+                  <div class="image-placeholder">💻</div>
+                  <div class="product-badges">
+                    <span class="badge hot">Hot</span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h4>Dell XPS 13</h4>
+                  <p class="product-description">Ultra-portable laptop with InfinityEdge display</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating-count">(98)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$1,299</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <!-- Headphones -->
+              <div class="product-card" data-category="headphones">
+                <div class="product-image">
+                  <div class="image-placeholder">🎧</div>
+                </div>
+                <div class="product-info">
+                  <h4>AirPods Pro 2</h4>
+                  <p class="product-description">Wireless earbuds with active noise cancellation</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-count">(234)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$249</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <div class="product-card" data-category="headphones">
+                <div class="product-image">
+                  <div class="image-placeholder">🎧</div>
+                  <div class="product-badges">
+                    <span class="badge sale">Sale</span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h4>Sony WH-1000XM5</h4>
+                  <p class="product-description">Premium noise-canceling over-ear headphones</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-count">(178)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$349</span>
+                    <span class="old-price">$399</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <!-- Smart Watches -->
+              <div class="product-card" data-category="smartwatches">
+                <div class="product-image">
+                  <div class="image-placeholder">⌚</div>
+                  <div class="product-badges">
+                    <span class="badge new">New</span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h4>Apple Watch Ultra 2</h4>
+                  <p class="product-description">Ultimate sports and adventure smartwatch</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-count">(145)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$799</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <div class="product-card" data-category="smartwatches">
+                <div class="product-image">
+                  <div class="image-placeholder">⌚</div>
+                </div>
+                <div class="product-info">
+                  <h4>Samsung Galaxy Watch 6</h4>
+                  <p class="product-description">Advanced health and fitness tracking</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating-count">(92)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$329</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <!-- Accessories -->
+              <div class="product-card" data-category="accessories">
+                <div class="product-image">
+                  <div class="image-placeholder">🔌</div>
+                </div>
+                <div class="product-info">
+                  <h4>MagSafe Charger</h4>
+                  <p class="product-description">Wireless charging pad for iPhone</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating-count">(67)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$39</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <div class="product-card" data-category="accessories">
+                <div class="product-image">
+                  <div class="image-placeholder">🔋</div>
+                  <div class="product-badges">
+                    <span class="badge hot">Hot</span>
+                  </div>
+                </div>
+                <div class="product-info">
+                  <h4>Anker PowerBank 20K</h4>
+                  <p class="product-description">High-capacity portable charger</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★★</span>
+                    <span class="rating-count">(201)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$59</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <div class="product-card" data-category="accessories">
+                <div class="product-image">
+                  <div class="image-placeholder">📷</div>
+                </div>
+                <div class="product-info">
+                  <h4>Ring Light Pro</h4>
+                  <p class="product-description">Professional LED ring light for content creation</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating-count">(83)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$89</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+
+              <div class="product-card" data-category="accessories">
+                <div class="product-image">
+                  <div class="image-placeholder">🖱️</div>
+                </div>
+                <div class="product-info">
+                  <h4>Magic Mouse</h4>
+                  <p class="product-description">Wireless multi-touch mouse</p>
+                  <div class="product-rating">
+                    <span class="stars">★★★★☆</span>
+                    <span class="rating-count">(124)</span>
+                  </div>
+                  <div class="product-price">
+                    <span class="current-price">$79</span>
+                  </div>
+                  <button class="add-to-cart">Add to Cart</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+              <button class="page-btn active">1</button>
+              <button class="page-btn">2</button>
+              <button class="page-btn">3</button>
+              <span class="page-dots">...</span>
+              <button class="page-btn">10</button>
+              <button class="page-btn next">Next →</button>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
+
+    <script>
+      function filterProducts(category) {
+        const products = document.querySelectorAll('.product-card');
+        const categoryLinks = document.querySelectorAll('.category-list a');
+        
+        // Update active category
+        categoryLinks.forEach(link => link.classList.remove('active'));
+        event.target.classList.add('active');
+        
+        // Filter products
+        products.forEach(product => {
+          if (category === 'all' || product.dataset.category === category) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+        
+        // Update results count
+        const visibleProducts = document.querySelectorAll('.product-card[style*="block"], .product-card:not([style*="none"])');
+        document.querySelector('.results-count strong').textContent = visibleProducts.length;
+      }
+    </script>
   </body>
 </html>
