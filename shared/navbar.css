@@ -1,0 +1,311 @@
+/* ========== navbar css ========== */
+
+.nav_main_div {
+  max-width: 1320px;
+  margin: auto;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding: 30px 0;
+  position: relative;
+}
+
+.nav_logo a {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.nav_item {
+  display: flex;
+  flex-direction: row;
+  gap: 100px;
+  font-size: 20px;
+}
+
+/* Mobile menu toggle button */
+.mobile_menu_toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.mobile_menu_toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+/* Mobile menu toggle animation */
+.mobile_menu_toggle.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.mobile_menu_toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.mobile_menu_toggle.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* ========== search section css ========== */
+
+.search_seciton {
+  background: #f5f5f3;
+  padding: 1px 0;
+}
+
+.search_seciton_container {
+  max-width: 1320px;
+  display: flex;
+  align-items: center;
+  margin: auto;
+  justify-content: space-between;
+}
+
+.search_box {
+  display: flex;
+  align-items: center;
+  max-width: 40%;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search_box input {
+  flex: 1;
+  padding: 10px 15px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.search_box button {
+  padding: 10px 20px;
+  color: black;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s;
+}
+
+.search_box button:hover {
+  background-color: transparent;
+  font: bold;
+}
+
+.shop_by_category {
+  width: 30%;
+  display: flex;
+}
+
+.shop_by_category p {
+  margin-left: 10px;
+}
+
+.cart {
+  width: 30%;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: flex-end;
+}
+
+/* ========== navbar active status ========== */
+
+.nav_item a {
+  position: relative;
+  text-decoration: none;
+  color: black; /* default color */
+}
+
+.nav_item a.active {
+  color: teal;
+  font-weight: bold;
+  font-size: 24px;
+}
+
+.nav_item a.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px; /* space between text and line */
+  height: 3px;
+  width: 100%;
+  background-color: teal;
+  border-radius: 2px;
+}
+
+/* ========== Navbar Responsive Design ========== */
+
+/* Mobile styles (up to 768px) */
+@media screen and (max-width: 768px) {
+  /* Navbar responsive */
+  .nav_main_div {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+  }
+
+  .mobile_menu_toggle {
+    display: flex;
+  }
+
+  .nav_menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    display: none;
+    z-index: 1000;
+    transition: all 0.3s ease;
+  }
+
+  .nav_menu.active {
+    display: block;
+    animation: slideDown 0.3s ease;
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .nav_item {
+    flex-direction: column;
+    gap: 0;
+    padding: 20px;
+  }
+
+  .nav_item li {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+    text-align: center;
+  }
+
+  .nav_item li:last-child {
+    border-bottom: none;
+  }
+
+  .nav_item a {
+    font-size: 18px;
+    display: block;
+    padding: 10px;
+  }
+
+  /* Search section responsive */
+  .search_seciton_container {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+
+  .shop_by_category {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .search_box {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+  }
+
+  .cart {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Tablet styles (769px to 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Navbar responsive */
+  .nav_main_div {
+    padding: 25px 20px;
+  }
+
+  .nav_item {
+    gap: 40px;
+    font-size: 18px;
+  }
+
+  .mobile_menu_toggle {
+    display: none;
+  }
+
+  /* Search section responsive */
+  .search_seciton_container {
+    padding: 0 20px;
+  }
+
+  .shop_by_category {
+    width: 25%;
+  }
+
+  .shop_by_category p {
+    font-size: 14px;
+  }
+
+  .search_box {
+    max-width: 50%;
+  }
+
+  .cart {
+    width: 25%;
+  }
+}
+
+/* Small mobile styles (up to 480px) */
+@media screen and (max-width: 480px) {
+  .nav_main_div {
+    padding: 15px;
+  }
+
+  .nav_logo a {
+    font-size: 20px;
+  }
+
+  .search_seciton_container {
+    padding: 10px;
+  }
+
+  .shop_by_category p {
+    font-size: 12px;
+  }
+
+  .search_box input {
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .search_box button {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
+
+  .cart img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Large screens (1025px and up) */
+@media screen and (min-width: 1025px) {
+  /* Ensure max-width containers don't get too wide on very large screens */
+  .nav_main_div,
+  .search_seciton_container {
+    max-width: 1320px;
+  }
+}

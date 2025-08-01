@@ -1,0 +1,156 @@
+/* ========== footer section css ========== */
+
+.footer_main {
+  background-color: #f5f5f3;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  margin-top: 60px;
+}
+
+.footer {
+  max-width: 1320px;
+  margin: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer_main .footer #list_item ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 21px;
+  opacity: 70%;
+}
+
+.footer_main .footer #list_item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer_main .footer #list_item h2 {
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.footer .address_main {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer_icon_main {
+  height: 24px;
+  width: 24px;
+  display: flex;
+  gap: 25px;
+}
+
+#footer_icon_main {
+  display: flex;
+  max-width: 1320px;
+  margin: auto;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+/* ========== Footer Responsive Design ========== */
+
+/* Mobile styles (up to 768px) */
+@media screen and (max-width: 768px) {
+  /* Footer responsive */
+  .footer {
+    flex-direction: column;
+    gap: 30px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .footer_main .footer #list_item ul {
+    gap: 8px;
+    font-size: 18px;
+  }
+
+  .footer .address_main {
+    gap: 8px;
+  }
+
+  #footer_icon_main {
+    flex-direction: column;
+    gap: 20px;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .footer_icon_main {
+    justify-content: center;
+  }
+}
+
+/* Tablet styles (769px to 1024px) */
+@media screen and (min-width: 769px) and (max-width: 1024px) {
+  /* Footer responsive */
+  .footer {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 0 20px;
+    justify-content: space-around;
+  }
+
+  .footer_main .footer #list_item {
+    min-width: 200px;
+    flex: 1;
+  }
+
+  .footer .address_main {
+    min-width: 250px;
+  }
+
+  #footer_icon_main {
+    padding: 0 20px;
+  }
+}
+
+/* Small mobile styles (up to 480px) */
+@media screen and (max-width: 480px) {
+  .footer_main {
+    padding: 30px 0;
+  }
+
+  .footer {
+    padding: 0 15px;
+    gap: 25px;
+  }
+
+  .footer_main .footer #list_item h2 {
+    font-size: 18px;
+  }
+
+  .footer_main .footer #list_item ul {
+    font-size: 16px;
+  }
+
+  .footer .address_main h2 {
+    font-size: 18px;
+  }
+
+  #footer_icon_main {
+    padding: 0 15px;
+    gap: 15px;
+  }
+
+  .footer_icon_main img {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Large screens (1025px and up) */
+@media screen and (min-width: 1025px) {
+  /* Ensure max-width containers don't get too wide on very large screens */
+  .footer,
+  #footer_icon_main {
+    max-width: 1320px;
+  }
+}
