@@ -1,176 +1,258 @@
 /* ========== hero section css ========== */
+
+.hero_section {
+  width: 100%;
+  position: relative;
+}
+
 .hero_img {
   width: 100%;
   height: 600px;
-  /* Background image */
   background-image: url("/images/homepage/banner.svg");
-  /* ← replace with your image */
   background-size: cover;
-  /* Fill the entire section */
   background-position: center;
-  /* Keep the focal point centered */
   background-repeat: no-repeat;
-  /* Prevent tiling */
 }
 
-/* ========== hero section css ========== */
+.info_section {
+  max-width: 1320px;
+  margin: 40px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+.info_section img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ========== sale offer section css ========== */
 
 .sale_offer {
   max-width: 1320px;
-  margin: auto;
-  justify-content: center;
-  margin-top: 100px;
-  height: 780px;
+  margin: 80px auto;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 30px;
 }
 
 .lights_bg {
   height: 580px;
-  width: 580px;
+  width: 100%;
+  max-width: 580px;
   background-image: url("/images/homepage/lights.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lights_bg:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
 }
 
 .lights_bg h2 {
   position: absolute;
-  margin-top: 60%;
-  margin-left: 50px;
-  font-size: 50px;
+  bottom: 30%;
+  left: 50px;
+  font-size: clamp(32px, 5vw, 50px);
   text-transform: capitalize;
   font-weight: bold;
+  color: #262626;
 }
 
 .lights_bg p {
   position: absolute;
-  margin-top: 70%;
-  margin-left: 50px;
-  font-size: 20px;
+  bottom: 20%;
+  left: 50px;
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: #262626;
 }
 
 .lights_bg p span {
-  font-size: 30px;
+  font-size: clamp(20px, 3.5vw, 30px);
   font-weight: bold;
+  color: #262626;
 }
 
 .lights_bg button {
-  margin-top: 80%;
-  margin-left: 50px;
+  position: absolute;
+  bottom: 10%;
+  left: 50px;
   background-color: #262626;
   color: white;
-  font-size: 20px;
+  font-size: clamp(16px, 2.5vw, 20px);
   font-weight: bold;
-  padding: 20px 30px;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lights_bg button:hover {
+  background-color: #434141;
+  transform: translateY(-2px);
 }
 
 .sale_offer_rightside {
   display: flex;
   flex-direction: column;
   gap: 20px;
+  width: 100%;
+  max-width: 684px;
 }
 
 .watch_bg {
   background-image: url(/images/homepage/watch.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 280px;
-  width: 684px;
+  width: 100%;
   position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.watch_bg:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .watch_bg h2 {
   position: absolute;
-  font-size: 40px;
+  top: 15%;
+  left: 50px;
+  font-size: clamp(24px, 4vw, 40px);
   font-weight: bold;
-  margin-top: 10%;
-  margin-left: 50px;
+  color: #262626;
 }
 
 .watch_bg p {
   position: absolute;
-  margin-top: 18%;
-  margin-left: 50px;
-  font-size: 20px;
+  top: 35%;
+  left: 50px;
+  font-size: clamp(14px, 2.5vw, 20px);
+  color: #262626;
 }
 
 .watch_bg p span {
-  font-size: 30px;
+  font-size: clamp(18px, 3vw, 30px);
   font-weight: bold;
+  color: #262626;
 }
 
 .watch_bg button {
-  margin-top: 26%;
-  margin-left: 50px;
+  position: absolute;
+  top: 55%;
+  left: 50px;
   background-color: #262626;
   color: white;
-  font-size: 20px;
+  font-size: clamp(14px, 2.5vw, 20px);
   font-weight: bold;
-  padding: 20px 30px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.watch_bg button:hover {
+  background-color: #434141;
+  transform: translateY(-2px);
 }
 
 .lamp_bg {
   background-image: url(/images/homepage/lamp.svg);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   height: 280px;
-  width: 684px;
+  width: 100%;
   position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.lamp_bg:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
 }
 
 .lamp_bg h2 {
   position: absolute;
-  font-size: 40px;
+  top: 15%;
+  left: 50px;
+  font-size: clamp(24px, 4vw, 40px);
   font-weight: bold;
-  margin-top: 10%;
-  margin-left: 50px;
+  color: #262626;
 }
 
 .lamp_bg p {
   position: absolute;
-  margin-top: 18%;
-  margin-left: 50px;
-  font-size: 20px;
+  top: 35%;
+  left: 50px;
+  font-size: clamp(14px, 2.5vw, 20px);
+  color: #262626;
 }
 
 .lamp_bg p span {
-  font-size: 30px;
+  font-size: clamp(18px, 3vw, 30px);
   font-weight: bold;
+  color: #262626;
 }
 
 .lamp_bg button {
-  margin-top: 26%;
-  margin-left: 50px;
+  position: absolute;
+  top: 55%;
+  left: 50px;
   background-color: #262626;
   color: white;
-  font-size: 20px;
+  font-size: clamp(14px, 2.5vw, 20px);
   font-weight: bold;
-  padding: 20px 30px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.lamp_bg button:hover {
+  background-color: #434141;
+  transform: translateY(-2px);
 }
 
 /* ========== new arrivals section css ========== */
 
 .new_arrivals_heading {
-  font-size: 36px;
+  font-size: clamp(28px, 4vw, 36px);
   font-weight: bold;
   max-width: 1320px;
-  margin: auto;
-  margin-bottom: 20px;
+  margin: 80px auto 40px;
+  padding: 0 20px;
+  color: #262626;
 }
 
 .new_arrivals {
   max-width: 1320px;
-  margin: auto;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  /* Optional: spacing between cards */
+  margin: 0 auto 80px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  justify-items: center;
 }
 
-/* cart image  */
+/* Cart image definitions */
 #cart1_img {
   background-image: url(/images/homepage/box.svg);
 }
@@ -187,82 +269,107 @@
 .card_1 {
   background-size: cover;
   background-position: center;
-  height: 300px;
-  width: 300px;
+  height: 320px;
+  width: 100%;
+  max-width: 300px;
   position: relative;
   overflow: hidden;
+  border-radius: 12px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card_1:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
 }
 
 /* Hidden hover cart initially */
 .card_1 .hover_cart {
   display: none;
-  height: 200px;
-  width: 300px;
-  background-color: teal;
-  margin-top: 120px;
-  transition: all 0.8s ease;
+  height: 180px;
+  width: 100%;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 128, 128, 0.95) 100%);
   position: absolute;
-  top: 0;
-  right: 0;
+  bottom: 0;
+  left: 0;
   padding: 20px;
   box-sizing: border-box;
   justify-content: flex-end;
+  align-items: flex-end;
+  transition: all 0.3s ease;
 }
 
 /* Show hover cart on card hover */
 .card_1:hover .hover_cart {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
+  align-items: stretch;
 }
 
 /* Price section */
 .card_price {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  align-items: center;
+  margin-top: 15px;
+  padding: 0 5px;
 }
 
 .card_price p {
-  font-size: 20px;
+  font-size: clamp(16px, 2vw, 20px);
+  color: #262626;
+  margin: 0;
 }
 
 .card_price .price {
   opacity: 0.7;
+  font-weight: 600;
 }
 
 /* Offer badge */
 .new_arrivals .card_1 .offer_percent {
-  margin-top: 5%;
-  margin-left: 20px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
   background-color: #262626;
   color: white;
-  font-size: 20px;
+  font-size: clamp(14px, 2vw, 20px);
   font-weight: bold;
-  padding: 5px 15px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  display: inline-block;
-  border-radius: 5px;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.new_arrivals .card_1 .offer_percent:hover {
+  background-color: #434141;
+  transform: scale(1.05);
 }
 
 /* Hover buttons */
 .new_arrivals .card_1 .hover_cart button {
   background-color: #f5f5f3;
-  padding: 10px 30px;
-  cursor: pointer;
-  gap: 10px;
+  color: #262626;
+  padding: 12px 20px;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: clamp(14px, 1.8vw, 16px);
+  font-weight: 500;
+  cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-  text-align: right;
+  margin-bottom: 8px;
+  width: 100%;
+  text-align: center;
 }
 
 .new_arrivals .card_1 .hover_cart button:hover {
   background-color: #e0e0dc;
   transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
 /* ========== phone of the year banner section css ========== */
@@ -271,52 +378,65 @@
   background-image: url("/images/homepage/banner_phone_of_the_year.svg");
   background-size: cover;
   background-position: center;
-  height: 370px;
-  width: 1320px;
-  margin: auto;
-  margin-top: 100px;
+  background-repeat: no-repeat;
+  height: 400px;
+  max-width: 1320px;
+  margin: 80px auto;
+  padding: 0 20px;
   position: relative;
   overflow: hidden;
-  margin-bottom: 100px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .phone_of_the_year_banner {
-  position: absolute;
-  margin-top: 100px;
-  margin-left: 50%;
+  max-width: 600px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+  margin-right: 50px;
+  text-align: center;
 }
 
 .phone_of_the_year_banner h3 {
-  font-size: 40px;
+  font-size: clamp(28px, 4vw, 40px);
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  color: #262626;
+  line-height: 1.2;
 }
 
 .phone_of_the_year_banner p {
-  width: 600px;
-  font-size: 20px;
-  opacity: 70%;
-  margin-bottom: 10px;
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: #666;
+  opacity: 0.8;
+  margin-bottom: 25px;
+  line-height: 1.6;
 }
 
-.phone_of_the_year_banner button {
-  margin-top: 5%;
+.phone_of_the_year_banner_shop_now_button {
   background-color: #262626;
   color: white;
-  font-size: 20px;
+  font-size: clamp(16px, 2.5vw, 20px);
   font-weight: bold;
-  padding: 10px 15px;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  display: inline-block;
-  border-radius: 5px;
+  transition: all 0.3s ease;
 }
 
 .phone_of_the_year_banner_shop_now_button:hover {
   background-color: #434141;
+  transform: translateY(-2px);
 }
 
 /* ========== special offer section css ========== */
-/* cart image */
+
+/* Special offer cart image definitions */
 #cart1_img_special {
   background-image: url(/images/homepage/cap.svg);
 }
@@ -331,45 +451,251 @@
 }
 
 .special_offer_heading {
-  font-size: 36px;
+  font-size: clamp(28px, 4vw, 36px);
   font-weight: bold;
   max-width: 1320px;
-  margin: auto;
-  margin-bottom: 20px;
+  margin: 80px auto 40px;
+  padding: 0 20px;
+  color: #262626;
 }
 
 .special_offer_main {
   max-width: 1320px;
-  margin: auto;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
+  margin: 0 auto 80px;
+  padding: 0 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  justify-items: center;
 }
 
 .special_offer_main .card_1 .offer_percent {
-  margin-top: 5%;
-  margin-left: 20px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
   background-color: #262626;
   color: white;
-  font-size: 20px;
+  font-size: clamp(14px, 2vw, 20px);
   font-weight: bold;
-  padding: 5px 15px;
+  padding: 8px 15px;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  display: inline-block;
-  border-radius: 5px;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.special_offer_main .card_1 .offer_percent:hover {
+  background-color: #434141;
+  transform: scale(1.05);
 }
 
 .special_offer_main .card_1 .hover_cart button {
   background-color: #f5f5f3;
-  padding: 10px 30px;
-  cursor: pointer;
-  gap: 10px;
+  color: #262626;
+  padding: 12px 20px;
   border: none;
   border-radius: 8px;
-  font-size: 16px;
+  font-size: clamp(14px, 1.8vw, 16px);
+  font-weight: 500;
+  cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
-  text-align: right;
+  margin-bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+.special_offer_main .card_1 .hover_cart button:hover {
+  background-color: #e0e0dc;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ========== Responsive Design ========== */
+
+/* Large Desktop (1400px+) */
+@media screen and (min-width: 1400px) {
+  .sale_offer {
+    gap: 50px;
+  }
+  
+  .lights_bg {
+    max-width: 620px;
+  }
+  
+  .sale_offer_rightside {
+    max-width: 750px;
+  }
+}
+
+/* Desktop Medium (992px - 1199px) */
+@media screen and (max-width: 1199px) {
+  .new_arrivals,
+  .special_offer_main {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Tablet (768px - 991px) */
+@media screen and (max-width: 991px) {
+  .hero_img {
+    height: 500px;
+  }
+  
+  .sale_offer {
+    flex-direction: column;
+    height: auto;
+    gap: 30px;
+  }
+  
+  .lights_bg,
+  .sale_offer_rightside {
+    max-width: 100%;
+  }
+  
+  .lights_bg {
+    height: 450px;
+  }
+  
+  .new_arrivals,
+  .special_offer_main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+  }
+  
+  .phone_of_the_year_banner {
+    margin-right: 20px;
+    padding: 30px 20px;
+  }
+}
+
+/* Mobile (480px - 767px) */
+@media screen and (max-width: 767px) {
+  .hero_img {
+    height: 400px;
+  }
+  
+  .sale_offer {
+    margin: 40px auto;
+    padding: 0 15px;
+    gap: 20px;
+  }
+  
+  .lights_bg {
+    height: 400px;
+  }
+  
+  .lights_bg h2,
+  .watch_bg h2,
+  .lamp_bg h2 {
+    left: 30px;
+  }
+  
+  .lights_bg p,
+  .watch_bg p,
+  .lamp_bg p {
+    left: 30px;
+  }
+  
+  .lights_bg button,
+  .watch_bg button,
+  .lamp_bg button {
+    left: 30px;
+  }
+  
+  .new_arrivals,
+  .special_offer_main {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+    gap: 25px;
+  }
+  
+  .card_1 {
+    max-width: 100%;
+    height: 350px;
+  }
+  
+  .phone_of_the_year_banner_main {
+    margin: 40px auto;
+    height: 350px;
+    justify-content: center;
+  }
+  
+  .phone_of_the_year_banner {
+    margin-right: 0;
+    padding: 30px 20px;
+    max-width: 100%;
+  }
+}
+
+/* Small Mobile (320px - 479px) */
+@media screen and (max-width: 479px) {
+  .hero_img {
+    height: 300px;
+  }
+  
+  .sale_offer {
+    margin: 30px auto;
+    padding: 0 10px;
+  }
+  
+  .lights_bg {
+    height: 350px;
+  }
+  
+  .lights_bg h2,
+  .watch_bg h2,
+  .lamp_bg h2 {
+    left: 20px;
+  }
+  
+  .lights_bg p,
+  .watch_bg p,
+  .lamp_bg p {
+    left: 20px;
+  }
+  
+  .lights_bg button,
+  .watch_bg button,
+  .lamp_bg button {
+    left: 20px;
+  }
+  
+  .new_arrivals,
+  .special_offer_main {
+    padding: 0 10px;
+    gap: 20px;
+  }
+  
+  .card_1 {
+    max-width: 100%;
+    height: 320px;
+  }
+  
+  .new_arrivals_heading,
+  .special_offer_heading {
+    padding: 0 10px;
+  }
+  
+  .phone_of_the_year_banner_main {
+    margin: 30px auto;
+    height: 300px;
+    padding: 0 10px;
+  }
+  
+  .phone_of_the_year_banner {
+    padding: 25px 15px;
+  }
+  
+  .card_1 {
+    max-width: 100%;
+    height: 320px;
+  }
+  
+  .card_price {
+    flex-direction: column;
+    gap: 5px;
+    text-align: center;
+  }
 }
