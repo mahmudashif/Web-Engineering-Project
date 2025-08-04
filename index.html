@@ -123,21 +123,26 @@
     <!-- ========== sale offer section design ========== -->
     <div class="sale_offer">
       <div class="sale_container">
-        <div class="lights_bg">
-          <h2>Smartphone Revolution</h2>
-          <p>Latest flagships up to <span>40%</span> off!</p>
-          <button onclick="window.location.href='shop.html'">Shop Smartphones</button>
+        <div class="slider_card lights_bg">
+          <div class="mini_slider" id="slider1">
+            <div class="slide" style="background-image: url('images/mini-slider/7.jpg');"></div>
+            <div class="slide" style="background-image: url('images/mini-slider/8.png');"></div>
+          </div>
         </div>
         <div class="sale_offer_rightside">
-          <div class="watch_bg">
-            <h2>Gaming Gear</h2>
-            <p>Pro equipment <span>60%</span> off!</p>
-            <button onclick="window.location.href='shop.html'">Game On</button>
+          <div class="slider_card watch_bg">
+            <div class="mini_slider" id="slider2">
+              <div class="slide" style="background-image: url('images/mini-slider/1.jpg');"></div>
+              <div class="slide" style="background-image: url('images/mini-slider/2.png');"></div>
+              <div class="slide" style="background-image: url('images/mini-slider/3.png');"></div>
+            </div>
           </div>
-          <div class="lamp_bg">
-            <h2>Smart Home</h2>
-            <p>Automation deals <span>45%</span> off!</p>
-            <button onclick="window.location.href='shop.html'">Upgrade Home</button>
+          <div class="slider_card lamp_bg">
+            <div class="mini_slider" id="slider3">
+              <div class="slide" style="background-image: url('images/mini-slider/4.jpg');"></div>
+              <div class="slide" style="background-image: url('images/mini-slider/5.jpg');"></div>
+              <div class="slide" style="background-image: url('images/mini-slider/6.jpg');"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -348,6 +353,55 @@
         
         // Change slide every 3 seconds
         setInterval(showNextSlide, 3000);
+        
+        // Mini slider functionality - Cinematic movie-style transitions
+        function initMiniSlider(sliderId, interval) {
+          const slider = document.getElementById(sliderId);
+          if (!slider) return;
+          
+          const slides = slider.querySelectorAll('.slide');
+          const totalSlides = slides.length;
+          let currentSlide = 0;
+          
+          // Set up initial state - all slides positioned absolutely
+          slides.forEach((slide, index) => {
+            slide.style.position = 'absolute';
+            slide.style.top = '0';
+            slide.style.left = '0';
+            slide.style.width = '100%';
+            slide.style.height = '100%';
+            slide.style.opacity = index === 0 ? '1' : '0';
+            slide.style.transform = index === 0 ? 'scale(1)' : 'scale(1.1)';
+            slide.style.transition = 'all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+            slide.style.zIndex = index === 0 ? '2' : '1';
+          });
+          
+          function showNextSlide() {
+            const currentSlideEl = slides[currentSlide];
+            const nextSlide = (currentSlide + 1) % totalSlides;
+            const nextSlideEl = slides[nextSlide];
+            
+            // Cinematic transition: current slide fades out and scales up
+            currentSlideEl.style.opacity = '0';
+            currentSlideEl.style.transform = 'scale(1.1)';
+            currentSlideEl.style.zIndex = '1';
+            
+            // Next slide fades in and scales to normal
+            nextSlideEl.style.opacity = '1';
+            nextSlideEl.style.transform = 'scale(1)';
+            nextSlideEl.style.zIndex = '2';
+            
+            currentSlide = nextSlide;
+          }
+          
+          // Start the cinematic slider
+          setInterval(showNextSlide, interval);
+        }
+        
+        // Initialize all mini sliders with different intervals
+        initMiniSlider('slider1', 3000); // Card 1: 3 second intervals
+        initMiniSlider('slider2', 2500); // Card 2: 2.5 second intervals  
+        initMiniSlider('slider3', 3500); // Card 3: 3.5 second intervals
       });
     </script>
   </body>
