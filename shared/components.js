@@ -6,12 +6,22 @@ function loadCSS(href) {
   document.head.appendChild(link);
 }
 
+// Function to load JavaScript file dynamically
+function loadJS(src) {
+  const script = document.createElement('script');
+  script.src = src;
+  document.head.appendChild(script);
+}
+
 // Function to load shared components
 async function loadSharedComponents() {
   try {
     // Load CSS files
     loadCSS('/shared/navbar.css');
     loadCSS('/shared/footer.css');
+
+    // Load global cart system
+    loadJS('/shared/cart-global.js');
 
     // Load navbar
     const navbarResponse = await fetch('/shared/navbar.html');
