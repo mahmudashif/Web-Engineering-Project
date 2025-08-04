@@ -15,10 +15,16 @@
 
     <!-- ========== hero section design ========== -->
     <div class="hero_section">
-      <div class="hero_img"></div>
+      <div class="hero_slideshow">
+        <div class="hero_slide active" style="background-image: url('/images/banner/banner-1.jpg');"></div>
+        <div class="hero_slide" style="background-image: url('/images/banner/banner-2.jpg');"></div>
+        <div class="hero_slide" style="background-image: url('/images/banner/banner-3.jpg');"></div>
+        <div class="hero_slide" style="background-image: url('/images/banner/banner-4.jpg');"></div>
+        <div class="hero_slide" style="background-image: url('/images/banner/banner-5.jpg');"></div>
+      </div>
       <div class="hero_content">
-        <h1>Discover Premium Electronics</h1>
-        <p>Experience the future of technology with our curated collection of cutting-edge smartphones, laptops, and smart accessories. Quality guaranteed, prices unmatched.</p>
+        <!-- <h1>Discover Premium Electronics</h1>
+        <p>Experience the future of technology with our curated collection of cutting-edge smartphones, laptops, and smart accessories. Quality guaranteed, prices unmatched.</p> -->
         <div class="hero_cta">
           <a href="shop.html" class="btn-primary">Explore Collection</a>
           <a href="#features" class="btn-secondary">Why Choose Us</a>
@@ -322,5 +328,27 @@
 
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
+
+    <script>
+      // Hero Slideshow functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const slides = document.querySelectorAll('.hero_slide');
+        let currentSlide = 0;
+        
+        function showNextSlide() {
+          // Remove active class from current slide
+          slides[currentSlide].classList.remove('active');
+          
+          // Move to next slide
+          currentSlide = (currentSlide + 1) % slides.length;
+          
+          // Add active class to new slide
+          slides[currentSlide].classList.add('active');
+        }
+        
+        // Change slide every 3 seconds
+        setInterval(showNextSlide, 3000);
+      });
+    </script>
   </body>
 </html>
