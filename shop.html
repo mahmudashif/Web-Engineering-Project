@@ -15,6 +15,18 @@
     <!-- Shop Section -->
     <section class="shop-section">
       <div class="container">
+        <!-- Search Bar -->
+        <div class="shop-search-section">
+          <div class="search-container">
+            <input type="text" id="product-search" class="search-input" placeholder="Search products...">
+            <button type="button" class="search-button" onclick="searchProducts()">
+              <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+              </svg>
+            </button>
+          </div>
+        </div>
+        
         <div class="shop-layout">
           <!-- Sidebar Filters -->
           <aside class="shop-sidebar">
@@ -91,7 +103,10 @@
                   <div class="product-price">
                     <span class="current-price">$1,199</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -113,7 +128,10 @@
                     <span class="current-price">$899</span>
                     <span class="old-price">$1,099</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -132,7 +150,10 @@
                   <div class="product-price">
                     <span class="current-price">$2,499</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -153,7 +174,10 @@
                   <div class="product-price">
                     <span class="current-price">$1,299</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -172,7 +196,10 @@
                   <div class="product-price">
                     <span class="current-price">$249</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -194,7 +221,10 @@
                     <span class="current-price">$349</span>
                     <span class="old-price">$399</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -216,7 +246,10 @@
                   <div class="product-price">
                     <span class="current-price">$799</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -234,7 +267,10 @@
                   <div class="product-price">
                     <span class="current-price">$329</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -253,7 +289,10 @@
                   <div class="product-price">
                     <span class="current-price">$39</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -274,7 +313,10 @@
                   <div class="product-price">
                     <span class="current-price">$59</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -292,7 +334,10 @@
                   <div class="product-price">
                     <span class="current-price">$89</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
 
@@ -310,7 +355,10 @@
                   <div class="product-price">
                     <span class="current-price">$79</span>
                   </div>
-                  <button class="add-to-cart">Add to Cart</button>
+                  <div class="product-buttons">
+                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="buy-now">Buy Now</button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -333,6 +381,7 @@
     <div id="footer-placeholder"></div>
 
     <script>
+      // Filter products by category
       function filterProducts(category) {
         const products = document.querySelectorAll('.product-card');
         const categoryLinks = document.querySelectorAll('.category-list a');
@@ -350,10 +399,110 @@
           }
         });
         
-        // Update results count
-        const visibleProducts = document.querySelectorAll('.product-card[style*="block"], .product-card:not([style*="none"])');
+        updateResultsCount();
+      }
+
+      // Search products by name
+      function searchProducts() {
+        const searchTerm = document.getElementById('product-search').value.toLowerCase();
+        const products = document.querySelectorAll('.product-card');
+        
+        products.forEach(product => {
+          const productName = product.querySelector('h4').textContent.toLowerCase();
+          const productDescription = product.querySelector('.product-description').textContent.toLowerCase();
+          
+          if (productName.includes(searchTerm) || productDescription.includes(searchTerm)) {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+        
+        updateResultsCount();
+      }
+
+      // Real-time search as user types
+      document.getElementById('product-search').addEventListener('input', searchProducts);
+
+      // Filter by price range
+      function filterByPrice() {
+        const checkedPrices = document.querySelectorAll('input[name="price"]:checked');
+        const products = document.querySelectorAll('.product-card');
+        
+        if (checkedPrices.length === 0) {
+          // No price filters selected, show all products
+          products.forEach(product => {
+            product.style.display = 'block';
+          });
+        } else {
+          products.forEach(product => {
+            const priceText = product.querySelector('.current-price').textContent;
+            const price = parseInt(priceText.replace(/[$,]/g, ''));
+            let showProduct = false;
+            
+            checkedPrices.forEach(checkbox => {
+              const range = checkbox.value;
+              if (range === '0-100' && price <= 100) showProduct = true;
+              if (range === '100-500' && price > 100 && price <= 500) showProduct = true;
+              if (range === '500-1000' && price > 500 && price <= 1000) showProduct = true;
+              if (range === '1000+' && price > 1000) showProduct = true;
+            });
+            
+            product.style.display = showProduct ? 'block' : 'none';
+          });
+        }
+        
+        updateResultsCount();
+      }
+
+      // Add event listeners to price checkboxes
+      document.querySelectorAll('input[name="price"]').forEach(checkbox => {
+        checkbox.addEventListener('change', filterByPrice);
+      });
+
+      // Update results count
+      function updateResultsCount() {
+        const visibleProducts = document.querySelectorAll('.product-card:not([style*="none"])');
         document.querySelector('.results-count strong').textContent = visibleProducts.length;
       }
+
+      // Sort products
+      document.querySelector('.sort-select').addEventListener('change', function() {
+        const sortBy = this.value;
+        const productsGrid = document.querySelector('.products-grid');
+        const products = Array.from(document.querySelectorAll('.product-card'));
+        
+        products.sort((a, b) => {
+          switch (sortBy) {
+            case 'price-low':
+              const priceA = parseInt(a.querySelector('.current-price').textContent.replace(/[$,]/g, ''));
+              const priceB = parseInt(b.querySelector('.current-price').textContent.replace(/[$,]/g, ''));
+              return priceA - priceB;
+            
+            case 'price-high':
+              const priceA2 = parseInt(a.querySelector('.current-price').textContent.replace(/[$,]/g, ''));
+              const priceB2 = parseInt(b.querySelector('.current-price').textContent.replace(/[$,]/g, ''));
+              return priceB2 - priceA2;
+            
+            case 'name':
+              const nameA = a.querySelector('h4').textContent;
+              const nameB = b.querySelector('h4').textContent;
+              return nameA.localeCompare(nameB);
+            
+            case 'rating':
+              const ratingA = a.querySelector('.stars').textContent.split('★').length - 1;
+              const ratingB = b.querySelector('.stars').textContent.split('★').length - 1;
+              return ratingB - ratingA;
+            
+            default:
+              return 0;
+          }
+        });
+        
+        // Clear and re-append sorted products
+        productsGrid.innerHTML = '';
+        products.forEach(product => productsGrid.appendChild(product));
+      });
     </script>
   </body>
 </html>
