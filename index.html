@@ -14,180 +14,308 @@
     <div id="navbar-placeholder"></div>
 
     <!-- ========== hero section design ========== -->
-
     <div class="hero_section">
       <div class="hero_img"></div>
+      <div class="hero_content">
+        <h1>Discover Premium Electronics</h1>
+        <p>Experience the future of technology with our curated collection of cutting-edge smartphones, laptops, and smart accessories. Quality guaranteed, prices unmatched.</p>
+        <div class="hero_cta">
+          <a href="shop.html" class="btn-primary">Explore Collection</a>
+          <a href="#features" class="btn-secondary">Why Choose Us</a>
+        </div>
+        <div class="hero_stats">
+          <div class="stat">
+            <span class="stat-number">50K+</span>
+            <span class="stat-label">Happy Customers</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">99.9%</span>
+            <span class="stat-label">Satisfaction Rate</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">24/7</span>
+            <span class="stat-label">Support Available</span>
+          </div>
+        </div>
+      </div>
     </div>
     
-    <div class="info_section">
-      <img src="/images/homepage/Information.svg" alt="Information" />
+    <div class="info_section" id="features">
+      <div class="info_container">
+        <div class="info_card">
+          <div class="info_icon">🚚</div>
+          <h3>Free Express Shipping</h3>
+          <p>Lightning-fast delivery on orders over $100. Track your package in real-time with our premium logistics partners worldwide.</p>
+        </div>
+        <div class="info_card">
+          <div class="info_icon">🔒</div>
+          <h3>Bank-Level Security</h3>
+          <p>Your data is protected with 256-bit SSL encryption and PCI DSS compliance. Shop with complete peace of mind.</p>
+        </div>
+        <div class="info_card">
+          <div class="info_icon">↩️</div>
+          <h3>30-Day Returns</h3>
+          <p>Not satisfied? Return any item within 30 days for a full refund. No restocking fees, no questions asked.</p>
+        </div>
+        <div class="info_card">
+          <div class="info_icon">🎧</div>
+          <h3>Expert Support</h3>
+          <p>Get instant help from our certified tech specialists. Available 24/7 via chat, email, or phone consultation.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========== brands section ========== -->
+    <div class="brands_section">
+      <div class="brands_container">
+        <h2>Trusted by Leading Brands</h2>
+        <div class="brands_grid">
+          <div class="brand_card">
+            <div class="brand_logo">🍎</div>
+            <span class="brand_name">Apple</span>
+          </div>
+          <div class="brand_card">
+            <div class="brand_logo">📱</div>
+            <span class="brand_name">Samsung</span>
+          </div>
+          <div class="brand_card">
+            <div class="brand_logo">🎧</div>
+            <span class="brand_name">Sony</span>
+          </div>
+          <div class="brand_card">
+            <div class="brand_logo">💻</div>
+            <span class="brand_name">Dell</span>
+          </div>
+          <div class="brand_card">
+            <div class="brand_logo">🖥️</div>
+            <span class="brand_name">Microsoft</span>
+          </div>
+          <div class="brand_card">
+            <div class="brand_logo">🔍</div>
+            <span class="brand_name">Google</span>
+          </div>
+          <div class="brand_card">
+            <div class="brand_logo">📲</div>
+            <span class="brand_name">Realme</span>
+          </div>
+          <div class="brand_card">
+            <div class="brand_logo">⚡</div>
+            <span class="brand_name">Asus</span>
+          </div>
+          <div class="brand_card">
+            <div class="brand_logo">🖨️</div>
+            <span class="brand_name">HP</span>
+          </div>
+          <div class="brand_card">
+            <div class="brand_logo">🎮</div>
+            <span class="brand_name">MSI</span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- ========== sale offer section design ========== -->
-
     <div class="sale_offer">
-      <div class="lights_bg">
-        <h2>phones sale</h2>
-        <p>Up to <span>30%</span> sale for all phones!</p>
-        <button>Shop Now</button>
-      </div>
-      <div class="sale_offer_rightside">
-        <div class="watch_bg">
-          <h2>Electronics Sale</h2>
-          <p>Up to <span>70%</span> sale for all electronics!</p>
-          <button>Shop Now</button>
+      <div class="sale_container">
+        <div class="lights_bg">
+          <h2>Smartphone Revolution</h2>
+          <p>Latest flagships up to <span>40%</span> off!</p>
+          <button onclick="window.location.href='shop.html'">Shop Smartphones</button>
         </div>
-        <div class="lamp_bg">
-          <h2>Electronics Sale</h2>
-          <p>Up to <span>50%</span> sale for all electronics!</p>
-          <button>Shop Now</button>
+        <div class="sale_offer_rightside">
+          <div class="watch_bg">
+            <h2>Gaming Gear</h2>
+            <p>Pro equipment <span>60%</span> off!</p>
+            <button onclick="window.location.href='shop.html'">Game On</button>
+          </div>
+          <div class="lamp_bg">
+            <h2>Smart Home</h2>
+            <p>Automation deals <span>45%</span> off!</p>
+            <button onclick="window.location.href='shop.html'">Upgrade Home</button>
+          </div>
         </div>
       </div>
     </div>
 
     <!-- ========== new arrivals section design ========== -->
-
-    <div class="new_arrivals_heading">New Arrivals</div>
+    <h2 class="new_arrivals_heading">Trending Now</h2>
 
     <div class="new_arrivals">
       <!-- ---------- card ---------- -->
       <div>
         <div id="cart1_img" class="card_1">
-          <button class="offer_percent">10%</button>
+          <button class="offer_percent">New</button>
           <div class="hover_cart">
-            <button>Add to Wish List</button>
-            <button>Compare</button>
-            <button>Add to cart</button>
+            <button>Add to Wishlist</button>
+            <button>Quick View</button>
+            <button>Add to Cart</button>
           </div>
         </div>
         <div class="card_price">
-          <p>Basic Crew Neck Tee</p>
-          <p class="price">$44.00</p>
+          <p>Wireless AirPods Pro</p>
+          <p class="price">$249.00</p>
         </div>
       </div>
 
       <div>
         <div id="cart2_img" class="card_1">
-          <button class="offer_percent">10%</button>
+          <button class="offer_percent">Hot</button>
           <div class="hover_cart">
-            <button>Add to Wish List</button>
-            <button>Compare</button>
-            <button>Add to cart</button>
+            <button>Add to Wishlist</button>
+            <button>Quick View</button>
+            <button>Add to Cart</button>
           </div>
         </div>
         <div class="card_price">
-          <p>Basic Crew Neck Tee</p>
-          <p class="price">$44.00</p>
+          <p>Smart Fitness Watch</p>
+          <p class="price">$399.00</p>
         </div>
       </div>
 
       <div>
         <div id="cart3_img" class="card_1">
-          <button class="offer_percent">10%</button>
+          <button class="offer_percent">Sale</button>
           <div class="hover_cart">
-            <button>Add to Wish List</button>
-            <button>Compare</button>
-            <button>Add to cart</button>
+            <button>Add to Wishlist</button>
+            <button>Quick View</button>
+            <button>Add to Cart</button>
           </div>
         </div>
         <div class="card_price">
-          <p>Basic Crew Neck Tee</p>
-          <p class="price">$44.00</p>
+          <p>Designer Leather Bag</p>
+          <p class="price">$189.00</p>
         </div>
       </div>
 
       <div>
         <div id="cart4_img" class="card_1">
-          <button class="offer_percent">10%</button>
+          <button class="offer_percent">Best</button>
           <div class="hover_cart">
-            <button>Add to Wish List</button>
-            <button>Compare</button>
-            <button>Add to cart</button>
+            <button>Add to Wishlist</button>
+            <button>Quick View</button>
+            <button>Add to Cart</button>
           </div>
         </div>
         <div class="card_price">
-          <p>Basic Crew Neck Tee</p>
-          <p class="price">$44.00</p>
+          <p>Gaming Headset Pro</p>
+          <p class="price">$159.00</p>
         </div>
       </div>
     </div>
 
     <!-- ========== phone of the year banner section design ========== -->
-
     <div class="phone_of_the_year_banner_main">
       <div class="phone_of_the_year_banner">
-        <h3>Phone of the year</h3>
+        <h3>Innovation Awards 2025</h3>
         <p>
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry orem Ipsum..
+          Discover our award-winning collection of smartphones that have redefined the industry. 
+          Featuring revolutionary cameras, AI-powered performance, and sustainable design that's changing the world.
         </p>
-        <button class="phone_of_the_year_banner_shop_now_button">
-          Shop Now
+        <button class="phone_of_the_year_banner_shop_now_button" onclick="window.location.href='shop.html'">
+          Explore Winners
         </button>
       </div>
     </div>
 
-    <!-- ========== special offer section design ========== -->
+    <!-- ========== testimonials section ========== -->
+    <div class="testimonials_section">
+      <div class="testimonials_container">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonials_grid">
+          <div class="testimonial_card">
+            <div class="testimonial_content">
+              <p>"Absolutely amazing service! Got my iPhone 15 Pro delivered next day. The quality is outstanding and customer support was incredibly helpful."</p>
+            </div>
+            <div class="testimonial_author">
+              <strong>Sarah Johnson</strong>
+              <span>Verified Buyer</span>
+              <div class="rating">★★★★★</div>
+            </div>
+          </div>
+          <div class="testimonial_card">
+            <div class="testimonial_content">
+              <p>"Best tech store I've ever used. Competitive prices, authentic products, and lightning-fast shipping. Highly recommend for all electronics!"</p>
+            </div>
+            <div class="testimonial_author">
+              <strong>Michael Chen</strong>
+              <span>Premium Member</span>
+              <div class="rating">★★★★★</div>
+            </div>
+          </div>
+          <div class="testimonial_card">
+            <div class="testimonial_content">
+              <p>"Returned a laptop after 2 weeks - no hassle at all! The return process was smooth and I got my refund within 3 days. Excellent experience."</p>
+            </div>
+            <div class="testimonial_author">
+              <strong>Emma Davis</strong>
+              <span>Happy Customer</span>
+              <div class="rating">★★★★★</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <div class="special_offer_heading">Special Offers</div>
+    <!-- ========== special offer section design ========== -->
+    <h2 class="special_offer_heading">Limited Time Deals</h2>
     <div class="special_offer_main">
       <div>
         <div id="cart1_img_special" class="card_1">
-          <button class="offer_percent">10%</button>
+          <button class="offer_percent">50%</button>
           <div class="hover_cart">
-            <button>Add to Wish List</button>
-            <button>Compare</button>
-            <button>Add to cart</button>
+            <button>Add to Wishlist</button>
+            <button>Quick View</button>
+            <button>Add to Cart</button>
           </div>
         </div>
         <div class="card_price">
-          <p>Basic Crew Neck Tee</p>
-          <p class="price">$44.00</p>
+          <p>Premium Baseball Cap</p>
+          <p class="price">$24.99</p>
         </div>
       </div>
 
       <div>
         <div id="cart2_img_special" class="card_1">
-          <button class="offer_percent">10%</button>
+          <button class="offer_percent">65%</button>
           <div class="hover_cart">
-            <button>Add to Wish List</button>
-            <button>Compare</button>
-            <button>Add to cart</button>
+            <button>Add to Wishlist</button>
+            <button>Quick View</button>
+            <button>Add to Cart</button>
           </div>
         </div>
         <div class="card_price">
-          <p>Basic Crew Neck Tee</p>
-          <p class="price">$44.00</p>
+          <p>Smart Coffee Table</p>
+          <p class="price">$299.99</p>
         </div>
       </div>
 
       <div>
         <div id="cart3_img_special" class="card_1">
-          <button class="offer_percent">10%</button>
+          <button class="offer_percent">70%</button>
           <div class="hover_cart">
-            <button>Add to Wish List</button>
-            <button>Compare</button>
-            <button>Add to cart</button>
+            <button>Add to Wishlist</button>
+            <button>Quick View</button>
+            <button>Add to Cart</button>
           </div>
         </div>
         <div class="card_price">
-          <p>Basic Crew Neck Tee</p>
-          <p class="price">$44.00</p>
+          <p>Studio Headphones</p>
+          <p class="price">$149.99</p>
         </div>
       </div>
 
       <div>
         <div id="cart4_img_special" class="card_1">
-          <button class="offer_percent">10%</button>
+          <button class="offer_percent">55%</button>
           <div class="hover_cart">
-            <button>Add to Wish List</button>
-            <button>Compare</button>
-            <button>Add to cart</button>
+            <button>Add to Wishlist</button>
+            <button>Quick View</button>
+            <button>Add to Cart</button>
           </div>
         </div>
         <div class="card_price">
-          <p>Basic Crew Neck Tee</p>
-          <p class="price">$44.00</p>
+          <p>Luxury Sunglasses</p>
+          <p class="price">$89.99</p>
         </div>
       </div>
     </div>

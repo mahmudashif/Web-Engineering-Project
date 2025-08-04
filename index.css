@@ -1,258 +1,421 @@
-/* ========== hero section css ========== */
+/* Modern E-commerce Homepage Styles */
 
-.hero_section {
-  width: 100%;
-  position: relative;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.hero_img {
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: #1f2937;
+  background-color: #fafaf9;
+}
+
+/* Hero Section */
+.hero_section {
+  position: relative;
+  height: 80vh;
+  min-height: 600px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero_section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  z-index: 1;
+}
+
+.hero_section .hero_img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  height: 600px;
+  height: 100%;
   background-image: url("/images/homepage/banner.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  opacity: 0.7;
 }
 
-.info_section {
-  max-width: 1320px;
-  margin: 40px auto;
+.hero_content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: white;
+  max-width: 900px;
   padding: 0 20px;
+}
+
+.hero_content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+
+.hero_content p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.hero_cta {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-bottom: 3rem;
+}
+
+.hero_stats {
+  display: flex;
+  justify-content: center;
+  gap: 3rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.stat {
   text-align: center;
 }
 
-.info_section img {
-  max-width: 100%;
-  height: auto;
+.stat-number {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #fbbf24;
+  margin-bottom: 0.5rem;
 }
 
-/* ========== sale offer section css ========== */
+.stat-label {
+  font-size: 0.875rem;
+  opacity: 0.8;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
 
+.btn-primary {
+  background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+  color: white;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #FF8A65 0%, #FFB74D 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 107, 53, 0.4);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  padding: 14px 32px;
+  border: 2px solid white;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-secondary:hover {
+  background: white;
+  color: #667eea;
+  transform: translateY(-2px);
+}
+
+/* Info Section */
+.info_section {
+  padding: 80px 0;
+  background: #f8fafc;
+}
+
+.info_container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
+  text-align: center;
+}
+
+.info_card {
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 32px 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+.info_card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+  border-color: #2563eb;
+}
+
+.info_icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.info_card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: #1f2937;
+}
+
+.info_card p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #6b7280;
+}
+
+/* Sale Offer Section */
 .sale_offer {
-  max-width: 1320px;
-  margin: 80px auto;
+  padding: 80px 0;
+  background: #f8fafc;
+}
+
+.sale_container {
+  max-width: 1200px;
+  margin: 0 auto;
   padding: 0 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  height: 400px;
 }
 
 .lights_bg {
-  height: 580px;
-  width: 100%;
-  max-width: 580px;
+  background: linear-gradient(135deg, #2563EB 0%, #3B82F6 100%);
   background-image: url("/images/homepage/lights.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  border-radius: 20px;
+  padding: 3rem;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   position: relative;
-  border-radius: 12px;
   overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid var(--secondary-gold);
 }
 
-.lights_bg:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(109, 40, 217, 0.2);
+.lights_bg::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 200%;
+  height: 200%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>') repeat;
+  animation: float 20s infinite linear;
+}
+
+@keyframes float {
+  0% { transform: translateX(0) translateY(0); }
+  100% { transform: translateX(-50px) translateY(-50px); }
 }
 
 .lights_bg h2 {
-  position: absolute;
-  bottom: 30%;
-  left: 50px;
-  font-size: clamp(32px, 5vw, 50px);
-  text-transform: capitalize;
-  font-weight: bold;
-  color: var(--text-gray);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: -0.025em;
+  position: relative;
+  z-index: 2;
 }
 
 .lights_bg p {
-  position: absolute;
-  bottom: 20%;
-  left: 50px;
-  font-size: clamp(16px, 2.5vw, 20px);
-  color: var(--text-gray);
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 2;
 }
 
 .lights_bg p span {
-  font-size: clamp(20px, 3.5vw, 30px);
-  font-weight: bold;
-  color: var(--accent-red);
+  color: #fbbf24;
+  font-weight: 800;
+  font-size: 1.5em;
 }
 
 .lights_bg button {
-  position: absolute;
-  bottom: 10%;
-  left: 50px;
-  background-color: var(--primary-purple);
+  background: rgba(255, 255, 255, 0.2);
   color: white;
-  font-size: clamp(16px, 2.5vw, 20px);
-  font-weight: bold;
-  padding: 15px 25px;
-  border: none;
+  padding: 12px 24px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  align-self: flex-start;
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(10px);
 }
 
 .lights_bg button:hover {
-  background-color: var(--hover-purple);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
 .sale_offer_rightside {
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  width: 100%;
-  max-width: 684px;
+  gap: 1rem;
+}
+
+.watch_bg, .lamp_bg {
+  background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+  border-radius: 16px;
+  padding: 2rem;
+  color: white;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
 }
 
 .watch_bg {
-  background-image: url(/images/homepage/watch.svg);
+  background-image: url("/images/homepage/watch.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 280px;
-  width: 100%;
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid var(--secondary-gold);
-}
-
-.watch_bg:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(109, 40, 217, 0.15);
-}
-
-.watch_bg h2 {
-  position: absolute;
-  top: 15%;
-  left: 50px;
-  font-size: clamp(24px, 4vw, 40px);
-  font-weight: bold;
-  color: var(--text-gray);
-}
-
-.watch_bg p {
-  position: absolute;
-  top: 35%;
-  left: 50px;
-  font-size: clamp(14px, 2.5vw, 20px);
-  color: var(--text-gray);
-}
-
-.watch_bg p span {
-  font-size: clamp(18px, 3vw, 30px);
-  font-weight: bold;
-  color: var(--accent-red);
-}
-
-.watch_bg button {
-  position: absolute;
-  top: 55%;
-  left: 50px;
-  background-color: var(--primary-purple);
-  color: white;
-  font-size: clamp(14px, 2.5vw, 20px);
-  font-weight: bold;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.watch_bg button:hover {
-  background-color: var(--hover-purple);
-  transform: translateY(-2px);
+  background-blend-mode: overlay;
 }
 
 .lamp_bg {
-  background-image: url(/images/homepage/lamp.svg);
+  background-image: url("/images/homepage/lamp.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 280px;
-  width: 100%;
+  background-blend-mode: overlay;
+}
+
+.watch_bg h2, .lamp_bg h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
   position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 2px solid var(--secondary-gold);
+  z-index: 2;
 }
 
-.lamp_bg:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(109, 40, 217, 0.15);
+.watch_bg p, .lamp_bg p {
+  font-size: 0.9rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 2;
 }
 
-.lamp_bg h2 {
-  position: absolute;
-  top: 15%;
-  left: 50px;
-  font-size: clamp(24px, 4vw, 40px);
-  font-weight: bold;
-  color: var(--text-gray);
+.watch_bg p span, .lamp_bg p span {
+  color: #fbbf24;
+  font-weight: 800;
+  font-size: 1.2em;
 }
 
-.lamp_bg p {
-  position: absolute;
-  top: 35%;
-  left: 50px;
-  font-size: clamp(14px, 2.5vw, 20px);
-  color: var(--text-gray);
-}
-
-.lamp_bg p span {
-  font-size: clamp(18px, 3vw, 30px);
-  font-weight: bold;
-  color: var(--accent-red);
-}
-
-.lamp_bg button {
-  position: absolute;
-  top: 55%;
-  left: 50px;
-  background-color: var(--primary-purple);
+.watch_bg button, .lamp_bg button {
+  background: rgba(255, 255, 255, 0.2);
   color: white;
-  font-size: clamp(14px, 2.5vw, 20px);
-  font-weight: bold;
-  padding: 12px 20px;
-  border: none;
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
   border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
+  align-self: flex-start;
+  position: relative;
+  z-index: 2;
 }
 
-.lamp_bg button:hover {
-  background-color: var(--hover-purple);
-  transform: translateY(-2px);
+.watch_bg button:hover, .lamp_bg button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
 }
 
-/* ========== new arrivals section css ========== */
-
-.new_arrivals_heading {
-  font-size: clamp(28px, 4vw, 36px);
-  font-weight: bold;
-  max-width: 1320px;
-  margin: 80px auto 40px;
-  padding: 0 20px;
-  color: var(--text-gray);
+/* Section Headings */
+.new_arrivals_heading, .special_offer_heading {
+  text-align: center;
+  padding: 80px 0 60px;
+  background: white;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin: 0;
+  letter-spacing: -0.025em;
 }
 
-.new_arrivals {
-  max-width: 1320px;
-  margin: 0 auto 80px;
-  padding: 0 20px;
+/* Product Cards */
+.new_arrivals, .special_offer_main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 80px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  justify-items: center;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.new_arrivals > div, .special_offer_main > div {
+  background: white;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.new_arrivals > div:hover, .special_offer_main > div:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+}
+
+.card_1 {
+  position: relative;
+  height: 250px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 /* Cart image definitions */
@@ -269,182 +432,6 @@
   background-image: url(/images/homepage/cat.svg);
 }
 
-.card_1 {
-  background-size: cover;
-  background-position: center;
-  height: 320px;
-  width: 100%;
-  max-width: 300px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  border: 2px solid var(--secondary-gold);
-}
-
-.card_1:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(109, 40, 217, 0.2);
-}
-
-/* Hidden hover cart initially */
-.card_1 .hover_cart {
-  display: none;
-  height: 180px;
-  width: 100%;
-  background: linear-gradient(180deg, transparent 0%, rgba(109, 40, 217, 0.95) 100%);
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 20px;
-  box-sizing: border-box;
-  justify-content: flex-end;
-  align-items: flex-end;
-  transition: all 0.3s ease;
-}
-
-/* Show hover cart on card hover */
-.card_1:hover .hover_cart {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-/* Price section */
-.card_price {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 15px;
-  padding: 0 5px;
-}
-
-.card_price p {
-  font-size: clamp(16px, 2vw, 20px);
-  color: var(--text-gray);
-  margin: 0;
-}
-
-.card_price .price {
-  opacity: 0.7;
-  font-weight: 600;
-  color: var(--secondary-gold);
-}
-
-/* Offer badge */
-.new_arrivals .card_1 .offer_percent {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  background-color: var(--accent-red);
-  color: white;
-  font-size: clamp(14px, 2vw, 20px);
-  font-weight: bold;
-  padding: 8px 15px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  z-index: 2;
-  transition: all 0.3s ease;
-}
-
-.new_arrivals .card_1 .offer_percent:hover {
-  background-color: #dc2626;
-  transform: scale(1.05);
-}
-
-/* Hover buttons */
-.new_arrivals .card_1 .hover_cart button {
-  background-color: var(--background-white);
-  color: var(--primary-purple);
-  padding: 12px 20px;
-  border: 2px solid var(--primary-purple);
-  border-radius: 8px;
-  font-size: clamp(14px, 1.8vw, 16px);
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(109, 40, 217, 0.1);
-  margin-bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-.new_arrivals .card_1 .hover_cart button:hover {
-  background-color: var(--primary-purple);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(109, 40, 217, 0.2);
-}
-
-/* ========== phone of the year banner section css ========== */
-
-.phone_of_the_year_banner_main {
-  background-image: url("/images/homepage/banner_phone_of_the_year.svg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 400px;
-  max-width: 1320px;
-  margin: 80px auto;
-  padding: 0 20px;
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  border: 2px solid var(--secondary-gold);
-}
-
-.phone_of_the_year_banner {
-  max-width: 600px;
-  padding: 40px;
-  background: rgba(250, 250, 249, 0.95);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  margin-right: 50px;
-  text-align: center;
-  border: 2px solid var(--secondary-gold);
-}
-
-.phone_of_the_year_banner h3 {
-  font-size: clamp(28px, 4vw, 40px);
-  font-weight: bold;
-  margin-bottom: 15px;
-  color: var(--text-gray);
-  line-height: 1.2;
-}
-
-.phone_of_the_year_banner p {
-  font-size: clamp(16px, 2.5vw, 20px);
-  color: var(--text-gray);
-  opacity: 0.8;
-  margin-bottom: 25px;
-  line-height: 1.6;
-}
-
-.phone_of_the_year_banner_shop_now_button {
-  background-color: var(--primary-purple);
-  color: white;
-  font-size: clamp(16px, 2.5vw, 20px);
-  font-weight: bold;
-  padding: 15px 25px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.phone_of_the_year_banner_shop_now_button:hover {
-  background-color: var(--hover-purple);
-  transform: translateY(-2px);
-}
-
-/* ========== special offer section css ========== */
-
-/* Special offer cart image definitions */
 #cart1_img_special {
   background-image: url(/images/homepage/cap.svg);
 }
@@ -458,253 +445,465 @@
   background-image: url(/images/homepage/sunglases.svg);
 }
 
-.special_offer_heading {
-  font-size: clamp(28px, 4vw, 36px);
-  font-weight: bold;
-  max-width: 1320px;
-  margin: 80px auto 40px;
-  padding: 0 20px;
-  color: var(--text-gray);
-}
-
-.special_offer_main {
-  max-width: 1320px;
-  margin: 0 auto 80px;
-  padding: 0 20px;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 30px;
-  justify-items: center;
-}
-
-.special_offer_main .card_1 .offer_percent {
+.offer_percent {
   position: absolute;
-  top: 15px;
-  left: 15px;
-  background-color: var(--accent-red);
+  top: 12px;
+  left: 12px;
+  background: linear-gradient(135deg, #ef4444 0%, #f87171 100%);
   color: white;
-  font-size: clamp(14px, 2vw, 20px);
-  font-weight: bold;
-  padding: 8px 15px;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  z-index: 10;
+  border: none;
+  cursor: pointer;
+}
+
+.hover_cart {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0, 0, 0, 0.8) 100%);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.3s ease;
+}
+
+.card_1:hover .hover_cart {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hover_cart button {
+  background: white;
+  color: #1f2937;
+  padding: 8px 16px;
   border: none;
   border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
   cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.hover_cart button:hover {
+  background: #2563eb;
+  color: white;
+  transform: translateY(-1px);
+}
+
+.card_price {
+  padding: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card_price p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin: 0;
+}
+
+.card_price .price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2563eb;
+}
+
+/* Featured Banner */
+.phone_of_the_year_banner_main {
+  background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+  background-image: url("/images/homepage/banner_phone_of_the_year.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-blend-mode: overlay;
+  color: white;
+  padding: 80px 0;
+  margin: 80px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.phone_of_the_year_banner_main::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+.phone_of_the_year_banner {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+  padding: 0 20px;
+  position: relative;
   z-index: 2;
-  transition: all 0.3s ease;
 }
 
-.special_offer_main .card_1 .offer_percent:hover {
-  background-color: #dc2626;
-  transform: scale(1.05);
+.phone_of_the_year_banner h3 {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  letter-spacing: -0.025em;
 }
 
-.special_offer_main .card_1 .hover_cart button {
-  background-color: var(--background-white);
-  color: var(--primary-purple);
-  padding: 12px 20px;
-  border: 2px solid var(--primary-purple);
-  border-radius: 8px;
-  font-size: clamp(14px, 1.8vw, 16px);
-  font-weight: 500;
+.phone_of_the_year_banner p {
+  font-size: 1.25rem;
+  opacity: 0.9;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.phone_of_the_year_banner_shop_now_button {
+  background: linear-gradient(135deg, #FF6B35 0%, #F7931E 100%);
+  color: white;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(109, 40, 217, 0.1);
-  margin-bottom: 8px;
-  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Brands Section */
+.brands_section {
+  padding: 80px 0;
+  background: linear-gradient(135deg, #f8fafc 0%, #e5e7eb 100%);
+  border-top: 1px solid #e5e7eb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.brands_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
   text-align: center;
 }
 
-.special_offer_main .card_1 .hover_cart button:hover {
-  background-color: var(--primary-purple);
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(109, 40, 217, 0.2);
+.brands_container h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 3rem;
+  letter-spacing: -0.025em;
 }
 
-/* ========== Responsive Design ========== */
+.brands_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2rem;
+  align-items: center;
+}
 
-/* Large Desktop (1400px+) */
-@media screen and (min-width: 1400px) {
-  .sale_offer {
-    gap: 50px;
+.brand_card {
+  background: white;
+  padding: 2rem 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 2px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.brand_card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  border-color: #2563eb;
+}
+
+.brand_logo {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  filter: grayscale(100%);
+  transition: filter 0.3s ease;
+}
+
+.brand_card:hover .brand_logo {
+  filter: grayscale(0%);
+}
+
+.brand_name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #374151;
+  transition: color 0.3s ease;
+}
+
+.brand_card:hover .brand_name {
+  color: #2563eb;
+}
+
+/* Testimonials Section */
+.testimonials_section {
+  padding: 80px 0;
+  background: white;
+}
+
+.testimonials_container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.testimonials_container h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  color: #1f2937;
+  margin-bottom: 3rem;
+  letter-spacing: -0.025em;
+}
+
+.testimonials_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 2rem;
+}
+
+.testimonial_card {
+  background: #f8fafc;
+  padding: 2rem;
+  border-radius: 16px;
+  border-left: 4px solid #2563eb;
+  transition: all 0.3s ease;
+}
+
+.testimonial_card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial_content p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #374151;
+  margin-bottom: 1.5rem;
+  font-style: italic;
+}
+
+.testimonial_author strong {
+  font-size: 1.125rem;
+  color: #1f2937;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.testimonial_author span {
+  color: #6b7280;
+  font-size: 0.875rem;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.rating {
+  color: #fbbf24;
+  font-size: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .sale_container {
+    grid-template-columns: 1fr;
+    height: auto;
   }
   
   .lights_bg {
-    max-width: 620px;
+    min-height: 300px;
   }
   
   .sale_offer_rightside {
-    max-width: 750px;
+    flex-direction: row;
   }
-}
-
-/* Desktop Medium (992px - 1199px) */
-@media screen and (max-width: 1199px) {
-  .new_arrivals,
-  .special_offer_main {
+  
+  .testimonials_grid {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  
+  .brands_grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .new_arrivals, .special_offer_main {
     grid-template-columns: repeat(3, 1fr);
   }
 }
 
-/* Tablet (768px - 991px) */
-@media screen and (max-width: 991px) {
-  .hero_img {
-    height: 500px;
+@media (max-width: 768px) {
+  .hero_content h1 {
+    font-size: 2.5rem;
   }
   
-  .sale_offer {
+  .hero_content p {
+    font-size: 1.125rem;
+  }
+  
+  .hero_cta {
     flex-direction: column;
-    height: auto;
+    align-items: center;
+  }
+  
+  .hero_stats {
+    gap: 2rem;
+  }
+  
+  .stat-number {
+    font-size: 1.5rem;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .info_container {
+    grid-template-columns: repeat(2, 1fr);
     gap: 30px;
   }
   
-  .lights_bg,
-  .sale_offer_rightside {
-    max-width: 100%;
-  }
-  
-  .lights_bg {
-    height: 450px;
-  }
-  
-  .new_arrivals,
-  .special_offer_main {
+  .brands_grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 25px;
-  }
-  
-  .phone_of_the_year_banner {
-    margin-right: 20px;
-    padding: 30px 20px;
-  }
-}
-
-/* Mobile (480px - 767px) */
-@media screen and (max-width: 767px) {
-  .hero_img {
-    height: 400px;
-  }
-  
-  .sale_offer {
-    margin: 40px auto;
-    padding: 0 15px;
-    gap: 20px;
+    gap: 1.5rem;
   }
   
   .lights_bg {
-    height: 400px;
+    padding: 2rem;
   }
   
-  .lights_bg h2,
-  .watch_bg h2,
-  .lamp_bg h2 {
-    left: 30px;
+  .lights_bg h2 {
+    font-size: 2rem;
   }
   
-  .lights_bg p,
-  .watch_bg p,
-  .lamp_bg p {
-    left: 30px;
-  }
-  
-  .lights_bg button,
-  .watch_bg button,
-  .lamp_bg button {
-    left: 30px;
-  }
-  
-  .new_arrivals,
-  .special_offer_main {
-    grid-template-columns: 1fr;
-    padding: 0 15px;
-    gap: 25px;
-  }
-  
-  .card_1 {
-    max-width: 100%;
-    height: 350px;
-  }
-  
-  .phone_of_the_year_banner_main {
-    margin: 40px auto;
-    height: 350px;
-    justify-content: center;
-  }
-  
-  .phone_of_the_year_banner {
-    margin-right: 0;
-    padding: 30px 20px;
-    max-width: 100%;
-  }
-}
-
-/* Small Mobile (320px - 479px) */
-@media screen and (max-width: 479px) {
-  .hero_img {
-    height: 300px;
-  }
-  
-  .sale_offer {
-    margin: 30px auto;
-    padding: 0 10px;
-  }
-  
-  .lights_bg {
-    height: 350px;
-  }
-  
-  .lights_bg h2,
-  .watch_bg h2,
-  .lamp_bg h2 {
-    left: 20px;
-  }
-  
-  .lights_bg p,
-  .watch_bg p,
-  .lamp_bg p {
-    left: 20px;
-  }
-  
-  .lights_bg button,
-  .watch_bg button,
-  .lamp_bg button {
-    left: 20px;
-  }
-  
-  .new_arrivals,
-  .special_offer_main {
-    padding: 0 10px;
-    gap: 20px;
-  }
-  
-  .card_1 {
-    max-width: 100%;
-    height: 320px;
-  }
-  
-  .new_arrivals_heading,
-  .special_offer_heading {
-    padding: 0 10px;
-  }
-  
-  .phone_of_the_year_banner_main {
-    margin: 30px auto;
-    height: 300px;
-    padding: 0 10px;
-  }
-  
-  .phone_of_the_year_banner {
-    padding: 25px 15px;
-  }
-  
-  .card_1 {
-    max-width: 100%;
-    height: 320px;
-  }
-  
-  .card_price {
+  .sale_offer_rightside {
     flex-direction: column;
-    gap: 5px;
-    text-align: center;
+  }
+  
+  .new_arrivals_heading, .special_offer_heading {
+    font-size: 2rem;
+    padding: 60px 0 40px;
+  }
+  
+  .phone_of_the_year_banner h3 {
+    font-size: 2.5rem;
+  }
+  
+  .testimonials_container h2 {
+    font-size: 2rem;
+  }
+  
+  .testimonials_grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .new_arrivals, .special_offer_main {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero_content h1 {
+    font-size: 2rem;
+  }
+  
+  .hero_content p {
+    font-size: 1rem;
+  }
+  
+  .hero_stats {
+    gap: 1.5rem;
+  }
+  
+  .stat-number {
+    font-size: 1.25rem;
+  }
+  
+  .info_container {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 0 20px;
+  }
+  
+  .info_card {
+    padding: 24px 20px;
+  }
+  
+  .info_icon {
+    font-size: 40px;
+    margin-bottom: 12px;
+  }
+  
+  .info_card h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .info_card p {
+    font-size: 13px;
+  }
+  
+  .brands_grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .lights_bg {
+    padding: 1.5rem;
+  }
+  
+  .lights_bg h2 {
+    font-size: 1.75rem;
+  }
+  
+  .watch_bg, .lamp_bg {
+    padding: 1.5rem;
+  }
+  
+  .new_arrivals, .special_offer_main {
+    grid-template-columns: 1fr;
+    padding: 0 15px 60px;
+  }
+  
+  .new_arrivals_heading, .special_offer_heading {
+    font-size: 1.75rem;
+    padding: 40px 0 30px;
+  }
+  
+  .phone_of_the_year_banner h3 {
+    font-size: 2rem;
+  }
+  
+  .phone_of_the_year_banner p {
+    font-size: 1rem;
+  }
+  
+  .testimonials_container h2 {
+    font-size: 1.75rem;
+  }
+  
+  .testimonial_card {
+    padding: 1.5rem;
   }
 }
