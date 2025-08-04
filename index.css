@@ -50,11 +50,12 @@
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid var(--secondary-gold);
 }
 
 .lights_bg:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 15px 35px rgba(109, 40, 217, 0.2);
 }
 
 .lights_bg h2 {
@@ -64,7 +65,7 @@
   font-size: clamp(32px, 5vw, 50px);
   text-transform: capitalize;
   font-weight: bold;
-  color: #262626;
+  color: var(--text-gray);
 }
 
 .lights_bg p {
@@ -72,20 +73,20 @@
   bottom: 20%;
   left: 50px;
   font-size: clamp(16px, 2.5vw, 20px);
-  color: #262626;
+  color: var(--text-gray);
 }
 
 .lights_bg p span {
   font-size: clamp(20px, 3.5vw, 30px);
   font-weight: bold;
-  color: #262626;
+  color: var(--accent-red);
 }
 
 .lights_bg button {
   position: absolute;
   bottom: 10%;
   left: 50px;
-  background-color: #262626;
+  background-color: var(--primary-purple);
   color: white;
   font-size: clamp(16px, 2.5vw, 20px);
   font-weight: bold;
@@ -97,7 +98,7 @@
 }
 
 .lights_bg button:hover {
-  background-color: #434141;
+  background-color: var(--hover-purple);
   transform: translateY(-2px);
 }
 
@@ -120,11 +121,12 @@
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid var(--secondary-gold);
 }
 
 .watch_bg:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(109, 40, 217, 0.15);
 }
 
 .watch_bg h2 {
@@ -133,7 +135,7 @@
   left: 50px;
   font-size: clamp(24px, 4vw, 40px);
   font-weight: bold;
-  color: #262626;
+  color: var(--text-gray);
 }
 
 .watch_bg p {
@@ -141,20 +143,20 @@
   top: 35%;
   left: 50px;
   font-size: clamp(14px, 2.5vw, 20px);
-  color: #262626;
+  color: var(--text-gray);
 }
 
 .watch_bg p span {
   font-size: clamp(18px, 3vw, 30px);
   font-weight: bold;
-  color: #262626;
+  color: var(--accent-red);
 }
 
 .watch_bg button {
   position: absolute;
   top: 55%;
   left: 50px;
-  background-color: #262626;
+  background-color: var(--primary-purple);
   color: white;
   font-size: clamp(14px, 2.5vw, 20px);
   font-weight: bold;
@@ -166,7 +168,7 @@
 }
 
 .watch_bg button:hover {
-  background-color: #434141;
+  background-color: var(--hover-purple);
   transform: translateY(-2px);
 }
 
@@ -181,11 +183,12 @@
   border-radius: 12px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid var(--secondary-gold);
 }
 
 .lamp_bg:hover {
   transform: translateY(-3px);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(109, 40, 217, 0.15);
 }
 
 .lamp_bg h2 {
@@ -194,7 +197,7 @@
   left: 50px;
   font-size: clamp(24px, 4vw, 40px);
   font-weight: bold;
-  color: #262626;
+  color: var(--text-gray);
 }
 
 .lamp_bg p {
@@ -202,20 +205,20 @@
   top: 35%;
   left: 50px;
   font-size: clamp(14px, 2.5vw, 20px);
-  color: #262626;
+  color: var(--text-gray);
 }
 
 .lamp_bg p span {
   font-size: clamp(18px, 3vw, 30px);
   font-weight: bold;
-  color: #262626;
+  color: var(--accent-red);
 }
 
 .lamp_bg button {
   position: absolute;
   top: 55%;
   left: 50px;
-  background-color: #262626;
+  background-color: var(--primary-purple);
   color: white;
   font-size: clamp(14px, 2.5vw, 20px);
   font-weight: bold;
@@ -227,7 +230,7 @@
 }
 
 .lamp_bg button:hover {
-  background-color: #434141;
+  background-color: var(--hover-purple);
   transform: translateY(-2px);
 }
 
@@ -239,7 +242,7 @@
   max-width: 1320px;
   margin: 80px auto 40px;
   padding: 0 20px;
-  color: #262626;
+  color: var(--text-gray);
 }
 
 .new_arrivals {
@@ -277,11 +280,12 @@
   border-radius: 12px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
+  border: 2px solid var(--secondary-gold);
 }
 
 .card_1:hover {
   transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 15px 35px rgba(109, 40, 217, 0.2);
 }
 
 /* Hidden hover cart initially */
@@ -289,7 +293,7 @@
   display: none;
   height: 180px;
   width: 100%;
-  background: linear-gradient(180deg, transparent 0%, rgba(0, 128, 128, 0.95) 100%);
+  background: linear-gradient(180deg, transparent 0%, rgba(109, 40, 217, 0.95) 100%);
   position: absolute;
   bottom: 0;
   left: 0;
@@ -318,13 +322,14 @@
 
 .card_price p {
   font-size: clamp(16px, 2vw, 20px);
-  color: #262626;
+  color: var(--text-gray);
   margin: 0;
 }
 
 .card_price .price {
   opacity: 0.7;
   font-weight: 600;
+  color: var(--secondary-gold);
 }
 
 /* Offer badge */
@@ -332,7 +337,7 @@
   position: absolute;
   top: 15px;
   left: 15px;
-  background-color: #262626;
+  background-color: var(--accent-red);
   color: white;
   font-size: clamp(14px, 2vw, 20px);
   font-weight: bold;
@@ -345,31 +350,32 @@
 }
 
 .new_arrivals .card_1 .offer_percent:hover {
-  background-color: #434141;
+  background-color: #dc2626;
   transform: scale(1.05);
 }
 
 /* Hover buttons */
 .new_arrivals .card_1 .hover_cart button {
-  background-color: #f5f5f3;
-  color: #262626;
+  background-color: var(--background-white);
+  color: var(--primary-purple);
   padding: 12px 20px;
-  border: none;
+  border: 2px solid var(--primary-purple);
   border-radius: 8px;
   font-size: clamp(14px, 1.8vw, 16px);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(109, 40, 217, 0.1);
   margin-bottom: 8px;
   width: 100%;
   text-align: center;
 }
 
 .new_arrivals .card_1 .hover_cart button:hover {
-  background-color: #e0e0dc;
+  background-color: var(--primary-purple);
+  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(109, 40, 217, 0.2);
 }
 
 /* ========== phone of the year banner section css ========== */
@@ -389,36 +395,38 @@
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  border: 2px solid var(--secondary-gold);
 }
 
 .phone_of_the_year_banner {
   max-width: 600px;
   padding: 40px;
-  background: rgba(255, 255, 255, 0.95);
+  background: rgba(250, 250, 249, 0.95);
   border-radius: 12px;
   backdrop-filter: blur(10px);
   margin-right: 50px;
   text-align: center;
+  border: 2px solid var(--secondary-gold);
 }
 
 .phone_of_the_year_banner h3 {
   font-size: clamp(28px, 4vw, 40px);
   font-weight: bold;
   margin-bottom: 15px;
-  color: #262626;
+  color: var(--text-gray);
   line-height: 1.2;
 }
 
 .phone_of_the_year_banner p {
   font-size: clamp(16px, 2.5vw, 20px);
-  color: #666;
+  color: var(--text-gray);
   opacity: 0.8;
   margin-bottom: 25px;
   line-height: 1.6;
 }
 
 .phone_of_the_year_banner_shop_now_button {
-  background-color: #262626;
+  background-color: var(--primary-purple);
   color: white;
   font-size: clamp(16px, 2.5vw, 20px);
   font-weight: bold;
@@ -430,7 +438,7 @@
 }
 
 .phone_of_the_year_banner_shop_now_button:hover {
-  background-color: #434141;
+  background-color: var(--hover-purple);
   transform: translateY(-2px);
 }
 
@@ -456,7 +464,7 @@
   max-width: 1320px;
   margin: 80px auto 40px;
   padding: 0 20px;
-  color: #262626;
+  color: var(--text-gray);
 }
 
 .special_offer_main {
@@ -473,7 +481,7 @@
   position: absolute;
   top: 15px;
   left: 15px;
-  background-color: #262626;
+  background-color: var(--accent-red);
   color: white;
   font-size: clamp(14px, 2vw, 20px);
   font-weight: bold;
@@ -486,30 +494,31 @@
 }
 
 .special_offer_main .card_1 .offer_percent:hover {
-  background-color: #434141;
+  background-color: #dc2626;
   transform: scale(1.05);
 }
 
 .special_offer_main .card_1 .hover_cart button {
-  background-color: #f5f5f3;
-  color: #262626;
+  background-color: var(--background-white);
+  color: var(--primary-purple);
   padding: 12px 20px;
-  border: none;
+  border: 2px solid var(--primary-purple);
   border-radius: 8px;
   font-size: clamp(14px, 1.8vw, 16px);
   font-weight: 500;
   cursor: pointer;
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(109, 40, 217, 0.1);
   margin-bottom: 8px;
   width: 100%;
   text-align: center;
 }
 
 .special_offer_main .card_1 .hover_cart button:hover {
-  background-color: #e0e0dc;
+  background-color: var(--primary-purple);
+  color: white;
   transform: translateY(-2px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 12px rgba(109, 40, 217, 0.2);
 }
 
 /* ========== Responsive Design ========== */

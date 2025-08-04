@@ -16,13 +16,13 @@
   font-weight: 300;
   text-align: center;
   margin-bottom: 60px;
-  color: #1a1a1a;
+  color: var(--text-gray);
   letter-spacing: 0.5px;
 }
 
 /* Hero Section */
 .hero-section {
-  background: #f7f8fa;
+  background: linear-gradient(135deg, var(--primary-purple) 0%, var(--hover-purple) 100%);
   padding: 120px 0 80px;
   text-align: center;
   margin-top: 60px;
@@ -31,21 +31,21 @@
 .hero-content h1 {
   font-size: 56px;
   font-weight: 300;
-  color: #1a1a1a;
+  color: white;
   margin-bottom: 20px;
   letter-spacing: 1px;
 }
 
 .hero-subtitle {
   font-size: 20px;
-  color: #666;
+  color: rgba(255, 255, 255, 0.9);
   font-weight: 300;
 }
 
 /* Story Section */
 .story-section {
   padding: 100px 0;
-  background: white;
+  background: var(--background-white);
 }
 
 .story-grid {
@@ -59,14 +59,15 @@
   font-size: 42px;
   font-weight: 300;
   margin-bottom: 30px;
-  color: #1a1a1a;
+  color: var(--text-gray);
 }
 
 .story-content p {
   font-size: 18px;
   line-height: 1.8;
-  color: #666;
+  color: var(--text-gray);
   margin-bottom: 25px;
+  opacity: 0.8;
 }
 
 .story-stats {
@@ -79,15 +80,16 @@
 .stat h3 {
   font-size: 32px;
   font-weight: 600;
-  color: #1a1a1a;
+  color: var(--primary-purple);
   margin-bottom: 8px;
 }
 
 .stat p {
   font-size: 14px;
-  color: #888;
+  color: var(--text-gray);
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  opacity: 0.7;
 }
 
 .story-image {
@@ -98,21 +100,21 @@
 .image-placeholder {
   width: 100%;
   height: 400px;
-  background: #f7f8fa;
+  background: linear-gradient(135deg, var(--primary-purple) 0%, var(--hover-purple) 100%);
   border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 18px;
-  color: #666;
+  color: white;
   font-weight: 500;
-  border: 1px solid #e9ecef;
+  border: 2px solid var(--secondary-gold);
 }
 
 /* Values Section */
 .values-section {
   padding: 100px 0;
-  background: #f7f8fa;
+  background: linear-gradient(135deg, #f8f7ff 0%, #faf9ff 100%);
 }
 
 .values-grid {
@@ -124,27 +126,30 @@
 .value-card {
   background: white;
   padding: 40px 30px;
-  border-radius: 8px;
+  border-radius: 12px;
   text-align: center;
-  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 30px rgba(109, 40, 217, 0.1);
   transition: transform 0.3s ease;
+  border-top: 4px solid var(--secondary-gold);
 }
 
 .value-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 12px 40px rgba(109, 40, 217, 0.15);
 }
 
 .value-card h3 {
   font-size: 24px;
   font-weight: 600;
   margin-bottom: 20px;
-  color: #1a1a1a;
+  color: var(--text-gray);
 }
 
 .value-card p {
   font-size: 16px;
   line-height: 1.7;
-  color: #666;
+  color: var(--text-gray);
+  opacity: 0.8;
 }
 
 /* Responsive Design */
