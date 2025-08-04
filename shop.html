@@ -6,11 +6,117 @@
     <title>Orebi - Shop</title>
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="shop.css" />
+    <link rel="stylesheet" href="shop-nav.css" />
     <script src="shared/components.js"></script>
   </head>
   <body>
     <!-- Navbar Placeholder -->
     <div id="navbar-placeholder"></div>
+
+    <!-- Shop Navigation Bar -->
+    <nav class="shop-navbar">
+      <div class="shop-nav-container">
+        <ul class="shop-nav-menu">
+          <li class="shop-nav-item">
+            <a href="#" class="shop-nav-link">Smartphones</a>
+            <div class="shop-dropdown">
+              <div class="dropdown-content">
+                <a href="#" onclick="filterByBrand('apple')">Apple iPhone</a>
+                <a href="#" onclick="filterByBrand('samsung')">Samsung Galaxy</a>
+                <a href="#" onclick="filterByBrand('google')">Google Pixel</a>
+                <a href="#" onclick="filterByBrand('oneplus')">OnePlus</a>
+                <a href="#" onclick="filterByBrand('xiaomi')">Xiaomi</a>
+                <a href="#" onclick="filterByBrand('huawei')">Huawei</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="shop-nav-item">
+            <a href="#" class="shop-nav-link">Laptops</a>
+            <div class="shop-dropdown">
+              <div class="dropdown-content">
+                <a href="#" onclick="filterByBrand('apple')">Apple MacBook</a>
+                <a href="#" onclick="filterByBrand('dell')">Dell</a>
+                <a href="#" onclick="filterByBrand('hp')">HP</a>
+                <a href="#" onclick="filterByBrand('lenovo')">Lenovo</a>
+                <a href="#" onclick="filterByBrand('asus')">ASUS</a>
+                <a href="#" onclick="filterByBrand('microsoft')">Microsoft Surface</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="shop-nav-item">
+            <a href="#" class="shop-nav-link">Headphones</a>
+            <div class="shop-dropdown">
+              <div class="dropdown-content">
+                <a href="#" onclick="filterByBrand('apple')">Apple AirPods</a>
+                <a href="#" onclick="filterByBrand('sony')">Sony</a>
+                <a href="#" onclick="filterByBrand('bose')">Bose</a>
+                <a href="#" onclick="filterByBrand('sennheiser')">Sennheiser</a>
+                <a href="#" onclick="filterByBrand('beats')">Beats</a>
+                <a href="#" onclick="filterByBrand('jbl')">JBL</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="shop-nav-item">
+            <a href="#" class="shop-nav-link">Smart Watches</a>
+            <div class="shop-dropdown">
+              <div class="dropdown-content">
+                <a href="#" onclick="filterByBrand('apple')">Apple Watch</a>
+                <a href="#" onclick="filterByBrand('samsung')">Samsung Galaxy Watch</a>
+                <a href="#" onclick="filterByBrand('garmin')">Garmin</a>
+                <a href="#" onclick="filterByBrand('fitbit')">Fitbit</a>
+                <a href="#" onclick="filterByBrand('fossil')">Fossil</a>
+                <a href="#" onclick="filterByBrand('amazfit')">Amazfit</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="shop-nav-item">
+            <a href="#" class="shop-nav-link">Accessories</a>
+            <div class="shop-dropdown">
+              <div class="dropdown-content">
+                <a href="#" onclick="filterByBrand('apple')">Apple</a>
+                <a href="#" onclick="filterByBrand('anker')">Anker</a>
+                <a href="#" onclick="filterByBrand('belkin')">Belkin</a>
+                <a href="#" onclick="filterByBrand('logitech')">Logitech</a>
+                <a href="#" onclick="filterByBrand('razer')">Razer</a>
+                <a href="#" onclick="filterByBrand('samsung')">Samsung</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="shop-nav-item">
+            <a href="#" class="shop-nav-link">PC Accessories</a>
+            <div class="shop-dropdown">
+              <div class="dropdown-content">
+                <a href="#" onclick="filterByBrand('logitech')">Logitech</a>
+                <a href="#" onclick="filterByBrand('corsair')">Corsair</a>
+                <a href="#" onclick="filterByBrand('razer')">Razer</a>
+                <a href="#" onclick="filterByBrand('steelseries')">SteelSeries</a>
+                <a href="#" onclick="filterByBrand('hyperx')">HyperX</a>
+                <a href="#" onclick="filterByBrand('dell')">Dell</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="shop-nav-item">
+            <a href="#" class="shop-nav-link">Gaming</a>
+            <div class="shop-dropdown">
+              <div class="dropdown-content">
+                <a href="#" onclick="filterByBrand('razer')">Razer</a>
+                <a href="#" onclick="filterByBrand('asus')">ASUS ROG</a>
+                <a href="#" onclick="filterByBrand('msi')">MSI Gaming</a>
+                <a href="#" onclick="filterByBrand('corsair')">Corsair</a>
+                <a href="#" onclick="filterByBrand('steelseries')">SteelSeries</a>
+                <a href="#" onclick="filterByBrand('alienware')">Alienware</a>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
 
     <!-- Shop Section -->
     <section class="shop-section">
@@ -464,6 +570,104 @@
       function updateResultsCount() {
         const visibleProducts = document.querySelectorAll('.product-card:not([style*="none"])');
         document.querySelector('.results-count strong').textContent = visibleProducts.length;
+      }
+
+      // Filter products by brand
+      function filterByBrand(brand) {
+        const products = document.querySelectorAll('.product-card');
+        products.forEach(product => {
+          const productName = product.querySelector('h4').textContent.toLowerCase();
+          if (productName.includes(brand.toLowerCase()) || brand === 'all') {
+            product.style.display = 'block';
+          } else {
+            product.style.display = 'none';
+          }
+        });
+        updateResultsCount();
+      }
+
+      // Filter products by type/category
+      function filterByType(type) {
+        const products = document.querySelectorAll('.product-card');
+        products.forEach(product => {
+          const productName = product.querySelector('h4').textContent.toLowerCase();
+          const productDesc = product.querySelector('.product-description').textContent.toLowerCase();
+          
+          let shouldShow = false;
+          
+          switch(type) {
+            case 'wireless':
+              shouldShow = productName.includes('wireless') || productDesc.includes('wireless');
+              break;
+            case 'gaming':
+              shouldShow = productDesc.includes('gaming') || productName.includes('gaming');
+              break;
+            case 'ultrabook':
+              shouldShow = productDesc.includes('ultra') || productName.includes('ultra');
+              break;
+            case 'business':
+              shouldShow = productDesc.includes('professional') || productDesc.includes('business');
+              break;
+            case 'fitness':
+              shouldShow = productDesc.includes('fitness') || productDesc.includes('health');
+              break;
+            default:
+              shouldShow = productDesc.includes(type) || productName.includes(type);
+          }
+          
+          product.style.display = shouldShow ? 'block' : 'none';
+        });
+        updateResultsCount();
+      }
+
+      // Filter products by feature
+      function filterByFeature(feature) {
+        const products = document.querySelectorAll('.product-card');
+        products.forEach(product => {
+          const productDesc = product.querySelector('.product-description').textContent.toLowerCase();
+          const productName = product.querySelector('h4').textContent.toLowerCase();
+          
+          let shouldShow = false;
+          
+          switch(feature) {
+            case 'camera':
+              shouldShow = productDesc.includes('camera') || productName.includes('pro');
+              break;
+            case 'battery':
+              shouldShow = productDesc.includes('battery') || productDesc.includes('long');
+              break;
+            case 'anc':
+              shouldShow = productDesc.includes('noise') || productDesc.includes('canceling');
+              break;
+            case 'gps':
+              shouldShow = productDesc.includes('gps') || productDesc.includes('tracking');
+              break;
+            case 'health':
+              shouldShow = productDesc.includes('health') || productDesc.includes('fitness');
+              break;
+            default:
+              shouldShow = productDesc.includes(feature) || productName.includes(feature);
+          }
+          
+          product.style.display = shouldShow ? 'block' : 'none';
+        });
+        updateResultsCount();
+      }
+
+      // Filter products by size
+      function filterBySize(size) {
+        const products = document.querySelectorAll('.product-card');
+        products.forEach(product => {
+          const productName = product.querySelector('h4').textContent.toLowerCase();
+          
+          if (size === 'all') {
+            product.style.display = 'block';
+          } else {
+            const shouldShow = productName.includes(size + '"') || productName.includes(size + ' ');
+            product.style.display = shouldShow ? 'block' : 'none';
+          }
+        });
+        updateResultsCount();
       }
 
       // Sort products
