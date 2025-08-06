@@ -174,9 +174,35 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.classList.add('loading');
                 submitBtn.disabled = true;
                 
-                // Simulate form submission
+                // Simulate form submission and registration
                 setTimeout(() => {
-                    alert('Form would be submitted here! (No backend functionality implemented)');
+                    const nameInput = document.getElementById('name');
+                    const emailInput = document.getElementById('email');
+                    
+                    const name = nameInput ? nameInput.value : 'New User';
+                    const email = emailInput ? emailInput.value : '';
+                    
+                    // Use the UserAuth system if available
+                    if (window.UserAuth) {
+                        window.UserAuth.login({
+                            name: name,
+                            email: email,
+                            loginTime: new Date().toISOString(),
+                            isNewUser: true
+                        });
+                        
+                        if (window.showNotification) {
+                            window.showNotification(`Welcome to Orebi, ${name}! Your account has been created.`, 'success');
+                        }
+                        
+                        // Redirect to home page after successful registration
+                        setTimeout(() => {
+                            window.location.href = 'index.php';
+                        }, 2000);
+                    } else {
+                        alert('Registration successful! (UserAuth system not loaded)');
+                    }
+                    
                     submitBtn.classList.remove('loading');
                     submitBtn.disabled = false;
                 }, 2000);
@@ -218,6 +244,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             let isValid = true;
             const submitBtn = form.querySelector('.auth-btn.primary');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
             
             // Basic validation
             const requiredInputs = form.querySelectorAll('input[required]');
@@ -235,9 +263,32 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.classList.add('loading');
                 submitBtn.disabled = true;
                 
-                // Simulate login
+                // Simulate login process
                 setTimeout(() => {
-                    alert('Login would be processed here! (No backend functionality implemented)');
+                    // Simulate successful login
+                    const email = emailInput.value;
+                    const name = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    
+                    // Use the UserAuth system if available
+                    if (window.UserAuth) {
+                        window.UserAuth.login({
+                            name: name,
+                            email: email,
+                            loginTime: new Date().toISOString()
+                        });
+                        
+                        if (window.showNotification) {
+                            window.showNotification(`Welcome back, ${name}!`, 'success');
+                        }
+                        
+                        // Redirect to home page after successful login
+                        setTimeout(() => {
+                            window.location.href = 'index.php';
+                        }, 1500);
+                    } else {
+                        alert('Login successful! (UserAuth system not loaded)');
+                    }
+                    
                     submitBtn.classList.remove('loading');
                     submitBtn.disabled = false;
                 }, 2000);

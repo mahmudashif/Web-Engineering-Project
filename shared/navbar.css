@@ -358,7 +358,8 @@
 
 /* Special styling for Sign In/Sign Up items */
 .dropdown_item[href*="login"],
-.dropdown_item[href*="register"] {
+.dropdown_item[href*="register"],
+.dropdown_item.auth_item {
   background: linear-gradient(135deg, #f8fafc, #f1f5f9);
   border-radius: 8px;
   margin: 4px 12px;
@@ -368,12 +369,31 @@
 }
 
 .dropdown_item[href*="login"]:hover,
-.dropdown_item[href*="register"]:hover {
+.dropdown_item[href*="register"]:hover,
+.dropdown_item.auth_item:hover {
   background: linear-gradient(135deg, var(--primary-purple), var(--hover-purple));
   color: white;
   transform: translateY(-1px);
   box-shadow: 0 4px 12px rgba(109, 40, 217, 0.2);
   padding-left: 16px;
+}
+
+/* Special styling for logout item */
+.dropdown_item.logout_item {
+  color: var(--accent-red);
+  border-top: 1px solid #fee2e2;
+  margin-top: 8px;
+  background: #fef2f2;
+}
+
+.dropdown_item.logout_item:hover {
+  background: var(--accent-red);
+  color: white;
+  padding-left: 24px;
+}
+
+.dropdown_item.logout_item .dropdown_icon {
+  color: inherit;
 }
 
 /* Hover effect for user icon */

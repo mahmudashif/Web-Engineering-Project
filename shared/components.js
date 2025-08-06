@@ -22,6 +22,9 @@ async function loadSharedComponents() {
 
     // Load global cart system
     loadJS('/shared/cart-global.js');
+    
+    // Load user authentication system
+    loadJS('/user-auth.js');
 
     // Load navbar
     const navbarResponse = await fetch('/shared/navbar.html');
