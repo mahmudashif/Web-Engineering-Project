@@ -57,6 +57,7 @@
 .form-group {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .form-group label {
@@ -73,6 +74,64 @@
   font-size: 1rem;
   transition: all 0.3s ease;
   background-color: #F9FAFB;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Ensure password inputs have consistent width with toggle button */
+.form-group input[type="password"],
+.form-group input[type="text"] {
+  padding-right: 3rem; /* Extra space for password toggle button */
+}
+
+/* Reset padding for non-password fields */
+.form-group input[type="email"],
+.form-group input[type="text"]:not([data-password-toggle]) {
+  padding-right: 1rem;
+}
+
+/* Password input wrapper styling */
+.password-input-wrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper input {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Password toggle button styling */
+.password-toggle-btn {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  border-radius: 4px;
+}
+
+.password-toggle-btn:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.password-toggle-btn:focus {
+  outline: 2px solid var(--primary-purple);
+  outline-offset: 2px;
 }
 
 .form-group input:focus {
@@ -235,6 +294,8 @@
   .auth-card {
     padding: 2rem 1.5rem;
     border-radius: 16px;
+    max-width: 100%;
+    margin: 0 auto;
   }
   
   .auth-header h1 {
@@ -244,11 +305,27 @@
   .form-group input {
     padding: 0.75rem;
     font-size: 0.95rem;
+    width: 100%;
+  }
+  
+  /* Ensure password inputs maintain consistent width on mobile */
+  .form-group input[type="password"],
+  .form-group input[type="text"][data-password-toggle] {
+    padding-right: 2.75rem; /* Slightly less space for mobile */
+  }
+  
+  .form-group input[type="email"],
+  .form-group input[type="text"]:not([data-password-toggle]) {
+    padding-right: 0.75rem;
   }
   
   .auth-btn {
     padding: 0.75rem 1.25rem;
     font-size: 0.95rem;
+  }
+  
+  .checkbox-label {
+    font-size: 0.85rem;
   }
 }
 
@@ -267,6 +344,34 @@
   
   .checkbox-label {
     font-size: 0.85rem;
+  }
+  
+  /* Mobile-specific password input adjustments */
+  .form-group input {
+    padding: 0.75rem;
+    font-size: 0.95rem;
+  }
+  
+  .form-group input[type="password"],
+  .form-group input[type="text"][data-password-toggle] {
+    padding-right: 2.5rem;
+  }
+  
+  .form-group input[type="email"],
+  .form-group input[type="text"]:not([data-password-toggle]) {
+    padding-right: 0.75rem;
+  }
+  
+  .password-toggle-btn {
+    right: 10px;
+    width: 22px;
+    height: 22px;
+    font-size: 14px;
+  }
+  
+  .auth-card {
+    max-width: 100%;
+    margin: 0;
   }
 }
 

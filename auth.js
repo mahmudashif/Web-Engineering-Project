@@ -6,14 +6,26 @@ document.addEventListener('DOMContentLoaded', function() {
         const passwordInputs = document.querySelectorAll('input[type="password"]');
         
         passwordInputs.forEach(input => {
-            const wrapper = document.createElement('div');
-            wrapper.style.position = 'relative';
-            input.parentNode.insertBefore(wrapper, input);
-            wrapper.appendChild(input);
+            // Mark input as having password toggle
+            input.setAttribute('data-password-toggle', 'true');
+            
+            // Create wrapper if it doesn't exist
+            let wrapper = input.parentNode;
+            if (!wrapper.classList.contains('password-input-wrapper')) {
+                wrapper = document.createElement('div');
+                wrapper.className = 'password-input-wrapper';
+                wrapper.style.cssText = `
+                    position: relative;
+                    width: 100%;
+                `;
+                input.parentNode.insertBefore(wrapper, input);
+                wrapper.appendChild(input);
+            }
             
             const toggleBtn = document.createElement('button');
             toggleBtn.type = 'button';
             toggleBtn.innerHTML = '👁️';
+            toggleBtn.className = 'password-toggle-btn';
             toggleBtn.style.cssText = `
                 position: absolute;
                 right: 12px;
@@ -25,6 +37,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 font-size: 16px;
                 opacity: 0.6;
                 transition: opacity 0.3s ease;
+                width: 24px;
+                height: 24px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 10;
             `;
             
             toggleBtn.addEventListener('click', function() {
@@ -34,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 } else {
                     input.type = 'password';
                     toggleBtn.innerHTML = '👁️';
+                    // Re-add the data attribute when switching back to password
+                    input.setAttribute('data-password-toggle', 'true');
                 }
             });
             
