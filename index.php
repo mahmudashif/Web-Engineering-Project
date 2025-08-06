@@ -4,9 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orebi - Home</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="index.css" />
-    <script src="shared/components.js"></script>
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/index.css" />
+    <script src="components/components.js"></script>
   </head>
 
   <body>
@@ -16,17 +16,17 @@
     <!-- ========== hero section design ========== -->
     <div class="hero_section">
       <div class="hero_slideshow">
-        <div class="hero_slide active" style="background-image: url('/images/banner/banner-1.jpg');"></div>
-        <div class="hero_slide" style="background-image: url('/images/banner/banner-2.jpg');"></div>
-        <div class="hero_slide" style="background-image: url('/images/banner/banner-3.jpg');"></div>
-        <div class="hero_slide" style="background-image: url('/images/banner/banner-4.jpg');"></div>
-        <div class="hero_slide" style="background-image: url('/images/banner/banner-5.jpg');"></div>
+        <div class="hero_slide active" style="background-image: url('assets/images/banner/banner-1.jpg');"></div>
+        <div class="hero_slide" style="background-image: url('assets/images/banner/banner-2.jpg');"></div>
+        <div class="hero_slide" style="background-image: url('assets/images/banner/banner-3.jpg');"></div>
+        <div class="hero_slide" style="background-image: url('assets/images/banner/banner-4.jpg');"></div>
+        <div class="hero_slide" style="background-image: url('assets/images/banner/banner-5.jpg');"></div>
       </div>
       <div class="hero_content">
         <!-- <h1>Discover Premium Electronics</h1>
         <p>Experience the future of technology with our curated collection of cutting-edge smartphones, laptops, and smart accessories. Quality guaranteed, prices unmatched.</p> -->
         <div class="hero_cta">
-          <a href="shop.html" class="btn-primary">Explore Collection</a>
+          <a href="pages/shop.php" class="btn-primary">Explore Collection</a>
           <a href="#features" class="btn-secondary">Why Choose Us</a>
         </div>
         <div class="hero_stats">
@@ -77,43 +77,43 @@
         <h2>Trusted by Leading Brands</h2>
         <div class="brands_grid">
           <div class="brand_card">
-            <img src="images/logo/apple.png" alt="Apple" class="brand_logo">
+            <img src="assets/images/logo/apple.png" alt="Apple" class="brand_logo">
             <span class="brand_name">Apple</span>
           </div>
           <div class="brand_card">
-            <img src="images/logo/samsung.png" alt="Samsung" class="brand_logo">
+            <img src="assets/images/logo/samsung.png" alt="Samsung" class="brand_logo">
             <span class="brand_name">Samsung</span>
           </div>
           <div class="brand_card">
-            <img src="images/logo/sony.png" alt="Sony" class="brand_logo">
+            <img src="assets/images/logo/sony.png" alt="Sony" class="brand_logo">
             <span class="brand_name">Sony</span>
           </div>
           <div class="brand_card">
-            <img src="images/logo/dell.png" alt="Dell" class="brand_logo">
+            <img src="assets/images/logo/dell.png" alt="Dell" class="brand_logo">
             <span class="brand_name">Dell</span>
           </div>
           <div class="brand_card">
-            <img src="images/logo/microsoft.png" alt="Microsoft" class="brand_logo">
+            <img src="assets/images/logo/microsoft.png" alt="Microsoft" class="brand_logo">
             <span class="brand_name">Microsoft</span>
           </div>
           <div class="brand_card">
-            <img src="images/logo/google.jpg" alt="Google" class="brand_logo">
+            <img src="assets/images/logo/google.jpg" alt="Google" class="brand_logo">
             <span class="brand_name">Google</span>
           </div>
           <div class="brand_card">
-            <img src="images/logo/realme.png" alt="Realme" class="brand_logo">
+            <img src="assets/images/logo/realme.png" alt="Realme" class="brand_logo">
             <span class="brand_name">Realme</span>
           </div>
           <div class="brand_card">
-            <img src="images/logo/asus.png" alt="Asus" class="brand_logo">
+            <img src="assets/images/logo/asus.png" alt="Asus" class="brand_logo">
             <span class="brand_name">Asus</span>
           </div>
           <div class="brand_card">
-            <img src="images/logo/hp.png" alt="HP" class="brand_logo">
+            <img src="assets/images/logo/hp.png" alt="HP" class="brand_logo">
             <span class="brand_name">HP</span>
           </div>
           <div class="brand_card">
-            <img src="images/logo/msi.png" alt="MSI" class="brand_logo">
+            <img src="assets/images/logo/msi.png" alt="MSI" class="brand_logo">
             <span class="brand_name">MSI</span>
           </div>
         </div>
@@ -125,23 +125,23 @@
       <div class="sale_container">
         <div class="slider_card lights_bg">
           <div class="mini_slider" id="slider1">
-            <div class="slide" style="background-image: url('images/mini-slider/7.jpg');"></div>
-            <div class="slide" style="background-image: url('images/mini-slider/8.png');"></div>
+            <div class="slide" style="background-image: url('assets/images/mini-slider/7.jpg');"></div>
+            <div class="slide" style="background-image: url('assets/images/mini-slider/8.png');"></div>
           </div>
         </div>
         <div class="sale_offer_rightside">
           <div class="slider_card watch_bg">
             <div class="mini_slider" id="slider2">
-              <div class="slide" style="background-image: url('images/mini-slider/1.jpg');"></div>
-              <div class="slide" style="background-image: url('images/mini-slider/2.png');"></div>
-              <div class="slide" style="background-image: url('images/mini-slider/3.png');"></div>
+              <div class="slide" style="background-image: url('assets/images/mini-slider/1.jpg');"></div>
+              <div class="slide" style="background-image: url('assets/images/mini-slider/2.png');"></div>
+              <div class="slide" style="background-image: url('assets/images/mini-slider/3.png');"></div>
             </div>
           </div>
           <div class="slider_card lamp_bg">
             <div class="mini_slider" id="slider3">
-              <div class="slide" style="background-image: url('images/mini-slider/4.jpg');"></div>
-              <div class="slide" style="background-image: url('images/mini-slider/5.jpg');"></div>
-              <div class="slide" style="background-image: url('images/mini-slider/6.jpg');"></div>
+              <div class="slide" style="background-image: url('assets/images/mini-slider/4.jpg');"></div>
+              <div class="slide" style="background-image: url('assets/images/mini-slider/5.jpg');"></div>
+              <div class="slide" style="background-image: url('assets/images/mini-slider/6.jpg');"></div>
             </div>
           </div>
         </div>
@@ -222,7 +222,7 @@
           Discover our award-winning collection of smartphones that have redefined the industry. 
           Featuring revolutionary cameras, AI-powered performance, and sustainable design that's changing the world.
         </p>
-        <button class="phone_of_the_year_banner_shop_now_button" onclick="window.location.href='shop.html'">
+        <button class="phone_of_the_year_banner_shop_now_button" onclick="window.location.href='pages/shop.php'">
           Explore Winners
         </button>
       </div>

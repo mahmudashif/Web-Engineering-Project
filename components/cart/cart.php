@@ -4,70 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart - Orebi</title>
-    <base href="../">
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="shared/navbar.css">
-    <link rel="stylesheet" href="shared/footer.css">
-    <link rel="stylesheet" href="cart/cart.css">
+    <base href="../../">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="components/navbar/navbar.css">
+    <link rel="stylesheet" href="components/footer/footer.css">
+    <link rel="stylesheet" href="components/cart/cart.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="components/components.js"></script>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-      <div class="nav_main_div">
-        <!-- Mobile menu toggle button (left side) -->
-        <div class="mobile_menu_toggle">
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-        
-        <!-- Left side: Logo -->
-        <div class="nav_left_section">
-          <div class="nav_logo">
-            <a href="index.php">
-              <span style="font-size: 24px; font-weight: bold; color: #667eea;">Orebi</span>
-            </a>
-          </div>
-        </div>
-        
-        <!-- Center: Search Bar -->
-        <div class="nav_search">
-          <div class="search_container">
-            <input type="text" class="search_input" placeholder="Search products">
-            <button class="search_button" type="submit">
-              <svg class="search_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-              </svg>
-            </button>
-          </div>
-        </div>
-        
-        <!-- Mobile Navigation Menu -->
-        <div class="nav_menu">
-          <ul class="nav_item">
-            <li><a href="index.php" id="nav-home">Home</a></li>
-            <li><a href="shop.php" id="nav-shop">Shop</a></li>
-            <li><a href="about.php" id="nav-about">About</a></li>
-            <li><a href="contact.php" id="nav-contact">Contacts</a></li>
-            <li><a href="journal.php" id="nav-journal">Journal</a></li>
-          </ul>
-        </div>
-        
-        <!-- User and Cart Icons (right side) -->
-        <div class="nav_icons">
-          <a href="#" class="nav_icon_link" title="User Account">
-            <img src="images/homepage/Icon_user.svg" alt="User Account" class="nav_icon" />
-          </a>
-          <a href="cart/cart.php" class="nav_icon_link cart_icon_link" title="Shopping Cart">
-            <img src="images/homepage/Icon_cart.svg" alt="Shopping Cart" class="nav_icon" />
-            <span class="cart_count">0</span>
-          </a>
-        </div>
-      </div>
-    </nav>
+    <!-- Navbar Placeholder -->
+    <div id="navbar-placeholder"></div>
 
     <!-- Cart Main Content -->
     <main class="cart-main">
@@ -101,7 +50,7 @@
 
                         <!-- Continue Shopping -->
                         <div class="continue-shopping">
-                            <a href="shop.php" class="btn-secondary">
+                            <a href="pages/shop.php" class="btn-secondary">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                                 </svg>
@@ -221,18 +170,14 @@
                     </div>
                     <h2>Your cart is empty</h2>
                     <p>Looks like you haven't added any items to your cart yet</p>
-                    <a href="shop.php" class="btn-primary">Start Shopping</a>
+                    <a href="pages/shop.php" class="btn-primary">Start Shopping</a>
                 </div>
             </div>
         </section>
     </main>
 
-    <!-- Footer -->
-    <footer style="background: #1a1a1a; color: white; text-align: center; padding: 40px 0; margin-top: 80px;">
-        <div class="container">
-            <p>&copy; 2025 Orebi. All rights reserved.</p>
-        </div>
-    </footer>
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
 
     <!-- JavaScript -->
     <script>
@@ -244,20 +189,9 @@
             if (cartCountElement) {
                 cartCountElement.textContent = totalItems;
             }
-            
-            // Initialize mobile menu
-            const mobileToggle = document.querySelector('.mobile_menu_toggle');
-            const navMenu = document.querySelector('.nav_menu');
-            
-            if (mobileToggle && navMenu) {
-                mobileToggle.addEventListener('click', function() {
-                    this.classList.toggle('active');
-                    navMenu.classList.toggle('active');
-                });
-            }
         });
     </script>
-    <script src="shared/cart-global.js"></script>
-    <script src="cart/cart.js"></script>
+    <script src="components/cart-global.js"></script>
+    <script src="components/cart/cart.js"></script>
 </body>
 </html>

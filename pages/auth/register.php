@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orebi - Register</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="auth.css">
-    <script src="shared/components.js"></script>
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/auth.css">
+    <script src="../../components/components.js"></script>
 </head>
 <body>
     <!-- Navbar Placeholder -->
@@ -73,6 +73,6 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
-    <script src="auth.js"></script>
+    <script src="../../assets/js/auth.js"></script>
 </body>
 </html>

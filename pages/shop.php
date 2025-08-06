@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orebi - Shop</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="shop.css" />
-    <link rel="stylesheet" href="shop-nav.css" />
-    <script src="shared/components.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css" />
+    <link rel="stylesheet" href="../assets/css/shop.css" />
+    <link rel="stylesheet" href="../assets/css/shop-nav.css" />
+    <script src="../components/components.js"></script>
   </head>
   <body>
     <!-- Navbar Placeholder -->

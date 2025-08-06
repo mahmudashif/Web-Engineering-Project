@@ -325,29 +325,29 @@ body {
 
 /* Cart image definitions */
 #cart1_img {
-  background-image: url(/images/homepage/box.svg);
+  background-image: url(../images/homepage/box.svg);
 }
 #cart2_img {
-  background-image: url(/images/homepage/clock.svg);
+  background-image: url(../images/homepage/clock.svg);
 }
 #cart3_img {
-  background-image: url(/images/homepage/bag.svg);
+  background-image: url(../images/homepage/bag.svg);
 }
 #cart4_img {
-  background-image: url(/images/homepage/cat.svg);
+  background-image: url(../images/homepage/cat.svg);
 }
 
 #cart1_img_special {
-  background-image: url(/images/homepage/cap.svg);
+  background-image: url(../images/homepage/cap.svg);
 }
 #cart2_img_special {
-  background-image: url(/images/homepage/table.svg);
+  background-image: url(../images/homepage/table.svg);
 }
 #cart3_img_special {
-  background-image: url(/images/homepage/headphone.svg);
+  background-image: url(../images/homepage/headphone.svg);
 }
 #cart4_img_special {
-  background-image: url(/images/homepage/sunglases.svg);
+  background-image: url(../images/homepage/sunglases.svg);
 }
 
 .offer_percent {
@@ -428,7 +428,7 @@ body {
 /* Featured Banner */
 .phone_of_the_year_banner_main {
   background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
-  background-image: url("/images/homepage/banner_phone_of_the_year.svg");
+  background-image: url("../images/homepage/banner_phone_of_the_year.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
