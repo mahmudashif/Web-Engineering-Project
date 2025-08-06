@@ -45,7 +45,7 @@ async function loadSharedComponents() {
 
 // Function to set active navigation based on current page
 function setActiveNavigation() {
-  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  const currentPage = window.location.pathname.split('/').pop() || 'index.php';
   
   // Remove active class from all nav items
   const navItems = document.querySelectorAll('.nav_item a');
@@ -54,20 +54,20 @@ function setActiveNavigation() {
   // Add active class to current page nav item
   let activeNavId = '';
   switch (currentPage) {
-    case 'index.html':
+    case 'index.php':
     case '':
       activeNavId = 'nav-home';
       break;
-    case 'shop.html':
+    case 'shop.php':
       activeNavId = 'nav-shop';
       break;
-    case 'about.html':
+    case 'about.php':
       activeNavId = 'nav-about';
       break;
-    case 'contact.html':
+    case 'contact.php':
       activeNavId = 'nav-contact';
       break;
-    case 'journal.html':
+    case 'journal.php':
       activeNavId = 'nav-journal';
       break;
     default:

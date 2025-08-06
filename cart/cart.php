@@ -27,7 +27,7 @@
         <!-- Left side: Logo -->
         <div class="nav_left_section">
           <div class="nav_logo">
-            <a href="index.html">
+            <a href="index.php">
               <span style="font-size: 24px; font-weight: bold; color: #667eea;">Orebi</span>
             </a>
           </div>
@@ -48,11 +48,11 @@
         <!-- Mobile Navigation Menu -->
         <div class="nav_menu">
           <ul class="nav_item">
-            <li><a href="index.html" id="nav-home">Home</a></li>
-            <li><a href="shop.html" id="nav-shop">Shop</a></li>
-            <li><a href="about.html" id="nav-about">About</a></li>
-            <li><a href="contact.html" id="nav-contact">Contacts</a></li>
-            <li><a href="journal.html" id="nav-journal">Journal</a></li>
+            <li><a href="index.php" id="nav-home">Home</a></li>
+            <li><a href="shop.php" id="nav-shop">Shop</a></li>
+            <li><a href="about.php" id="nav-about">About</a></li>
+            <li><a href="contact.php" id="nav-contact">Contacts</a></li>
+            <li><a href="journal.php" id="nav-journal">Journal</a></li>
           </ul>
         </div>
         
@@ -61,7 +61,7 @@
           <a href="#" class="nav_icon_link" title="User Account">
             <img src="images/homepage/Icon_user.svg" alt="User Account" class="nav_icon" />
           </a>
-          <a href="cart/cart.html" class="nav_icon_link cart_icon_link" title="Shopping Cart">
+          <a href="cart/cart.php" class="nav_icon_link cart_icon_link" title="Shopping Cart">
             <img src="images/homepage/Icon_cart.svg" alt="Shopping Cart" class="nav_icon" />
             <span class="cart_count">0</span>
           </a>
@@ -78,7 +78,7 @@
                     <h1>Shopping Cart</h1>
                     <p>Review your selected items and proceed to checkout</p>
                     <div class="breadcrumb">
-                        <a href="index.html">Home</a> / <span>Cart</span>
+                        <a href="index.php">Home</a> / <span>Cart</span>
                     </div>
                 </div>
             </div>
@@ -101,7 +101,7 @@
 
                         <!-- Continue Shopping -->
                         <div class="continue-shopping">
-                            <a href="shop.html" class="btn-secondary">
+                            <a href="shop.php" class="btn-secondary">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path d="M19 12H5M12 19l-7-7 7-7"/>
                                 </svg>
@@ -221,7 +221,7 @@
                     </div>
                     <h2>Your cart is empty</h2>
                     <p>Looks like you haven't added any items to your cart yet</p>
-                    <a href="shop.html" class="btn-primary">Start Shopping</a>
+                    <a href="shop.php" class="btn-primary">Start Shopping</a>
                 </div>
             </div>
         </section>

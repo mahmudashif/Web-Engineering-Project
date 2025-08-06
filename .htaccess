@@ -1,0 +1,19 @@
+# Redirect old HTML files to PHP versions
+RewriteEngine On
+
+# Redirect specific HTML files to PHP
+RewriteRule ^index\.html$ index.php [R=301,L]
+RewriteRule ^shop\.html$ shop.php [R=301,L]
+RewriteRule ^about\.html$ about.php [R=301,L]
+RewriteRule ^contact\.html$ contact.php [R=301,L]
+RewriteRule ^journal\.html$ journal.php [R=301,L]
+RewriteRule ^error404\.html$ error404.php [R=301,L]
+RewriteRule ^cart/cart\.html$ cart/cart.php [R=301,L]
+
+# Set index.php as default directory index
+DirectoryIndex index.php index.html
+
+# Optional: Hide .php extension (uncomment if you want clean URLs)
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteRule ^([^\.]+)$ $1.php [NC,L]
