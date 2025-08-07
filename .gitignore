@@ -1,0 +1,36 @@
+# Environment variables (contains secrets - NEVER commit)
+.env
+
+# IDE and editor files
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Node modules (if you add Node.js later)
+node_modules/
+
+# Composer dependencies (if you add Composer later)
+vendor/
+
+# Cache directories
+cache/
+tmp/
+temp/
