@@ -32,8 +32,8 @@ async function checkAuthenticationAndLoadProfile() {
 
 // Load and display user profile information
 function loadUserProfile(user) {
-    // Create full name from first_name and last_name
-    const fullName = `${user.first_name || ''} ${user.last_name || ''}`.trim() || 'User';
+    // Use full_name from database or default to 'User'
+    const fullName = user.full_name || 'User';
     
     // Update profile header
     document.getElementById('profile-name').textContent = fullName;
