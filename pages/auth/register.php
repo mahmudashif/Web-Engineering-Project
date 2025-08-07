@@ -19,7 +19,7 @@
                 <p>Join us today and start shopping</p>
             </div>
 
-            <form class="auth-form">
+            <form class="auth-form" method="POST" action="../../api/register.php">
                 <div class="form-group">
                     <label for="name">Full Name</label>
                     <input type="text" id="name" name="name" required placeholder="Enter your full name">
@@ -37,7 +37,7 @@
 
                 <div class="form-group">
                     <label for="confirm-password">Confirm Password</label>
-                    <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm your password">
+                    <input type="password" id="confirm-password" name="confirm_password" required placeholder="Confirm your password">
                 </div>
 
                 <div class="checkbox-group">

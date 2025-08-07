@@ -19,7 +19,7 @@
                 <p>Sign in to your account</p>
             </div>
 
-            <form class="auth-form">
+            <form class="auth-form" method="POST" action="../../api/login.php">
                 <div class="form-group">
                     <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" required placeholder="Enter your email">

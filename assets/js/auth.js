@@ -1,5 +1,74 @@
 // ========== Authentication Form Validation and Enhancement ========== 
 
+// Message display function
+function showMessage(message, type = 'info') {
+    // Remove existing messages
+    const existingMessages = document.querySelectorAll('.auth-message');
+    existingMessages.forEach(msg => msg.remove());
+    
+    const messageDiv = document.createElement('div');
+    messageDiv.className = `auth-message auth-message-${type}`;
+    messageDiv.textContent = message;
+    
+    messageDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 12px 20px;
+        border-radius: 6px;
+        color: white;
+        font-weight: 500;
+        z-index: 10000;
+        max-width: 400px;
+        animation: slideIn 0.3s ease-out;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        ${type === 'success' ? 'background-color: #10b981;' : ''}
+        ${type === 'error' ? 'background-color: #ef4444;' : ''}
+        ${type === 'info' ? 'background-color: #3b82f6;' : ''}
+    `;
+    
+    document.body.appendChild(messageDiv);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        messageDiv.style.animation = 'slideOut 0.3s ease-in forwards';
+        setTimeout(() => {
+            if (messageDiv.parentNode) {
+                messageDiv.remove();
+            }
+        }, 300);
+    }, 5000);
+}
+
+// Add animation styles
+const messageCSS = `
+@keyframes slideIn {
+    from { 
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+}
+`;
+
+const messageStyle = document.createElement('style');
+messageStyle.textContent = messageCSS;
+document.head.appendChild(messageStyle);
+
 document.addEventListener('DOMContentLoaded', function() {
     // Password visibility toggle functionality
     function addPasswordToggle() {
@@ -142,8 +211,8 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        // Form submission
-        form.addEventListener('submit', function(e) {
+        // Form submission for registration
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             let isValid = true;
@@ -173,39 +242,50 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add loading state
                 submitBtn.classList.add('loading');
                 submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Creating Account...';
                 
-                // Simulate form submission and registration
-                setTimeout(() => {
-                    const nameInput = document.getElementById('name');
-                    const emailInput = document.getElementById('email');
+                try {
+                    // Prepare form data
+                    const formData = {
+                        name: nameInput.value,
+                        email: emailInput.value,
+                        password: passwordInput.value,
+                        confirm_password: confirmPasswordInput.value
+                    };
                     
-                    const name = nameInput ? nameInput.value : 'New User';
-                    const email = emailInput ? emailInput.value : '';
+                    // Send registration request
+                    const response = await fetch('../../api/register.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
                     
-                    // Use the UserAuth system if available
-                    if (window.UserAuth) {
-                        window.UserAuth.login({
-                            name: name,
-                            email: email,
-                            loginTime: new Date().toISOString(),
-                            isNewUser: true
-                        });
-                        
-                        if (window.showNotification) {
-                            window.showNotification(`Welcome to Orebi, ${name}! Your account has been created.`, 'success');
-                        }
+                    const result = await response.json();
+                    
+                    if (response.ok && result.success) {
+                        // Registration successful
+                        showMessage(result.message || 'Account created successfully!', 'success');
                         
                         // Redirect to home page after successful registration
                         setTimeout(() => {
-                            window.location.href = 'index.php';
+                            window.location.href = '../../index.php';
                         }, 2000);
                     } else {
-                        alert('Registration successful! (UserAuth system not loaded)');
+                        // Registration failed
+                        showMessage(result.error || 'Registration failed. Please try again.', 'error');
                     }
                     
-                    submitBtn.classList.remove('loading');
-                    submitBtn.disabled = false;
-                }, 2000);
+                } catch (error) {
+                    console.error('Registration error:', error);
+                    showMessage('Network error. Please check your connection and try again.', 'error');
+                }
+                
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Create Account';
             } else {
                 // Shake animation for invalid form
                 form.style.animation = 'shake 0.5s ease-in-out';
@@ -239,7 +319,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Form submission for login
-        form.addEventListener('submit', function(e) {
+        form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
             let isValid = true;
@@ -262,36 +342,48 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Add loading state
                 submitBtn.classList.add('loading');
                 submitBtn.disabled = true;
+                submitBtn.innerHTML = 'Signing In...';
                 
-                // Simulate login process
-                setTimeout(() => {
-                    // Simulate successful login
-                    const email = emailInput.value;
-                    const name = email.split('@')[0].replace(/[._]/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                try {
+                    // Prepare form data
+                    const formData = {
+                        email: emailInput.value,
+                        password: passwordInput.value
+                    };
                     
-                    // Use the UserAuth system if available
-                    if (window.UserAuth) {
-                        window.UserAuth.login({
-                            name: name,
-                            email: email,
-                            loginTime: new Date().toISOString()
-                        });
-                        
-                        if (window.showNotification) {
-                            window.showNotification(`Welcome back, ${name}!`, 'success');
-                        }
+                    // Send login request
+                    const response = await fetch('../../api/login.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(formData)
+                    });
+                    
+                    const result = await response.json();
+                    
+                    if (response.ok && result.success) {
+                        // Login successful
+                        showMessage(result.message || 'Login successful!', 'success');
                         
                         // Redirect to home page after successful login
                         setTimeout(() => {
-                            window.location.href = 'index.php';
+                            window.location.href = '../../index.php';
                         }, 1500);
                     } else {
-                        alert('Login successful! (UserAuth system not loaded)');
+                        // Login failed
+                        showMessage(result.error || 'Login failed. Please check your credentials.', 'error');
                     }
                     
-                    submitBtn.classList.remove('loading');
-                    submitBtn.disabled = false;
-                }, 2000);
+                } catch (error) {
+                    console.error('Login error:', error);
+                    showMessage('Network error. Please check your connection and try again.', 'error');
+                }
+                
+                // Reset button state
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Sign In';
             }
         });
     }
