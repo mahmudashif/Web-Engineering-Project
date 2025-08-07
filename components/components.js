@@ -60,6 +60,11 @@ async function loadSharedComponents() {
     
     // Initialize mobile menu functionality
     initializeMobileMenu();
+    
+    // Initialize user authentication system after navbar is loaded
+    if (window.UserAuth) {
+      window.userAuth = new window.UserAuth();
+    }
   } catch (error) {
     console.error('Error loading shared components:', error);
   }

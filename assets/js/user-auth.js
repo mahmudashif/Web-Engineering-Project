@@ -1,147 +1,245 @@
-// ========== User Authentication State Management ========== 
-
-// Simple user state management (in a real app, this would connect to your backend)
-const UserAuth = {
-    // Check if user is logged in (you can replace this with actual session/token checking)
-    isLoggedIn: function() {
-        return localStorage.getItem('userLoggedIn') === 'true';
-    },
-    
-    // Get current user data (replace with actual user data fetching)
-    getCurrentUser: function() {
-        const userData = localStorage.getItem('userData');
-        return userData ? JSON.parse(userData) : null;
-    },
-    
-    // Simulate login (replace with actual login logic)
-    login: function(userData) {
-        localStorage.setItem('userLoggedIn', 'true');
-        localStorage.setItem('userData', JSON.stringify(userData));
-        this.updateDropdownUI();
-    },
-    
-    // Simulate logout (replace with actual logout logic)
-    logout: function() {
-        localStorage.removeItem('userLoggedIn');
-        localStorage.removeItem('userData');
-        this.updateDropdownUI();
-    },
-    
-    // Update the dropdown UI based on login status
-    updateDropdownUI: function() {
-        const notLoggedInContent = document.getElementById('dropdown_not_logged_in');
-        const loggedInContent = document.getElementById('dropdown_logged_in');
-        const userNameElement = document.getElementById('user_name');
-        
-        if (!notLoggedInContent || !loggedInContent) return;
-        
-        if (this.isLoggedIn()) {
-            // Show logged-in content
-            notLoggedInContent.style.display = 'none';
-            loggedInContent.style.display = 'block';
-            
-            // Update user name if available
-            const user = this.getCurrentUser();
-            if (user && user.name && userNameElement) {
-                userNameElement.textContent = user.name;
-            }
-        } else {
-            // Show not-logged-in content
-            notLoggedInContent.style.display = 'block';
-            loggedInContent.style.display = 'none';
-        }
+// User authentication and navbar management
+class UserAuth {
+    constructor() {
+        this.init();
     }
-};
 
-// Handle logout functionality
-function handleLogout() {
-    if (confirm('Are you sure you want to sign out?')) {
-        UserAuth.logout();
-        
-        // Optional: Redirect to home page
-        window.location.href = 'index.php';
-        
-        // Show success message
-        showNotification('You have been signed out successfully!', 'success');
+    init() {
+        this.loadUser();
+        this.setupEventListeners();
     }
-}
 
-// Simple notification system
-function showNotification(message, type = 'info') {
-    // Create notification element
-    const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${type === 'success' ? '#10B981' : type === 'error' ? '#EF4444' : '#3B82F6'};
-        color: white;
-        padding: 16px 24px;
-        border-radius: 8px;
-        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-        z-index: 10000;
-        font-weight: 500;
-        max-width: 300px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-    `;
-    notification.textContent = message;
-    
-    // Add to page
-    document.body.appendChild(notification);
-    
-    // Animate in
-    setTimeout(() => {
-        notification.style.transform = 'translateX(0)';
-    }, 100);
-    
-    // Remove after 3 seconds
-    setTimeout(() => {
-        notification.style.transform = 'translateX(100%)';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
+    setupEventListeners() {
+        // Logout button
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.id === 'logoutBtn') {
+                e.preventDefault();
+                this.logout();
             }
-        }, 300);
-    }, 3000);
-}
+        });
 
-// Simulate successful login (for testing purposes)
-function simulateLogin(name = 'John Doe', email = 'john@example.com') {
-    const userData = {
-        name: name,
-        email: email,
-        loginTime: new Date().toISOString()
-    };
-    
-    UserAuth.login(userData);
-    showNotification(`Welcome back, ${name}!`, 'success');
-}
+        // Login button
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.id === 'loginNavBtn') {
+                e.preventDefault();
+                window.location.href = '/pages/auth/login.php';
+            }
+        });
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', function() {
-    // Update dropdown UI based on current login status
-    UserAuth.updateDropdownUI();
-    
-    // Add click handler for testing login (remove this in production)
-    // You can call simulateLogin() from browser console to test logged-in state
-    
-    // Optional: Add keyboard shortcut for testing
-    document.addEventListener('keydown', function(e) {
-        // Ctrl + Shift + L to simulate login (for testing only)
-        if (e.ctrlKey && e.shiftKey && e.key === 'L') {
-            if (!UserAuth.isLoggedIn()) {
-                simulateLogin();
+        // Profile link
+        document.addEventListener('click', (e) => {
+            if (e.target && e.target.classList.contains('profile-link')) {
+                e.preventDefault();
+                window.location.href = '/pages/profile.php';
+            }
+        });
+    }
+
+    async loadUser() {
+        try {
+            const response = await fetch('/api/check-auth.php', {
+                method: 'GET',
+                credentials: 'same-origin'
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success && data.user) {
+                    this.updateNavbarForLoggedInUser(data.user);
+                } else {
+                    this.updateNavbarForLoggedOutUser();
+                }
             } else {
-                handleLogout();
+                this.updateNavbarForLoggedOutUser();
             }
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+            this.updateNavbarForLoggedOutUser();
         }
-    });
-});
+    }
 
-// Export functions for global access
+    updateNavbarForLoggedInUser(user) {
+        const userIconDropdown = document.querySelector('.user-icon-dropdown');
+        if (userIconDropdown) {
+            const firstName = user.first_name || 'User';
+            const lastName = user.last_name || '';
+            const fullName = `${firstName} ${lastName}`.trim();
+            const email = user.email || '';
+
+            userIconDropdown.innerHTML = `
+                <div class="user_dropdown_container">
+                    <a href="#" class="nav_icon_link user_icon_link" title="User Account">
+                        <svg class="nav_icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"/>
+                            <path d="M12 14C7.02944 14 3 18.0294 3 23H21C21 18.0294 16.9706 14 12 14Z"/>
+                        </svg>
+                    </a>
+                    <div class="user_dropdown">
+                        <div class="dropdown_header">
+                            <span class="user_greeting">${fullName}</span>
+                            <span class="user_subtitle">${email}</span>
+                        </div>
+                        <div class="dropdown_menu">
+                            <a href="pages/profile.php" class="dropdown_item profile-link">
+                                <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                </svg>
+                                My Profile
+                            </a>
+                            <a href="#" class="dropdown_item">
+                                <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                                My Orders
+                            </a>
+                            <a href="#" class="dropdown_item">
+                                <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                                </svg>
+                                Wishlist
+                            </a>
+                            <a href="#" class="dropdown_item">
+                                <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                Settings
+                            </a>
+                            <div class="dropdown_divider"></div>
+                            <a href="#" class="dropdown_item logout_item" id="logoutBtn">
+                                <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                                </svg>
+                                Sign Out
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    updateNavbarForLoggedOutUser() {
+        const userIconDropdown = document.querySelector('.user-icon-dropdown');
+        if (userIconDropdown) {
+            userIconDropdown.innerHTML = `
+                <div class="user_dropdown_container">
+                    <a href="#" class="nav_icon_link user_icon_link" title="User Account">
+                        <svg class="nav_icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"/>
+                            <path d="M12 14C7.02944 14 3 18.0294 3 23H21C21 18.0294 16.9706 14 12 14Z"/>
+                        </svg>
+                    </a>
+                    <div class="user_dropdown">
+                        <div class="dropdown_header">
+                            <span class="user_greeting">Welcome!</span>
+                            <span class="user_subtitle">Join us today</span>
+                        </div>
+                        <div class="dropdown_menu">
+                            <a href="pages/auth/login.php" class="dropdown_item auth_item" id="loginNavBtn">
+                                <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"></path>
+                                </svg>
+                                Sign In
+                            </a>
+                            <a href="pages/auth/register.php" class="dropdown_item auth_item">
+                                <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z"></path>
+                                </svg>
+                                Sign Up
+                            </a>
+                            <div class="dropdown_divider"></div>
+                            <a href="pages/shop.php" class="dropdown_item">
+                                <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                </svg>
+                                Browse Products
+                            </a>
+                            <a href="pages/about.php" class="dropdown_item">
+                                <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                About Us
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
+    async logout() {
+        try {
+            const response = await fetch('/api/logout.php', {
+                method: 'POST',
+                credentials: 'same-origin'
+            });
+
+            if (response.ok) {
+                // Refresh the page to update navbar state
+                window.location.reload();
+            } else {
+                console.error('Logout failed');
+                // Still refresh on error
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error during logout:', error);
+            // Still refresh on error
+            window.location.reload();
+        }
+    }
+
+    // Method to check if user is authenticated (for protected pages)
+    async requireAuth() {
+        try {
+            const response = await fetch('/api/check-auth.php', {
+                method: 'GET',
+                credentials: 'same-origin'
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success && data.user) {
+                    return data.user;
+                } else {
+                    // Redirect to login if not authenticated
+                    window.location.href = '/pages/auth/login.php';
+                    return null;
+                }
+            } else {
+                window.location.href = '/pages/auth/login.php';
+                return null;
+            }
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+            window.location.href = '/pages/auth/login.php';
+            return null;
+        }
+    }
+
+    // Method to prevent access to auth pages when already logged in
+    async preventAuthPageAccess() {
+        try {
+            const response = await fetch('/api/check-auth.php', {
+                method: 'GET',
+                credentials: 'same-origin'
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success && data.user) {
+                    // User is already logged in, redirect to home
+                    window.location.href = '/';
+                }
+            }
+        } catch (error) {
+            console.error('Error checking authentication:', error);
+        }
+    }
+}
+
+// Export for use in other scripts
 window.UserAuth = UserAuth;
-window.handleLogout = handleLogout;
-window.simulateLogin = simulateLogin;
-window.showNotification = showNotification;
+
+// Note: UserAuth will be initialized by components.js after navbar is loaded

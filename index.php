@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="assets/css/style.css" />
     <link rel="stylesheet" href="assets/css/index.css" />
     <script src="components/components.js"></script>
+    <script src="assets/js/user-auth.js"></script>
   </head>
 
   <body>

@@ -60,5 +60,14 @@
     <div id="footer-placeholder"></div>
 
     <script src="../../assets/js/auth.js"></script>
+    <script src="../../assets/js/user-auth.js"></script>
+    <script>
+        // Prevent access to auth pages when already logged in
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.userAuth) {
+                window.userAuth.preventAuthPageAccess();
+            }
+        });
+    </script>
 </body>
 </html>
