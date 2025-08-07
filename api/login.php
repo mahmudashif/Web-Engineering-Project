@@ -34,11 +34,11 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 }
 
 try {
-    // Direct database connection
+    // Direct database connection to gadegt_shop
     $servername = "localhost";
     $username = "root";
     $db_password = "";
-    $dbname = "web_engineering";
+    $dbname = "gadegt_shop";
     
     $conn = new mysqli($servername, $username, $db_password, $dbname);
     
@@ -49,7 +49,7 @@ try {
     $conn->set_charset("utf8");
     
     // Get user by email
-    $stmt = $conn->prepare("SELECT id, first_name, last_name, email, password FROM users WHERE email = ?");
+    $stmt = $conn->prepare("SELECT id, full_name, email, password FROM users WHERE email = ? AND is_active = 1");
     $stmt->bind_param("s", $email);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -78,7 +78,7 @@ try {
     
     // Set session
     $_SESSION['user_id'] = $user['id'];
-    $_SESSION['user_name'] = $user['first_name'] . ' ' . $user['last_name'];
+    $_SESSION['user_name'] = $user['full_name'];
     $_SESSION['user_email'] = $user['email'];
     
     echo json_encode([
@@ -86,8 +86,7 @@ try {
         'message' => 'Login successful',
         'user' => [
             'id' => $user['id'],
-            'first_name' => $user['first_name'],
-            'last_name' => $user['last_name'],
+            'full_name' => $user['full_name'],
             'email' => $user['email']
         ]
     ]);

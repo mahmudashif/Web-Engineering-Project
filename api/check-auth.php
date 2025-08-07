@@ -2,11 +2,11 @@
 session_start();
 header('Content-Type: application/json');
 
-// Database connection
+// Database connection to gadegt_shop
 $host = "localhost";
 $username = "root"; 
 $password = "";
-$database = "web_engineering";
+$database = "gadegt_shop";
 
 $connection = new mysqli($host, $username, $password, $database);
 
@@ -28,7 +28,7 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 // Get user data from database
-$stmt = $connection->prepare("SELECT id, first_name, last_name, email, phone, address, date_of_birth, created_at FROM users WHERE id = ?");
+$stmt = $connection->prepare("SELECT id, full_name, email, created_at FROM users WHERE id = ? AND is_active = 1");
 $stmt->bind_param("i", $_SESSION['user_id']);
 $stmt->execute();
 $result = $stmt->get_result();

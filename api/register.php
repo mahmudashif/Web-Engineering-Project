@@ -22,11 +22,6 @@ $email = trim($input['email'] ?? '');
 $password = $input['password'] ?? '';
 $confirm_password = $input['confirm_password'] ?? '';
 
-// Split full name into first and last name
-$name_parts = explode(' ', $full_name, 2);
-$first_name = $name_parts[0];
-$last_name = isset($name_parts[1]) ? $name_parts[1] : '';
-
 // Validation
 if (empty($full_name) || empty($email) || empty($password) || empty($confirm_password)) {
     http_response_code(400);
@@ -53,11 +48,11 @@ if ($password !== $confirm_password) {
 }
 
 try {
-    // Direct database connection
+    // Direct database connection to gadegt_shop
     $servername = "localhost";
     $username = "root";
     $db_password = "";
-    $dbname = "web_engineering";
+    $dbname = "gadegt_shop";
     
     $conn = new mysqli($servername, $username, $db_password, $dbname);
     
@@ -84,8 +79,8 @@ try {
     $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     
     // Insert new user
-    $stmt = $conn->prepare("INSERT INTO users (first_name, last_name, email, password) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $first_name, $last_name, $email, $hashed_password);
+    $stmt = $conn->prepare("INSERT INTO users (full_name, email, password, is_active) VALUES (?, ?, ?, 1)");
+    $stmt->bind_param("sss", $full_name, $email, $hashed_password);
     
     if ($stmt->execute()) {
         $user_id = $conn->insert_id;
@@ -101,8 +96,7 @@ try {
             'message' => 'Account created successfully',
             'user' => [
                 'id' => $user_id,
-                'first_name' => $first_name,
-                'last_name' => $last_name,
+                'full_name' => $full_name,
                 'email' => $email
             ]
         ]);
