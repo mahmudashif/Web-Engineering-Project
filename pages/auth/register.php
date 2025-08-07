@@ -53,7 +53,7 @@
                     <span>Or continue with</span>
                 </div>
 
-                <button type="button" class="auth-btn google">
+                <button type="button" class="auth-btn google" onclick="signInWithGoogle()">
                     <svg class="google-icon" viewBox="0 0 24 24">
                         <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                         <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -76,10 +76,55 @@
     <script src="../../assets/js/auth.js"></script>
     <script src="../../assets/js/user-auth.js"></script>
     <script>
+        // Google Sign-In function
+        function signInWithGoogle() {
+            // Show loading state
+            const googleBtn = document.querySelector('.auth-btn.google');
+            const originalText = googleBtn.innerHTML;
+            googleBtn.innerHTML = '<div class="loading-spinner"></div>Connecting to Google...';
+            googleBtn.disabled = true;
+
+            // Redirect to Google OAuth
+            window.location.href = '../../api/google-login.php';
+        }
+
         // Prevent access to auth pages when already logged in
         document.addEventListener('DOMContentLoaded', () => {
             if (window.userAuth) {
                 window.userAuth.preventAuthPageAccess();
+            }
+
+            // Check for URL parameters and show messages
+            const urlParams = new URLSearchParams(window.location.search);
+            const error = urlParams.get('error');
+            
+            if (error) {
+                let errorMessage = '';
+                switch(error) {
+                    case 'google_access_denied':
+                        errorMessage = 'Google sign-in was cancelled. Please try again.';
+                        break;
+                    case 'google_token_failed':
+                        errorMessage = 'Google authentication failed. Please try again.';
+                        break;
+                    case 'google_user_info_failed':
+                        errorMessage = 'Failed to retrieve user information from Google. Please try again.';
+                        break;
+                    case 'registration_failed':
+                        errorMessage = 'Account creation failed. Please try again or contact support.';
+                        break;
+                    case 'invalid_request':
+                        errorMessage = 'Invalid authentication request. Please try signing in again.';
+                        break;
+                    default:
+                        errorMessage = 'An error occurred during Google sign-in. Please try again.';
+                }
+                
+                // Show error message (you can customize this based on your UI)
+                alert(errorMessage);
+                
+                // Clean URL
+                window.history.replaceState({}, document.title, window.location.pathname);
             }
         });
     </script>

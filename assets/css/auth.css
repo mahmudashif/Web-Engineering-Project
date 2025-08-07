@@ -234,9 +234,32 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.auth-btn.google:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  background: #f5f5f5;
+  transform: none;
+}
+
 .google-icon {
   width: 20px;
   height: 20px;
+}
+
+/* Loading spinner for Google Sign-In */
+.loading-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #4285F4;
+  border-radius: 50%;
+  animation: googleSpin 1s linear infinite;
+}
+
+@keyframes googleSpin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 .divider {
