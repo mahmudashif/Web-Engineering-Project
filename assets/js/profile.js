@@ -68,7 +68,6 @@ async function loadAdditionalProfileData() {
             
             if (data.phone) document.getElementById('phone').value = data.phone;
             if (data.address) document.getElementById('address').value = data.address;
-            if (data.bio) document.getElementById('bio').value = data.bio;
         }
     } catch (error) {
         console.log('Additional profile data not available yet');
@@ -80,14 +79,8 @@ function initializeProfileFunctionality() {
     // Profile form submission
     document.getElementById('profile-form').addEventListener('submit', handleProfileUpdate);
     
-    // Change password form submission
-    document.getElementById('change-password-form').addEventListener('submit', handlePasswordChange);
-    
     // Avatar upload functionality
     document.getElementById('avatar-upload').addEventListener('change', handleAvatarUpload);
-    
-    // Email notifications toggle
-    document.getElementById('email-notifications').addEventListener('change', handleNotificationToggle);
 }
 
 // Toggle edit mode for profile form
@@ -150,8 +143,7 @@ async function handleProfileUpdate(e) {
     const profileData = {
         full_name: formData.get('full_name'),
         phone: formData.get('phone'),
-        address: formData.get('address'),
-        bio: formData.get('bio')
+        address: formData.get('address')
     };
     
     try {
@@ -182,59 +174,6 @@ async function handleProfileUpdate(e) {
         
     } catch (error) {
         console.error('Profile update error:', error);
-        showMessage('Network error. Please try again.', 'error');
-    }
-}
-
-// Handle password change
-async function handlePasswordChange(e) {
-    e.preventDefault();
-    
-    const formData = new FormData(e.target);
-    const currentPassword = formData.get('current_password');
-    const newPassword = formData.get('new_password');
-    const confirmPassword = formData.get('confirm_new_password');
-    
-    // Client-side validation
-    if (newPassword !== confirmPassword) {
-        showMessage('New passwords do not match', 'error');
-        return;
-    }
-    
-    if (newPassword.length < 6) {
-        showMessage('Password must be at least 6 characters long', 'error');
-        return;
-    }
-    
-    try {
-        showMessage('Updating password...', 'info');
-        
-        const response = await fetch('../api/change-password.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                current_password: currentPassword,
-                new_password: newPassword
-            })
-        });
-        
-        const result = await response.json();
-        
-        if (response.ok && result.success) {
-            showMessage('Password updated successfully!', 'success');
-            closeChangePasswordModal();
-            
-            // Clear form
-            document.getElementById('change-password-form').reset();
-            
-        } else {
-            showMessage(result.error || 'Failed to update password', 'error');
-        }
-        
-    } catch (error) {
-        console.error('Password change error:', error);
         showMessage('Network error. Please try again.', 'error');
     }
 }
@@ -270,40 +209,6 @@ function handleAvatarUpload(e) {
     // Upload the image (implement later)
     showMessage('Avatar upload functionality will be implemented', 'info');
 }
-
-// Handle notification toggle
-function handleNotificationToggle(e) {
-    const enabled = e.target.checked;
-    showMessage(
-        `Email notifications ${enabled ? 'enabled' : 'disabled'}`,
-        'success'
-    );
-    
-    // Save preference to server (implement later)
-    console.log('Email notifications:', enabled);
-}
-
-// Modal functionality
-function openChangePasswordModal() {
-    document.getElementById('change-password-modal').style.display = 'block';
-    document.body.style.overflow = 'hidden'; // Prevent background scrolling
-}
-
-function closeChangePasswordModal() {
-    document.getElementById('change-password-modal').style.display = 'none';
-    document.body.style.overflow = 'auto'; // Restore scrolling
-    
-    // Clear form
-    document.getElementById('change-password-form').reset();
-}
-
-// Close modal when clicking outside
-window.addEventListener('click', function(e) {
-    const modal = document.getElementById('change-password-modal');
-    if (e.target === modal) {
-        closeChangePasswordModal();
-    }
-});
 
 // Message display function
 function showMessage(message, type = 'info') {

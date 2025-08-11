@@ -78,53 +78,11 @@
                             <textarea id="address" name="address" placeholder="Add your address" readonly rows="3"></textarea>
                         </div>
                         
-                        <div class="form-group">
-                            <label for="bio">Bio</label>
-                            <textarea id="bio" name="bio" placeholder="Tell us about yourself" readonly rows="4"></textarea>
-                        </div>
-                        
                         <div class="form-actions" id="form-actions" style="display: none;">
                             <button type="button" class="btn-secondary" onclick="cancelEdit()">Cancel</button>
                             <button type="submit" class="btn-primary">Save Changes</button>
                         </div>
                     </form>
-                </div>
-            </div>
-
-            <!-- Account Settings Card -->
-            <div class="profile-card">
-                <div class="card-header">
-                    <h2>Account Settings</h2>
-                </div>
-                <div class="card-content">
-                    <div class="settings-section">
-                        <div class="setting-item">
-                            <div class="setting-info">
-                                <h3>Password</h3>
-                                <p>Last changed: Never</p>
-                            </div>
-                            <button class="btn-outline" onclick="openChangePasswordModal()">Change Password</button>
-                        </div>
-                        
-                        <div class="setting-item">
-                            <div class="setting-info">
-                                <h3>Email Notifications</h3>
-                                <p>Receive updates about your orders</p>
-                            </div>
-                            <label class="toggle-switch">
-                                <input type="checkbox" id="email-notifications" checked>
-                                <span class="toggle-slider"></span>
-                            </label>
-                        </div>
-                        
-                        <div class="setting-item">
-                            <div class="setting-info">
-                                <h3>Account Status</h3>
-                                <p id="account-status">Active</p>
-                            </div>
-                            <span class="status-badge active">Active</span>
-                        </div>
-                    </div>
                 </div>
             </div>
 
@@ -185,37 +143,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Change Password Modal -->
-    <div id="change-password-modal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>Change Password</h3>
-                <button class="modal-close" onclick="closeChangePasswordModal()">&times;</button>
-            </div>
-            <form id="change-password-form" class="modal-form">
-                <div class="form-group">
-                    <label for="current-password">Current Password</label>
-                    <input type="password" id="current-password" name="current_password" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="new-password">New Password</label>
-                    <input type="password" id="new-password" name="new_password" required minlength="6">
-                </div>
-                
-                <div class="form-group">
-                    <label for="confirm-new-password">Confirm New Password</label>
-                    <input type="password" id="confirm-new-password" name="confirm_new_password" required minlength="6">
-                </div>
-                
-                <div class="modal-actions">
-                    <button type="button" class="btn-secondary" onclick="closeChangePasswordModal()">Cancel</button>
-                    <button type="submit" class="btn-primary">Update Password</button>
-                </div>
-            </form>
         </div>
     </div>
 
