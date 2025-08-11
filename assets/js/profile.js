@@ -45,6 +45,15 @@ function loadUserProfile(user) {
     document.getElementById('full-name').value = fullName;
     document.getElementById('email').value = user.email;
     
+    // Load profile picture if available
+    if (user.profile_picture) {
+        console.log('Setting profile picture:', user.profile_picture); // Debug log
+        document.getElementById('profile-avatar').src = '../' + user.profile_picture + '?t=' + Date.now();
+    } else {
+        console.log('No profile picture available, using default'); // Debug log
+        document.getElementById('profile-avatar').src = '../assets/images/homepage/Icon_user.svg';
+    }
+    
     // Load phone and address from check-auth response
     if (user.phone) {
         console.log('Setting phone:', user.phone); // Debug log
@@ -198,15 +207,60 @@ function handleAvatarUpload(e) {
         return;
     }
     
-    // Preview the image
+    // Preview the image immediately
     const reader = new FileReader();
     reader.onload = function(e) {
         document.getElementById('profile-avatar').src = e.target.result;
     };
     reader.readAsDataURL(file);
     
-    // Upload the image (implement later)
-    showMessage('Avatar upload functionality will be implemented', 'info');
+    // Upload the image
+    uploadAvatar(file);
+}
+
+// Upload avatar to server
+async function uploadAvatar(file) {
+    const avatarElement = document.querySelector('.profile-avatar');
+    
+    try {
+        // Add loading state
+        avatarElement.classList.add('uploading');
+        showMessage('Uploading profile picture...', 'info');
+        
+        const formData = new FormData();
+        formData.append('avatar', file);
+        
+        const response = await fetch('../api/upload-avatar.php', {
+            method: 'POST',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+            showMessage('Profile picture updated successfully!', 'success');
+            
+            // Update the avatar src with the server path
+            const avatarImg = document.getElementById('profile-avatar');
+            avatarImg.src = '../' + result.profile_picture + '?t=' + Date.now(); // Add timestamp to prevent caching
+            
+        } else {
+            showMessage(result.error || 'Failed to upload profile picture', 'error');
+            
+            // Revert to default avatar on error
+            document.getElementById('profile-avatar').src = '../assets/images/homepage/Icon_user.svg';
+        }
+        
+    } catch (error) {
+        console.error('Avatar upload error:', error);
+        showMessage('Network error. Please try again.', 'error');
+        
+        // Revert to default avatar on error
+        document.getElementById('profile-avatar').src = '../assets/images/homepage/Icon_user.svg';
+    } finally {
+        // Remove loading state
+        avatarElement.classList.remove('uploading');
+    }
 }
 
 // Message display function
