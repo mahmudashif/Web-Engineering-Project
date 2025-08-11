@@ -22,7 +22,8 @@ class UserAuth {
         document.addEventListener('click', (e) => {
             if (e.target && e.target.id === 'loginNavBtn') {
                 e.preventDefault();
-                window.location.href = '/pages/auth/login.php';
+                const basePath = this.getBasePath();
+                window.location.href = basePath + 'pages/auth/login.php';
             }
         });
 
@@ -30,14 +31,16 @@ class UserAuth {
         document.addEventListener('click', (e) => {
             if (e.target && e.target.classList.contains('profile-link')) {
                 e.preventDefault();
-                window.location.href = '/pages/profile.php';
+                const basePath = this.getBasePath();
+                window.location.href = basePath + 'pages/profile.php';
             }
         });
     }
 
     async loadUser() {
         try {
-            const response = await fetch('/api/check-auth.php', {
+            const basePath = this.getBasePath();
+            const response = await fetch(basePath + 'api/check-auth.php', {
                 method: 'GET',
                 credentials: 'same-origin'
             });
@@ -63,22 +66,60 @@ class UserAuth {
         if (userIconDropdown) {
             const fullName = user.full_name || 'User';
             const email = user.email || '';
+            // Handle profile picture path - it should already be the full relative path from the API
+            const profilePicture = user.profile_picture ? user.profile_picture : null;
+            
+            // Get base path for current page
+            const basePath = this.getBasePath();
+            const fullProfilePicturePath = profilePicture ? basePath + profilePicture : null;
+
+            // Determine what to show as the main icon
+            const mainIconHTML = fullProfilePicturePath ? 
+                `<img src="${fullProfilePicturePath}?t=${Date.now()}" alt="Profile" class="nav_profile_image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                 <svg class="nav_icon nav_default_icon" style="display: none;" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"/>
+                    <path d="M12 14C7.02944 14 3 18.0294 3 23H21C21 18.0294 16.9706 14 12 14Z"/>
+                 </svg>` :
+                `<svg class="nav_icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"/>
+                    <path d="M12 14C7.02944 14 3 18.0294 3 23H21C21 18.0294 16.9706 14 12 14Z"/>
+                 </svg>`;
+
+            // Profile picture for dropdown header - horizontal layout
+            const dropdownProfileHTML = fullProfilePicturePath ? 
+                `<div class="dropdown_profile_container">
+                    <img src="${fullProfilePicturePath}?t=${Date.now()}" alt="Profile" class="dropdown_profile_image" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <svg class="dropdown_default_icon" style="display: none;" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"/>
+                        <path d="M12 14C7.02944 14 3 18.0294 3 23H21C21 18.0294 16.9706 14 12 14Z"/>
+                    </svg>
+                    <div class="dropdown_user_info">
+                        <span class="user_greeting">${fullName}</span>
+                        <span class="user_subtitle">${email}</span>
+                    </div>
+                 </div>` : 
+                `<div class="dropdown_profile_container">
+                    <svg class="dropdown_default_icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"/>
+                        <path d="M12 14C7.02944 14 3 18.0294 3 23H21C21 18.0294 16.9706 14 12 14Z"/>
+                    </svg>
+                    <div class="dropdown_user_info">
+                        <span class="user_greeting">${fullName}</span>
+                        <span class="user_subtitle">${email}</span>
+                    </div>
+                 </div>`;
 
             userIconDropdown.innerHTML = `
                 <div class="user_dropdown_container">
                     <a href="#" class="nav_icon_link user_icon_link" title="User Account">
-                        <svg class="nav_icon" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12 12C14.7614 12 17 9.76142 17 7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7C7 9.76142 9.23858 12 12 12Z"/>
-                            <path d="M12 14C7.02944 14 3 18.0294 3 23H21C21 18.0294 16.9706 14 12 14Z"/>
-                        </svg>
+                        ${mainIconHTML}
                     </a>
                     <div class="user_dropdown">
                         <div class="dropdown_header">
-                            <span class="user_greeting">${fullName}</span>
-                            <span class="user_subtitle">${email}</span>
+                            ${dropdownProfileHTML}
                         </div>
                         <div class="dropdown_menu">
-                            <a href="pages/profile.php" class="dropdown_item profile-link">
+                            <a href="${basePath}pages/profile.php" class="dropdown_item profile-link">
                                 <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                                 </svg>
@@ -168,7 +209,8 @@ class UserAuth {
 
     async logout() {
         try {
-            const response = await fetch('/api/logout.php', {
+            const basePath = this.getBasePath();
+            const response = await fetch(basePath + 'api/logout.php', {
                 method: 'POST',
                 credentials: 'same-origin'
             });
@@ -191,7 +233,8 @@ class UserAuth {
     // Method to check if user is authenticated (for protected pages)
     async requireAuth() {
         try {
-            const response = await fetch('/api/check-auth.php', {
+            const basePath = this.getBasePath();
+            const response = await fetch(basePath + 'api/check-auth.php', {
                 method: 'GET',
                 credentials: 'same-origin'
             });
@@ -202,16 +245,17 @@ class UserAuth {
                     return data.user;
                 } else {
                     // Redirect to login if not authenticated
-                    window.location.href = '/pages/auth/login.php';
+                    window.location.href = basePath + 'pages/auth/login.php';
                     return null;
                 }
             } else {
-                window.location.href = '/pages/auth/login.php';
+                window.location.href = basePath + 'pages/auth/login.php';
                 return null;
             }
         } catch (error) {
             console.error('Error checking authentication:', error);
-            window.location.href = '/pages/auth/login.php';
+            const basePath = this.getBasePath();
+            window.location.href = basePath + 'pages/auth/login.php';
             return null;
         }
     }
@@ -219,7 +263,8 @@ class UserAuth {
     // Method to prevent access to auth pages when already logged in
     async preventAuthPageAccess() {
         try {
-            const response = await fetch('/api/check-auth.php', {
+            const basePath = this.getBasePath();
+            const response = await fetch(basePath + 'api/check-auth.php', {
                 method: 'GET',
                 credentials: 'same-origin'
             });
@@ -228,11 +273,29 @@ class UserAuth {
                 const data = await response.json();
                 if (data.success && data.user) {
                     // User is already logged in, redirect to home
-                    window.location.href = '/';
+                    window.location.href = basePath + 'index.php';
                 }
             }
         } catch (error) {
             console.error('Error checking authentication:', error);
+        }
+    }
+
+    // Method to refresh navbar after profile picture update
+    async refreshNavbar() {
+        await this.loadUser();
+    }
+
+    // Method to get correct base path based on current page location
+    getBasePath() {
+        const path = window.location.pathname;
+        
+        if (path.includes('/pages/auth/')) {
+            return '../../';
+        } else if (path.includes('/pages/') || path.includes('/components/') || path.includes('/error/')) {
+            return '../';
+        } else {
+            return '';
         }
     }
 }

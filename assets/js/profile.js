@@ -244,6 +244,14 @@ async function uploadAvatar(file) {
             const avatarImg = document.getElementById('profile-avatar');
             avatarImg.src = '../' + result.profile_picture + '?t=' + Date.now(); // Add timestamp to prevent caching
             
+            // Refresh navbar to show updated profile picture
+            if (window.userAuth) {
+                window.userAuth.refreshNavbar();
+            } else {
+                // Fallback: reload the page if userAuth is not available
+                setTimeout(() => window.location.reload(), 1000);
+            }
+            
         } else {
             showMessage(result.error || 'Failed to upload profile picture', 'error');
             

@@ -544,6 +544,127 @@
   filter: brightness(0) invert(1) drop-shadow(0 0 8px rgba(251, 191, 36, 0.6));
 }
 
+/* ========== Profile Image Styles ========== */
+
+/* Navbar profile image */
+.nav_profile_image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+}
+
+.nav_profile_image:hover {
+  border-color: rgba(251, 191, 36, 0.6);
+  box-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+  transform: scale(1.1);
+}
+
+.nav_default_icon {
+  width: 32px;
+  height: 32px;
+}
+
+/* Dropdown profile container - horizontal layout */
+.dropdown_profile_container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 0;
+  width: 100%;
+}
+
+.dropdown_profile_image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  flex-shrink: 0;
+}
+
+.dropdown_default_icon {
+  width: 60px;
+  height: 60px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+/* Updated dropdown header layout */
+.dropdown_header {
+  padding: 20px 20px 16px;
+  background: linear-gradient(135deg, var(--primary-purple), var(--hover-purple));
+  color: white;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.dropdown_user_info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  min-width: 0; /* Allow text to wrap */
+}
+
+.user_greeting {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  color: white;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+.user_subtitle {
+  font-size: 13px;
+  opacity: 0.9;
+  font-weight: 400;
+  color: white;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+/* Responsive profile images */
+@media (max-width: 768px) {
+  .nav_profile_image {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .nav_default_icon {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .dropdown_profile_image {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .dropdown_default_icon {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .dropdown_profile_container {
+    gap: 10px;
+  }
+  
+  .user_greeting {
+    font-size: 16px;
+  }
+  
+  .user_subtitle {
+    font-size: 12px;
+  }
+}
+
 /* Arrow indicator */
 .user_dropdown::before {
   content: '';
