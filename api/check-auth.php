@@ -27,8 +27,14 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Get user data from database
-$stmt = $connection->prepare("SELECT id, full_name, email, created_at FROM users WHERE id = ? AND is_active = 1");
+// Get user data from database with profile info
+$stmt = $connection->prepare("
+    SELECT u.id, u.full_name, u.email, u.created_at,
+           p.phone, p.address
+    FROM users u
+    LEFT JOIN user_profiles p ON u.id = p.user_id
+    WHERE u.id = ? AND u.is_active = 1
+");
 $stmt->bind_param("i", $_SESSION['user_id']);
 $stmt->execute();
 $result = $stmt->get_result();

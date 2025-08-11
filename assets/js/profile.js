@@ -32,6 +32,8 @@ async function checkAuthenticationAndLoadProfile() {
 
 // Load and display user profile information
 function loadUserProfile(user) {
+    console.log('Loading user profile with data:', user); // Debug log
+    
     // Use full_name from database or default to 'User'
     const fullName = user.full_name || 'User';
     
@@ -43,6 +45,21 @@ function loadUserProfile(user) {
     document.getElementById('full-name').value = fullName;
     document.getElementById('email').value = user.email;
     
+    // Load phone and address from check-auth response
+    if (user.phone) {
+        console.log('Setting phone:', user.phone); // Debug log
+        document.getElementById('phone').value = user.phone;
+    } else {
+        console.log('No phone data available'); // Debug log
+    }
+    
+    if (user.address) {
+        console.log('Setting address:', user.address); // Debug log
+        document.getElementById('address').value = user.address;
+    } else {
+        console.log('No address data available'); // Debug log
+    }
+    
     // Set join date from database if available
     if (user.created_at) {
         const joinDate = new Date(user.created_at).toLocaleDateString('en-US', {
@@ -53,24 +70,6 @@ function loadUserProfile(user) {
         document.getElementById('join-date').textContent = joinDate;
     } else {
         document.getElementById('join-date').textContent = 'Recently';
-    }
-    
-    // Load additional profile data if available
-    loadAdditionalProfileData();
-}
-
-// Load additional profile data from server
-async function loadAdditionalProfileData() {
-    try {
-        const response = await fetch('../api/profile.php');
-        if (response.ok) {
-            const data = await response.json();
-            
-            if (data.phone) document.getElementById('phone').value = data.phone;
-            if (data.address) document.getElementById('address').value = data.address;
-        }
-    } catch (error) {
-        console.log('Additional profile data not available yet');
     }
 }
 
