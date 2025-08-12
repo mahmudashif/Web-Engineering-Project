@@ -11,7 +11,7 @@ try {
     $conn = getDBConnection();
     
     // Get all users
-    $query = "SELECT id, full_name, email, username, is_admin, profile_picture, bio, phone, address, created_at FROM users ORDER BY id DESC";
+    $query = "SELECT id, full_name, email, is_admin, profile_picture, bio, phone, address, created_at FROM users ORDER BY id DESC";
     $stmt = $conn->prepare($query);
     $stmt->execute();
     $result = $stmt->get_result();
@@ -23,7 +23,6 @@ try {
             'id' => $row['id'],
             'full_name' => $row['full_name'],
             'email' => $row['email'],
-            'username' => $row['username'],
             'is_admin' => (bool)$row['is_admin'],
             'profile_picture' => $row['profile_picture'],
             'bio' => $row['bio'],

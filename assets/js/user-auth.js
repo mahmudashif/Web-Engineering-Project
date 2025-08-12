@@ -251,7 +251,8 @@ class UserAuth {
 
             if (response.ok) {
                 const data = await response.json();
-                if (data.success && data.user && data.user.role === 'admin') {
+                // Check if user is admin using either role field or is_admin field
+                if (data.success && data.user && (data.user.role === 'admin' || data.user.is_admin === '1' || data.user.is_admin === 1)) {
                     return data.user;
                 } else {
                     // Redirect to login if not authenticated or not an admin
