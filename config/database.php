@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = ""; // Empty password for root user
-$dbname = "gadegt_shop";
+$dbname = "gadget_shop";
 $conn = null;
 
 // Function to get database connection

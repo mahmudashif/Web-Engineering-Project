@@ -23,7 +23,7 @@ try {
     $servername = "localhost";
     $username = "root";
     $db_password = "";
-    $dbname = "gadegt_shop";
+    $dbname = "gadget_shop";
     
     $conn = new mysqli($servername, $username, $db_password, $dbname);
     
@@ -35,19 +35,16 @@ try {
     
     $user_id = $_SESSION['user_id'];
     
-    // Get user basic info
-    $user_stmt = $conn->prepare("SELECT full_name, email, created_at FROM users WHERE id = ?");
+    // Get user info including profile fields
+    $user_stmt = $conn->prepare("SELECT full_name, email, phone, address, bio, profile_picture, created_at FROM users WHERE id = ?");
     $user_stmt->bind_param("i", $user_id);
     $user_stmt->execute();
     $user_result = $user_stmt->get_result();
     $user_data = $user_result->fetch_assoc();
     
-    // Get profile info if exists
-    $profile_stmt = $conn->prepare("SELECT phone, address, bio FROM user_profiles WHERE user_id = ?");
-    $profile_stmt->bind_param("i", $user_id);
-    $profile_stmt->execute();
-    $profile_result = $profile_stmt->get_result();
-    $profile_data = $profile_result->fetch_assoc();
+    if (!$user_data) {
+        throw new Exception("User not found");
+    }
     
     echo json_encode([
         'success' => true,
@@ -55,10 +52,11 @@ try {
             'id' => $user_id,
             'name' => $user_data['full_name'],
             'email' => $user_data['email'],
-            'created_at' => $user_data['created_at'],
-            'phone' => $profile_data['phone'] ?? '',
-            'address' => $profile_data['address'] ?? '',
-            'bio' => $profile_data['bio'] ?? ''
+            'phone' => $user_data['phone'] ?? '',
+            'address' => $user_data['address'] ?? '',
+            'bio' => $user_data['bio'] ?? '',
+            'profile_picture' => $user_data['profile_picture'] ?? '',
+            'created_at' => $user_data['created_at']
         ]
     ]);
     

@@ -42,7 +42,7 @@ try {
     $servername = "localhost";
     $username = "root";
     $db_password = "";
-    $dbname = "gadegt_shop";
+    $dbname = "gadget_shop";
     
     $conn = new mysqli($servername, $username, $db_password, $dbname);
     
@@ -52,51 +52,11 @@ try {
     
     $conn->set_charset("utf8");
     
-    // Check if profile table exists, if not create it with profile_picture column
-    $create_profile_table = "CREATE TABLE IF NOT EXISTS user_profiles (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        phone VARCHAR(20),
-        address TEXT,
-        bio TEXT,
-        profile_picture VARCHAR(255),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-        UNIQUE KEY unique_user (user_id)
-    )";
+    // Update user's profile information directly in users table
+    $stmt = $conn->prepare("UPDATE users SET full_name = ?, phone = ?, address = ?, bio = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
+    $stmt->bind_param("ssssi", $full_name, $phone, $address, $bio, $user_id);
     
-    $conn->query($create_profile_table);
-    
-    // Add profile_picture column if it doesn't exist (for existing tables)
-    $check_column = $conn->query("SHOW COLUMNS FROM user_profiles LIKE 'profile_picture'");
-    if ($check_column->num_rows === 0) {
-        $add_column_query = "ALTER TABLE user_profiles ADD COLUMN profile_picture VARCHAR(255) NULL";
-        $conn->query($add_column_query);
-    }
-    
-    // Update user's basic info (full name) in users table
-    $stmt = $conn->prepare("UPDATE users SET full_name = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
-    $stmt->bind_param("si", $full_name, $user_id);
-    
-    if (!$stmt->execute()) {
-        throw new Exception('Failed to update user information');
-    }
-    
-    // Update or insert profile information
-    $profile_stmt = $conn->prepare("
-        INSERT INTO user_profiles (user_id, phone, address, bio) 
-        VALUES (?, ?, ?, ?) 
-        ON DUPLICATE KEY UPDATE 
-        phone = VALUES(phone), 
-        address = VALUES(address), 
-        bio = VALUES(bio),
-        updated_at = CURRENT_TIMESTAMP
-    ");
-    
-    $profile_stmt->bind_param("isss", $user_id, $phone, $address, $bio);
-    
-    if ($profile_stmt->execute()) {
+    if ($stmt->execute()) {
         // Update session with new name
         $_SESSION['user_name'] = $full_name;
         

@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "gadegt_shop";
+$dbname = "gadget_shop";
 
 try {
     // First, connect without selecting a database

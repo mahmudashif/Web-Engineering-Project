@@ -8,7 +8,7 @@ require_once 'GoogleOAuth.php';
 $host = "localhost";
 $username = "root"; 
 $password = "";
-$database = "gadegt_shop";
+$database = "gadget_shop";
 
 $connection = new mysqli($host, $username, $password, $database);
 

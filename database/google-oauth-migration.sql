@@ -1,7 +1,7 @@
--- Google OAuth Migration for gadegt_shop database
+-- Google OAuth Migration for gadget_shop database
 -- Add google_id column to users table and make password nullable
 
-USE gadegt_shop;
+USE gadget_shop;
 
 -- Add google_id column if it doesn't exist
 ALTER TABLE users 

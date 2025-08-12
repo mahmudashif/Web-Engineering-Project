@@ -38,7 +38,7 @@ try {
     $servername = "localhost";
     $username = "root";
     $db_password = "";
-    $dbname = "gadegt_shop";
+    $dbname = "gadget_shop";
     
     $conn = new mysqli($servername, $username, $db_password, $dbname);
     

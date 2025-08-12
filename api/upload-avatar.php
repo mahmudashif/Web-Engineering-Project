@@ -50,7 +50,7 @@ try {
     $servername = "localhost";
     $username = "root";
     $db_password = "";
-    $dbname = "gadegt_shop";
+    $dbname = "gadget_shop";
     
     $conn = new mysqli($servername, $username, $db_password, $dbname);
     
@@ -73,7 +73,7 @@ try {
     $db_path = 'assets/uploads/profile_pictures/' . $new_filename;
     
     // Remove old profile picture if exists
-    $old_pic_stmt = $conn->prepare("SELECT profile_picture FROM user_profiles WHERE user_id = ?");
+    $old_pic_stmt = $conn->prepare("SELECT profile_picture FROM users WHERE id = ?");
     $old_pic_stmt->bind_param("i", $user_id);
     $old_pic_stmt->execute();
     $old_pic_result = $old_pic_stmt->get_result();
@@ -93,39 +93,9 @@ try {
         throw new Exception('Failed to save uploaded file');
     }
     
-    // Ensure user_profiles table exists with profile_picture column
-    $create_profile_table = "CREATE TABLE IF NOT EXISTS user_profiles (
-        id INT AUTO_INCREMENT PRIMARY KEY,
-        user_id INT NOT NULL,
-        phone VARCHAR(20),
-        address TEXT,
-        bio TEXT,
-        profile_picture VARCHAR(255),
-        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-        UNIQUE KEY unique_user (user_id)
-    )";
-    
-    $conn->query($create_profile_table);
-    
-    // Try to add profile_picture column if it doesn't exist (ignore error if exists)
-    $check_column = $conn->query("SHOW COLUMNS FROM user_profiles LIKE 'profile_picture'");
-    if ($check_column->num_rows === 0) {
-        $add_column_query = "ALTER TABLE user_profiles ADD COLUMN profile_picture VARCHAR(255) NULL";
-        $conn->query($add_column_query);
-    }
-    
-    // Update user profile with new picture path
-    $update_stmt = $conn->prepare("
-        INSERT INTO user_profiles (user_id, profile_picture) 
-        VALUES (?, ?) 
-        ON DUPLICATE KEY UPDATE 
-        profile_picture = VALUES(profile_picture),
-        updated_at = CURRENT_TIMESTAMP
-    ");
-    
-    $update_stmt->bind_param("is", $user_id, $db_path);
+    // Update user profile with new picture path directly in users table
+    $update_stmt = $conn->prepare("UPDATE users SET profile_picture = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?");
+    $update_stmt->bind_param("si", $db_path, $user_id);
     
     if ($update_stmt->execute()) {
         echo json_encode([
