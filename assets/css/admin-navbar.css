@@ -1,0 +1,36 @@
+/* Admin navbar specific styles to ensure it displays correctly in admin pages */
+.admin-navbar {
+    /* Ensure the navbar is visible */
+    display: flex !important;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    border-bottom: 3px solid #3498db; /* Add a blue border to indicate admin section */
+}
+
+/* Additional admin header styling */
+.admin-header {
+    margin-top: 20px;
+}
+
+/* Ensure navbar elements are properly aligned */
+#navbar-placeholder {
+    width: 100%;
+}
+
+/* Add admin indicator in navbar */
+.navbar.admin-navbar::before {
+    content: 'Admin';
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    background-color: #e74c3c;
+    color: white;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: bold;
+}

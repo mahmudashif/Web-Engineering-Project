@@ -32,6 +32,10 @@ require_once '../../includes/admin-auth.php';
                 <h2>Settings</h2>
                 <div class="admin-user">
                     <span id="admin-name">Admin</span>
+                    <div class="admin-profile-pic" id="admin-profile-pic">
+                        <img src="" alt="Admin" id="admin-image" style="display:none;">
+                        <div class="admin-initials" id="admin-initials">A</div>
+                    </div>
                 </div>
             </div>
             
@@ -72,6 +76,36 @@ require_once '../../includes/admin-auth.php';
                     const adminNameElement = document.getElementById('admin-name');
                     if (adminNameElement) {
                         adminNameElement.textContent = user.full_name;
+                    }
+                    
+                    // Update admin profile picture or initials
+                    const adminImageElement = document.getElementById('admin-image');
+                    const adminInitialsElement = document.getElementById('admin-initials');
+                    
+                    if (user.profile_picture) {
+                        // Get base path for current page
+                        const basePath = '../../';
+                        const profilePicturePath = basePath + user.profile_picture;
+                        
+                        adminImageElement.src = profilePicturePath;
+                        adminImageElement.style.display = 'block';
+                        adminInitialsElement.style.display = 'none';
+                    } else {
+                        // Show initials if no profile picture
+                        const nameParts = user.full_name.split(' ');
+                        let initials = '';
+                        
+                        if (nameParts.length > 0) {
+                            initials += nameParts[0].charAt(0).toUpperCase();
+                            
+                            if (nameParts.length > 1) {
+                                initials += nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+                            }
+                        }
+                        
+                        adminInitialsElement.textContent = initials || 'A';
+                        adminInitialsElement.style.display = 'block';
+                        adminImageElement.style.display = 'none';
                     }
                 }
             });

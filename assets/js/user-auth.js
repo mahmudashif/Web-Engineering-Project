@@ -240,6 +240,36 @@ class UserAuth {
         }
     }
 
+    // Method to check if user is authenticated and is an admin (for admin pages)
+    async requireAdminAuth() {
+        try {
+            const basePath = this.getBasePath();
+            const response = await fetch(basePath + 'api/check-auth.php', {
+                method: 'GET',
+                credentials: 'same-origin'
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                if (data.success && data.user && data.user.role === 'admin') {
+                    return data.user;
+                } else {
+                    // Redirect to login if not authenticated or not an admin
+                    window.location.href = basePath + 'index.php';
+                    return null;
+                }
+            } else {
+                window.location.href = basePath + 'index.php';
+                return null;
+            }
+        } catch (error) {
+            console.error('Error checking admin authentication:', error);
+            const basePath = this.getBasePath();
+            window.location.href = basePath + 'index.php';
+            return null;
+        }
+    }
+
     // Method to check if user is authenticated (for protected pages)
     async requireAuth() {
         try {
@@ -300,7 +330,10 @@ class UserAuth {
     getBasePath() {
         const path = window.location.pathname;
         
-        if (path.includes('/pages/auth/')) {
+        if (path.includes('/pages/admin/')) {
+            // Admin pages are in a subfolder, need to go up two levels
+            return '../../';
+        } else if (path.includes('/pages/auth/')) {
             return '../../';
         } else if (path.includes('/pages/') || path.includes('/components/') || path.includes('/error/')) {
             return '../';

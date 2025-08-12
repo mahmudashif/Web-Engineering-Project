@@ -12,8 +12,13 @@ require_once '../../includes/admin-auth.php';
     <link rel="stylesheet" href="../../assets/css/admin-dashboard.css">
 </head>
 <body>
-    <!-- Include navbar -->
-    <div id="navbar-container"></div>
+    <!-- Admin header with logo -->
+    <div class="admin-top-header">
+        <div class="admin-logo">
+            <a href="../../index.php">Orebi</a>
+        </div>
+        <div class="admin-title">Admin Dashboard</div>
+    </div>
 
     <div class="admin-dashboard-container">
         <div class="admin-sidebar">
@@ -24,6 +29,7 @@ require_once '../../includes/admin-auth.php';
                 <li><a href="products.php"><span class="icon">🛒</span> Products</a></li>
                 <li><a href="orders.php"><span class="icon">📦</span> Orders</a></li>
                 <li><a href="settings.php"><span class="icon">⚙️</span> Settings</a></li>
+                <li class="home-link"><a href="../../index.php"><span class="icon">🏠</span> Back to Website</a></li>
             </ul>
         </div>
         
@@ -31,7 +37,14 @@ require_once '../../includes/admin-auth.php';
             <div class="admin-header">
                 <h2>Dashboard</h2>
                 <div class="admin-user">
-                    <span id="admin-name">Admin</span>
+                    <div class="admin-user-info">
+                        <span id="admin-name">Admin</span>
+                        <span id="admin-role">Administrator</span>
+                    </div>
+                    <div class="admin-profile-pic" id="admin-profile-pic">
+                        <img src="" alt="Admin" id="admin-image" style="display:none;">
+                        <div class="admin-initials" id="admin-initials">A</div>
+                    </div>
                 </div>
             </div>
             
@@ -40,7 +53,7 @@ require_once '../../includes/admin-auth.php';
                     <div class="stat-icon users-icon">👥</div>
                     <div class="stat-details">
                         <h3>Users</h3>
-                        <p class="stat-number">0</p>
+                        <p class="stat-number" id="users-count">0</p>
                     </div>
                 </div>
                 
@@ -83,24 +96,83 @@ require_once '../../includes/admin-auth.php';
     <div id="footer-container"></div>
 
     <!-- Scripts -->
-    <script src="../../components/components.js"></script>
+    <script src="../../assets/js/admin-components.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize components
-            new Components();
-            
-            // Check for admin user and update UI
-            const userAuth = new UserAuth();
-            
-            userAuth.requireAuth().then(user => {
-                if (user) {
-                    // Update admin name
-                    const adminNameElement = document.getElementById('admin-name');
-                    if (adminNameElement) {
-                        adminNameElement.textContent = user.full_name;
-                    }
+            // Wait for UserAuth to be available
+            const checkUserAuth = setInterval(function() {
+                if (window.userAuth) {
+                    clearInterval(checkUserAuth);
+                    
+                    // Now we can use UserAuth
+                    const userAuth = window.userAuth;
+                    
+                    userAuth.requireAdminAuth().then(user => {
+                        if (user) {
+                            // Update admin name
+                            const adminNameElement = document.getElementById('admin-name');
+                            if (adminNameElement) {
+                                adminNameElement.textContent = user.full_name;
+                            }
+                            
+                            // Update admin role
+                            const adminRoleElement = document.getElementById('admin-role');
+                            if (adminRoleElement) {
+                                adminRoleElement.textContent = 'Administrator'; // Always show Administrator since only admins can access
+                            }
+                            
+                            // Update admin profile picture or initials
+                            const adminImageElement = document.getElementById('admin-image');
+                            const adminInitialsElement = document.getElementById('admin-initials');
+                            
+                            if (user.profile_picture) {
+                                // Get base path for current page
+                                const basePath = '../../';
+                                const profilePicturePath = basePath + user.profile_picture;
+                                
+                                adminImageElement.src = profilePicturePath;
+                                adminImageElement.style.display = 'block';
+                                adminInitialsElement.style.display = 'none';
+                            } else {
+                                // Show initials if no profile picture
+                                const nameParts = user.full_name.split(' ');
+                                let initials = '';
+                                
+                                if (nameParts.length > 0) {
+                                    initials += nameParts[0].charAt(0).toUpperCase();
+                                    
+                                    if (nameParts.length > 1) {
+                                        initials += nameParts[nameParts.length - 1].charAt(0).toUpperCase();
+                                    }
+                                }
+                                
+                                adminInitialsElement.textContent = initials || 'A';
+                                adminInitialsElement.style.display = 'block';
+                                adminImageElement.style.display = 'none';
+                            }
+                            
+                            // Update dashboard statistics
+                            fetchDashboardData();
+                        }
+                    });
                 }
-            });
+            }, 100); // Check every 100ms
+            
+            // Function to fetch dashboard data
+            function fetchDashboardData() {
+                // Fetch users count
+                fetch('../../api/admin/get-users-count.php')
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Update users count in the dashboard
+                            document.getElementById('users-count').textContent = data.count;
+                        }
+                    })
+                    .catch(error => console.error('Error fetching users count:', error));
+                
+                // More statistics can be added here later
+            }
         });
     </script>
 </body>
