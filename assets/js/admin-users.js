@@ -154,8 +154,9 @@ document.addEventListener('DOMContentLoaded', function() {
                             `;
                         }
                         
-                        // Create role badge
-                        const roleBadge = (user.is_admin || user.role === 'admin') ? 
+                        // Create role badge - check both is_admin and role fields
+                        const isAdmin = user.is_admin === true || user.is_admin === 1 || user.is_admin === '1' || user.role === 'admin';
+                        const roleBadge = isAdmin ? 
                             '<span class="user-role role-admin">Admin</span>' : 
                             '<span class="user-role role-user">User</span>';
                         
