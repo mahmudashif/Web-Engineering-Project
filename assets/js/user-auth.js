@@ -108,6 +108,15 @@ class UserAuth {
                         <span class="user_subtitle">${email}</span>
                     </div>
                  </div>`;
+                 
+            // Admin dashboard link - only show for admin users
+            const adminDashboardLink = user.role === 'admin' ? 
+                `<a href="${basePath}pages/admin/dashboard.php" class="dropdown_item admin-dashboard-link">
+                    <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.121 17.804A13.937 13.937 0 0112 16c2.5 0 4.847.655 6.879 1.804M15 10a3 3 0 11-6 0 3 3 0 016 0zm6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    Admin Dashboard
+                </a>` : '';
 
             userIconDropdown.innerHTML = `
                 <div class="user_dropdown_container">
@@ -125,6 +134,7 @@ class UserAuth {
                                 </svg>
                                 My Profile
                             </a>
+                            ${adminDashboardLink}
                             <a href="#" class="dropdown_item">
                                 <svg class="dropdown_icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>

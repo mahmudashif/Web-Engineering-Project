@@ -29,7 +29,7 @@ if (!isset($_SESSION['user_id'])) {
 
 // Get user data from database with profile info
 $stmt = $connection->prepare("
-    SELECT id, full_name, email, phone, address, bio, profile_picture, created_at
+    SELECT id, full_name, email, phone, address, bio, profile_picture, role, created_at
     FROM users
     WHERE id = ? AND is_active = 1
 ");
