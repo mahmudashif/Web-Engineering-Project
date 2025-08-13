@@ -471,7 +471,7 @@
                 <span class="stock-text ${product.stock_status}">${product.stock_text}</span>
               </div>
               <div class="product-buttons">
-                <button class="add-to-cart" onclick="addToCart(${product.id})" ${buttonDisabled}>
+                <button class="add-to-cart" onclick="addToCart(${product.id}, 1)" ${buttonDisabled}>
                   ${isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
                 </button>
                 <button class="view-details" onclick="viewProduct(${product.id})">View Details</button>
@@ -671,8 +671,15 @@
         return text.replace(/[&<>"']/g, function(m) { return map[m]; });
       }
 
-      // Add to cart function
+      // Add to cart function - ensures single addition only
       async function addToCart(productId, quantity = 1) {
+        // Prevent multiple simultaneous requests
+        if (window.addToCartInProgress) {
+          return;
+        }
+        
+        window.addToCartInProgress = true;
+        
         try {
           const response = await fetch('../api/add-to-cart.php', {
             method: 'POST',
@@ -688,14 +695,21 @@
           const data = await response.json();
           
           if (data.success) {
-            showNotification(data.message, 'success');
+            showNotification(`${data.data.product_name} added to cart!`, 'success');
             updateCartCount(data.data.cart_count);
+            
+            // Update global cart state
+            if (window.GlobalCart) {
+              await window.GlobalCart.loadFromAPI();
+            }
           } else {
             showNotification(data.message, 'error');
           }
         } catch (error) {
           console.error('Error adding to cart:', error);
           showNotification('Failed to add item to cart. Please try again.', 'error');
+        } finally {
+          window.addToCartInProgress = false;
         }
       }
 
@@ -788,7 +802,7 @@
             
             <div class="modal-buttons">
               ${product.stock_quantity > 0 ? `
-                <button class="btn-add-to-cart-modal" onclick="addToCartFromModal(${product.id})">
+                <button class="btn-add-to-cart-modal" onclick="addToCartFromModal(${product.id})" data-product-id="${product.id}">
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <circle cx="9" cy="21" r="1"/>
                     <circle cx="20" cy="21" r="1"/>
@@ -849,12 +863,29 @@
         increaseBtn.disabled = input.value >= max;
       }
       
-      // Add to cart from modal
+      // Add to cart from modal - with button state management
       async function addToCartFromModal(productId) {
+        // Prevent multiple clicks
+        const button = event.target;
+        if (button.disabled) return;
+        
         const quantityInput = document.getElementById('quantityModal');
         const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
         
-        await addToCart(productId, quantity);
+        // Disable button temporarily
+        button.disabled = true;
+        const originalText = button.innerHTML;
+        button.innerHTML = 'Adding...';
+        
+        try {
+          await addToCart(productId, quantity);
+        } finally {
+          // Re-enable button after delay
+          setTimeout(() => {
+            button.disabled = false;
+            button.innerHTML = originalText;
+          }, 1500);
+        }
       }
       
       // Update cart count in navbar

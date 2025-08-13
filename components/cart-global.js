@@ -244,55 +244,12 @@ window.GlobalCart = {
         }
     },
     
-    // Bind events for add to cart buttons
+    // Bind events for add to cart buttons - DISABLED to prevent conflicts
     bindEvents() {
-        // Handle add to cart button clicks
-        document.addEventListener('click', async (e) => {
-            if (e.target.matches('.add-to-cart, button[data-action="add-to-cart"]')) {
-                e.preventDefault();
-                
-                // Check if user is logged in
-                const isLoggedIn = await this.checkAuth();
-                if (!isLoggedIn) {
-                    this.showErrorNotification('Please login to add items to cart');
-                    // Redirect to login after a short delay
-                    setTimeout(() => {
-                        const basePath = this.getBasePath();
-                        window.location.href = basePath + 'pages/auth/login.php';
-                    }, 2000);
-                    return;
-                }
-                
-                // Get product ID from button or parent element
-                const productId = e.target.dataset.productId || 
-                                e.target.closest('[data-product-id]')?.dataset.productId;
-                
-                if (productId) {
-                    const success = await this.addItem(productId, 1);
-                    
-                    if (success) {
-                        // Visual feedback
-                        const button = e.target;
-                        const originalText = button.textContent;
-                        const originalBackground = button.style.background;
-                        
-                        button.textContent = 'Added!';
-                        button.style.background = '#059669';
-                        button.disabled = true;
-                        
-                        setTimeout(() => {
-                            button.textContent = originalText;
-                            button.style.background = originalBackground;
-                            button.disabled = false;
-                        }, 1500);
-                    }
-                } else {
-                    this.showErrorNotification('Product ID not found');
-                }
-            }
-        });
+        // Cart-global.js event handling is disabled to prevent conflicts
+        // Individual pages handle their own add-to-cart functionality
         
-        // Handle cart icon clicks
+        // Handle cart icon clicks only
         document.addEventListener('click', (e) => {
             if (e.target.closest('.cart_icon_link')) {
                 // If cart is empty, show notification
