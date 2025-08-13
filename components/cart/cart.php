@@ -129,29 +129,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        <!-- Recommended Products -->
-                        <div class="recommended-section">
-                            <h3>You might also like</h3>
-                            <div class="recommended-items">
-                                <div class="recommended-item">
-                                    <img src="images/mini-slider/4.jpg" alt="iPad Pro">
-                                    <div class="recommended-info">
-                                        <h4>iPad Pro</h4>
-                                        <p>$1,099.00</p>
-                                        <button class="btn-add-small">Add to Cart</button>
-                                    </div>
-                                </div>
-                                <div class="recommended-item">
-                                    <img src="images/mini-slider/5.jpg" alt="Apple Watch">
-                                    <div class="recommended-info">
-                                        <h4>Apple Watch Ultra</h4>
-                                        <p>$799.00</p>
-                                        <button class="btn-add-small">Add to Cart</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
