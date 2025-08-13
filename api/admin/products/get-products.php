@@ -112,6 +112,7 @@ try {
             'price' => (float)$row['price'],
             'stock_quantity' => (int)$row['stock_quantity'],
             'image' => $row['image'],
+            'brand' => $row['brand'], // Add brand field
             'category' => $row['category'], // Legacy field
             'category_id' => (int)$row['category_id'],
             'category_name' => $row['category_name'],

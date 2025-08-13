@@ -21,11 +21,8 @@ try {
     
     // Build query
     $where_conditions = [
-        "stock_quantity > 0",
-        "category IS NOT NULL",
-        "category != ''",
-        "category != '0'"
-    ]; // Only show products in stock with valid categories
+        "stock_quantity > 0"
+    ]; // Only show products in stock
     $params = [];
     $param_types = '';
     
@@ -138,13 +135,12 @@ try {
     $categories_sql = "SELECT DISTINCT category FROM products 
                       WHERE stock_quantity > 0 
                       AND category IS NOT NULL 
-                      AND category != '' 
-                      AND category != '0'
+                      AND category != ''
                       ORDER BY category";
     $categories_result = $conn->query($categories_sql);
     $categories = [];
     while ($cat_row = $categories_result->fetch_assoc()) {
-        if (!empty($cat_row['category']) && $cat_row['category'] !== '0') {
+        if (!empty($cat_row['category'])) {
             $categories[] = $cat_row['category'];
         }
     }

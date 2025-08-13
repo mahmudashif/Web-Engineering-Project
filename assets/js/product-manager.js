@@ -1,7 +1,7 @@
 // Product Management System
 class ProductManager {
     constructor() {
-        this.apiBase = '../../../api/admin/products';
+        this.apiBase = '../../api/admin/products';
         this.currentPage = 1;
         this.itemsPerPage = 10;
         this.totalPages = 1;
