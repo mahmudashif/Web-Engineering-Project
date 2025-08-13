@@ -138,13 +138,9 @@
           <aside class="shop-sidebar">
             <div class="filter-section">
               <h3>Categories</h3>
-              <ul class="category-list">
-                <li><a href="#" class="active" onclick="filterProducts('all')">All Products</a></li>
-                <li><a href="#" onclick="filterProducts('smartphones')">Smartphones</a></li>
-                <li><a href="#" onclick="filterProducts('laptops')">Laptops</a></li>
-                <li><a href="#" onclick="filterProducts('headphones')">Headphones</a></li>
-                <li><a href="#" onclick="filterProducts('smartwatches')">Smart Watches</a></li>
-                <li><a href="#" onclick="filterProducts('accessories')">Accessories</a></li>
+              <ul class="category-list" id="category-list">
+                <li><a href="#" class="active" data-category="all">All Products</a></li>
+                <!-- Categories will be loaded dynamically -->
               </ul>
             </div>
             
@@ -190,282 +186,11 @@
             </div>
 
             <!-- Products Grid -->
-            <div class="products-grid">
-              <!-- Smartphones -->
-              <div class="product-card" data-category="smartphones">
-                <div class="product-image">
-                  <div class="image-placeholder">📱</div>
-                  <div class="product-badges">
-                    <span class="badge new">New</span>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <h4>iPhone 15 Pro</h4>
-                  <p class="product-description">Latest flagship smartphone with titanium design</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★★</span>
-                    <span class="rating-count">(127)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$1,199</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="product-card" data-category="smartphones">
-                <div class="product-image">
-                  <div class="image-placeholder">📱</div>
-                  <div class="product-badges">
-                    <span class="badge sale">Sale</span>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <h4>Samsung Galaxy S24</h4>
-                  <p class="product-description">Premium Android smartphone with AI features</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="rating-count">(89)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$899</span>
-                    <span class="old-price">$1,099</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Laptops -->
-              <div class="product-card" data-category="laptops">
-                <div class="product-image">
-                  <div class="image-placeholder">💻</div>
-                </div>
-                <div class="product-info">
-                  <h4>MacBook Pro 16"</h4>
-                  <p class="product-description">Professional laptop with M3 Pro chip</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★★</span>
-                    <span class="rating-count">(156)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$2,499</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="product-card" data-category="laptops">
-                <div class="product-image">
-                  <div class="image-placeholder">💻</div>
-                  <div class="product-badges">
-                    <span class="badge hot">Hot</span>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <h4>Dell XPS 13</h4>
-                  <p class="product-description">Ultra-portable laptop with InfinityEdge display</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="rating-count">(98)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$1,299</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Headphones -->
-              <div class="product-card" data-category="headphones">
-                <div class="product-image">
-                  <div class="image-placeholder">🎧</div>
-                </div>
-                <div class="product-info">
-                  <h4>AirPods Pro 2</h4>
-                  <p class="product-description">Wireless earbuds with active noise cancellation</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★★</span>
-                    <span class="rating-count">(234)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$249</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="product-card" data-category="headphones">
-                <div class="product-image">
-                  <div class="image-placeholder">🎧</div>
-                  <div class="product-badges">
-                    <span class="badge sale">Sale</span>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <h4>Sony WH-1000XM5</h4>
-                  <p class="product-description">Premium noise-canceling over-ear headphones</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★★</span>
-                    <span class="rating-count">(178)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$349</span>
-                    <span class="old-price">$399</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Smart Watches -->
-              <div class="product-card" data-category="smartwatches">
-                <div class="product-image">
-                  <div class="image-placeholder">⌚</div>
-                  <div class="product-badges">
-                    <span class="badge new">New</span>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <h4>Apple Watch Ultra 2</h4>
-                  <p class="product-description">Ultimate sports and adventure smartwatch</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★★</span>
-                    <span class="rating-count">(145)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$799</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="product-card" data-category="smartwatches">
-                <div class="product-image">
-                  <div class="image-placeholder">⌚</div>
-                </div>
-                <div class="product-info">
-                  <h4>Samsung Galaxy Watch 6</h4>
-                  <p class="product-description">Advanced health and fitness tracking</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="rating-count">(92)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$329</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <!-- Accessories -->
-              <div class="product-card" data-category="accessories">
-                <div class="product-image">
-                  <div class="image-placeholder">🔌</div>
-                </div>
-                <div class="product-info">
-                  <h4>MagSafe Charger</h4>
-                  <p class="product-description">Wireless charging pad for iPhone</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="rating-count">(67)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$39</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="product-card" data-category="accessories">
-                <div class="product-image">
-                  <div class="image-placeholder">🔋</div>
-                  <div class="product-badges">
-                    <span class="badge hot">Hot</span>
-                  </div>
-                </div>
-                <div class="product-info">
-                  <h4>Anker PowerBank 20K</h4>
-                  <p class="product-description">High-capacity portable charger</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★★</span>
-                    <span class="rating-count">(201)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$59</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="product-card" data-category="accessories">
-                <div class="product-image">
-                  <div class="image-placeholder">📷</div>
-                </div>
-                <div class="product-info">
-                  <h4>Ring Light Pro</h4>
-                  <p class="product-description">Professional LED ring light for content creation</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="rating-count">(83)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$89</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
-              </div>
-
-              <div class="product-card" data-category="accessories">
-                <div class="product-image">
-                  <div class="image-placeholder">🖱️</div>
-                </div>
-                <div class="product-info">
-                  <h4>Magic Mouse</h4>
-                  <p class="product-description">Wireless multi-touch mouse</p>
-                  <div class="product-rating">
-                    <span class="stars">★★★★☆</span>
-                    <span class="rating-count">(124)</span>
-                  </div>
-                  <div class="product-price">
-                    <span class="current-price">$79</span>
-                  </div>
-                  <div class="product-buttons">
-                    <button class="add-to-cart">Add to Cart</button>
-                    <button class="buy-now">Buy Now</button>
-                  </div>
-                </div>
+            <div class="products-grid" id="products-grid">
+              <!-- Products will be loaded dynamically -->
+              <div class="loading-spinner" id="loading-spinner">
+                <div class="spinner"></div>
+                <p>Loading products...</p>
               </div>
             </div>
 
@@ -487,226 +212,380 @@
     <div id="footer-placeholder"></div>
 
     <script>
-      // Filter products by category
-      function filterProducts(category) {
-        const products = document.querySelectorAll('.product-card');
-        const categoryLinks = document.querySelectorAll('.category-list a');
-        
-        // Update active category
-        categoryLinks.forEach(link => link.classList.remove('active'));
-        event.target.classList.add('active');
-        
-        // Filter products
-        products.forEach(product => {
-          if (category === 'all' || product.dataset.category === category) {
-            product.style.display = 'block';
-          } else {
-            product.style.display = 'none';
+      // Global variables
+      let currentProducts = [];
+      let currentFilters = {
+        category: 'all',
+        search: '',
+        minPrice: 0,
+        maxPrice: null,
+        sortBy: 'id',
+        sortOrder: 'DESC'
+      };
+      let currentPage = 1;
+      let productsPerPage = 12;
+      let totalProducts = 0;
+
+      // Load products when page loads
+      document.addEventListener('DOMContentLoaded', function() {
+        loadProducts();
+        setupEventListeners();
+      });
+
+      // Setup event listeners
+      function setupEventListeners() {
+        // Search functionality
+        const searchInput = document.getElementById('product-search');
+        searchInput.addEventListener('input', debounce(function() {
+          currentFilters.search = this.value;
+          currentPage = 1;
+          loadProducts();
+        }, 500));
+
+        // Sort functionality
+        const sortSelect = document.querySelector('.sort-select');
+        sortSelect.addEventListener('change', function() {
+          const [sortBy, sortOrder] = this.value.split('-');
+          switch(this.value) {
+            case 'price-low':
+              currentFilters.sortBy = 'price';
+              currentFilters.sortOrder = 'ASC';
+              break;
+            case 'price-high':
+              currentFilters.sortBy = 'price';
+              currentFilters.sortOrder = 'DESC';
+              break;
+            case 'name':
+              currentFilters.sortBy = 'name';
+              currentFilters.sortOrder = 'ASC';
+              break;
+            default:
+              currentFilters.sortBy = 'id';
+              currentFilters.sortOrder = 'DESC';
           }
+          currentPage = 1;
+          loadProducts();
         });
-        
-        updateResultsCount();
+
+        // Price filter checkboxes
+        document.querySelectorAll('input[name="price"]').forEach(checkbox => {
+          checkbox.addEventListener('change', function() {
+            applyPriceFilters();
+          });
+        });
       }
 
-      // Search products by name
-      function searchProducts() {
-        const searchTerm = document.getElementById('product-search').value.toLowerCase();
-        const products = document.querySelectorAll('.product-card');
-        
-        products.forEach(product => {
-          const productName = product.querySelector('h4').textContent.toLowerCase();
-          const productDescription = product.querySelector('.product-description').textContent.toLowerCase();
-          
-          if (productName.includes(searchTerm) || productDescription.includes(searchTerm)) {
-            product.style.display = 'block';
-          } else {
-            product.style.display = 'none';
-          }
-        });
-        
-        updateResultsCount();
+      // Debounce function for search
+      function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+          const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+          };
+          clearTimeout(timeout);
+          timeout = setTimeout(later, wait);
+        };
       }
 
-      // Real-time search as user types
-      document.getElementById('product-search').addEventListener('input', searchProducts);
+      // Load products from API
+      async function loadProducts() {
+        showLoading(true);
+        
+        try {
+          const params = new URLSearchParams({
+            category: currentFilters.category,
+            search: currentFilters.search,
+            min_price: currentFilters.minPrice,
+            sort_by: currentFilters.sortBy,
+            sort_order: currentFilters.sortOrder,
+            limit: productsPerPage,
+            offset: (currentPage - 1) * productsPerPage
+          });
 
-      // Filter by price range
-      function filterByPrice() {
+          if (currentFilters.maxPrice) {
+            params.append('max_price', currentFilters.maxPrice);
+          }
+
+          const response = await fetch(`../api/get-products.php?${params}`);
+          const data = await response.json();
+
+          if (data.success) {
+            currentProducts = data.products;
+            totalProducts = data.total;
+            displayProducts(data.products);
+            updateCategories(data.categories);
+            updatePagination(data.pagination);
+            updateResultsCount(data.total);
+          } else {
+            showError('Error loading products: ' + data.message);
+          }
+        } catch (error) {
+          console.error('Error:', error);
+          showError('Failed to load products. Please try again.');
+        } finally {
+          showLoading(false);
+        }
+      }
+
+      // Display products in grid
+      function displayProducts(products) {
+        const grid = document.getElementById('products-grid');
+        
+        if (products.length === 0) {
+          grid.innerHTML = '<div class="no-products"><h3>No products found</h3><p>Try adjusting your filters or search terms.</p></div>';
+          return;
+        }
+
+        grid.innerHTML = products.map(product => createProductCard(product)).join('');
+      }
+
+      // Create product card HTML
+      function createProductCard(product) {
+        const stockBadge = product.stock_quantity <= 5 && product.stock_quantity > 0 
+          ? '<span class="badge low-stock">Low Stock</span>' 
+          : product.stock_quantity > 50 
+          ? '<span class="badge in-stock">In Stock</span>' 
+          : '';
+
+        const isOutOfStock = product.stock_quantity === 0;
+        const buttonDisabled = isOutOfStock ? 'disabled' : '';
+        const cardClass = isOutOfStock ? 'product-card out-of-stock' : 'product-card';
+
+        return `
+          <div class="${cardClass}" data-category="${product.category}" data-product-id="${product.id}">
+            <div class="product-image">
+              ${product.image ? 
+                `<img src="${product.image_url}" alt="${product.name}" onerror="this.src='../assets/images/placeholder-product.svg'">` :
+                '<div class="image-placeholder">📦</div>'
+              }
+              <div class="product-badges">
+                ${stockBadge}
+              </div>
+            </div>
+            <div class="product-info">
+              <h4>${escapeHtml(product.name)}</h4>
+              <p class="product-description">${escapeHtml(product.description || 'No description available')}</p>
+              <div class="product-price">
+                <span class="current-price">${product.formatted_price}</span>
+              </div>
+              <div class="product-stock">
+                <span class="stock-text ${product.stock_status}">${product.stock_text}</span>
+              </div>
+              <div class="product-buttons">
+                <button class="add-to-cart" onclick="addToCart(${product.id})" ${buttonDisabled}>
+                  ${isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
+                </button>
+                <button class="view-details" onclick="viewProduct(${product.id})">View Details</button>
+              </div>
+            </div>
+          </div>
+        `;
+      }
+
+      // Update categories list
+      function updateCategories(categories) {
+        const categoryList = document.getElementById('category-list');
+        const allProductsItem = categoryList.querySelector('[data-category="all"]').parentElement;
+        
+        categoryList.innerHTML = '';
+        categoryList.appendChild(allProductsItem);
+
+        categories.forEach(category => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a href="#" data-category="${category}">${formatCategoryName(category)}</a>`;
+          categoryList.appendChild(li);
+        });
+
+        // Add event listeners to category links
+        categoryList.addEventListener('click', function(e) {
+          if (e.target.tagName === 'A') {
+            e.preventDefault();
+            const category = e.target.getAttribute('data-category');
+            filterByCategory(category);
+            
+            // Update active class
+            document.querySelectorAll('.category-list a').forEach(link => {
+              link.classList.remove('active');
+            });
+            e.target.classList.add('active');
+          }
+        });
+      }
+
+      // Format category name for display
+      function formatCategoryName(category) {
+        return category.split('_').map(word => 
+          word.charAt(0).toUpperCase() + word.slice(1)
+        ).join(' ');
+      }
+
+      // Filter by category
+      function filterByCategory(category) {
+        currentFilters.category = category;
+        currentPage = 1;
+        loadProducts();
+      }
+
+      // Apply price filters
+      function applyPriceFilters() {
         const checkedPrices = document.querySelectorAll('input[name="price"]:checked');
-        const products = document.querySelectorAll('.product-card');
         
         if (checkedPrices.length === 0) {
-          // No price filters selected, show all products
-          products.forEach(product => {
-            product.style.display = 'block';
-          });
+          currentFilters.minPrice = 0;
+          currentFilters.maxPrice = null;
         } else {
-          products.forEach(product => {
-            const priceText = product.querySelector('.current-price').textContent;
-            const price = parseInt(priceText.replace(/[$,]/g, ''));
-            let showProduct = false;
-            
-            checkedPrices.forEach(checkbox => {
-              const range = checkbox.value;
-              if (range === '0-100' && price <= 100) showProduct = true;
-              if (range === '100-500' && price > 100 && price <= 500) showProduct = true;
-              if (range === '500-1000' && price > 500 && price <= 1000) showProduct = true;
-              if (range === '1000+' && price > 1000) showProduct = true;
-            });
-            
-            product.style.display = showProduct ? 'block' : 'none';
+          let minPrice = Infinity;
+          let maxPrice = 0;
+          
+          checkedPrices.forEach(checkbox => {
+            const range = checkbox.value;
+            if (range === '0-100') {
+              minPrice = Math.min(minPrice, 0);
+              maxPrice = Math.max(maxPrice, 100);
+            } else if (range === '100-500') {
+              minPrice = Math.min(minPrice, 100);
+              maxPrice = Math.max(maxPrice, 500);
+            } else if (range === '500-1000') {
+              minPrice = Math.min(minPrice, 500);
+              maxPrice = Math.max(maxPrice, 1000);
+            } else if (range === '1000+') {
+              minPrice = Math.min(minPrice, 1000);
+              maxPrice = null; // No upper limit
+            }
           });
+          
+          currentFilters.minPrice = minPrice === Infinity ? 0 : minPrice;
+          currentFilters.maxPrice = maxPrice;
         }
         
-        updateResultsCount();
+        currentPage = 1;
+        loadProducts();
       }
 
-      // Add event listeners to price checkboxes
-      document.querySelectorAll('input[name="price"]').forEach(checkbox => {
-        checkbox.addEventListener('change', filterByPrice);
-      });
+      // Update pagination
+      function updatePagination(pagination) {
+        const paginationDiv = document.querySelector('.pagination');
+        if (!pagination || pagination.total_pages <= 1) {
+          paginationDiv.style.display = 'none';
+          return;
+        }
+        
+        paginationDiv.style.display = 'flex';
+        let paginationHTML = '';
+        
+        // Previous button
+        if (pagination.has_prev) {
+          paginationHTML += `<button class="page-btn" onclick="goToPage(${pagination.current_page - 1})">← Prev</button>`;
+        }
+        
+        // Page numbers
+        const startPage = Math.max(1, pagination.current_page - 2);
+        const endPage = Math.min(pagination.total_pages, pagination.current_page + 2);
+        
+        if (startPage > 1) {
+          paginationHTML += `<button class="page-btn" onclick="goToPage(1)">1</button>`;
+          if (startPage > 2) {
+            paginationHTML += '<span class="page-dots">...</span>';
+          }
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
+          const activeClass = i === pagination.current_page ? 'active' : '';
+          paginationHTML += `<button class="page-btn ${activeClass}" onclick="goToPage(${i})">${i}</button>`;
+        }
+        
+        if (endPage < pagination.total_pages) {
+          if (endPage < pagination.total_pages - 1) {
+            paginationHTML += '<span class="page-dots">...</span>';
+          }
+          paginationHTML += `<button class="page-btn" onclick="goToPage(${pagination.total_pages})">${pagination.total_pages}</button>`;
+        }
+        
+        // Next button
+        if (pagination.has_next) {
+          paginationHTML += `<button class="page-btn" onclick="goToPage(${pagination.current_page + 1})">Next →</button>`;
+        }
+        
+        paginationDiv.innerHTML = paginationHTML;
+      }
+
+      // Go to specific page
+      function goToPage(page) {
+        currentPage = page;
+        loadProducts();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
 
       // Update results count
-      function updateResultsCount() {
-        const visibleProducts = document.querySelectorAll('.product-card:not([style*="none"])');
-        document.querySelector('.results-count strong').textContent = visibleProducts.length;
+      function updateResultsCount(total) {
+        const countElement = document.querySelector('.results-count strong');
+        if (countElement) {
+          countElement.textContent = total;
+        }
       }
 
-      // Filter products by brand
+      // Show/hide loading spinner
+      function showLoading(show) {
+        const spinner = document.getElementById('loading-spinner');
+        if (spinner) {
+          spinner.style.display = show ? 'flex' : 'none';
+        }
+      }
+
+      // Show error message
+      function showError(message) {
+        const grid = document.getElementById('products-grid');
+        grid.innerHTML = `
+          <div class="error-message">
+            <h3>Oops! Something went wrong</h3>
+            <p>${message}</p>
+            <button onclick="loadProducts()" class="retry-btn">Try Again</button>
+          </div>
+        `;
+      }
+
+      // Escape HTML to prevent XSS
+      function escapeHtml(text) {
+        const map = {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+      }
+
+      // Add to cart function
+      function addToCart(productId) {
+        // TODO: Implement add to cart functionality
+        alert(`Product ${productId} added to cart! (Cart functionality coming soon)`);
+      }
+
+      // View product details
+      function viewProduct(productId) {
+        // TODO: Implement product details page
+        alert(`View product ${productId} details (Product page coming soon)`);
+      }
+
+      // Legacy functions for navbar compatibility
+      function searchProducts() {
+        const searchTerm = document.getElementById('product-search').value;
+        currentFilters.search = searchTerm;
+        currentPage = 1;
+        loadProducts();
+      }
+
       function filterByBrand(brand) {
-        const products = document.querySelectorAll('.product-card');
-        products.forEach(product => {
-          const productName = product.querySelector('h4').textContent.toLowerCase();
-          if (productName.includes(brand.toLowerCase()) || brand === 'all') {
-            product.style.display = 'block';
-          } else {
-            product.style.display = 'none';
-          }
-        });
-        updateResultsCount();
+        currentFilters.search = brand;
+        currentPage = 1;
+        loadProducts();
       }
 
-      // Filter products by type/category
-      function filterByType(type) {
-        const products = document.querySelectorAll('.product-card');
-        products.forEach(product => {
-          const productName = product.querySelector('h4').textContent.toLowerCase();
-          const productDesc = product.querySelector('.product-description').textContent.toLowerCase();
-          
-          let shouldShow = false;
-          
-          switch(type) {
-            case 'wireless':
-              shouldShow = productName.includes('wireless') || productDesc.includes('wireless');
-              break;
-            case 'gaming':
-              shouldShow = productDesc.includes('gaming') || productName.includes('gaming');
-              break;
-            case 'ultrabook':
-              shouldShow = productDesc.includes('ultra') || productName.includes('ultra');
-              break;
-            case 'business':
-              shouldShow = productDesc.includes('professional') || productDesc.includes('business');
-              break;
-            case 'fitness':
-              shouldShow = productDesc.includes('fitness') || productDesc.includes('health');
-              break;
-            default:
-              shouldShow = productDesc.includes(type) || productName.includes(type);
-          }
-          
-          product.style.display = shouldShow ? 'block' : 'none';
-        });
-        updateResultsCount();
+      function filterProducts(category) {
+        filterByCategory(category);
       }
-
-      // Filter products by feature
-      function filterByFeature(feature) {
-        const products = document.querySelectorAll('.product-card');
-        products.forEach(product => {
-          const productDesc = product.querySelector('.product-description').textContent.toLowerCase();
-          const productName = product.querySelector('h4').textContent.toLowerCase();
-          
-          let shouldShow = false;
-          
-          switch(feature) {
-            case 'camera':
-              shouldShow = productDesc.includes('camera') || productName.includes('pro');
-              break;
-            case 'battery':
-              shouldShow = productDesc.includes('battery') || productDesc.includes('long');
-              break;
-            case 'anc':
-              shouldShow = productDesc.includes('noise') || productDesc.includes('canceling');
-              break;
-            case 'gps':
-              shouldShow = productDesc.includes('gps') || productDesc.includes('tracking');
-              break;
-            case 'health':
-              shouldShow = productDesc.includes('health') || productDesc.includes('fitness');
-              break;
-            default:
-              shouldShow = productDesc.includes(feature) || productName.includes(feature);
-          }
-          
-          product.style.display = shouldShow ? 'block' : 'none';
-        });
-        updateResultsCount();
-      }
-
-      // Filter products by size
-      function filterBySize(size) {
-        const products = document.querySelectorAll('.product-card');
-        products.forEach(product => {
-          const productName = product.querySelector('h4').textContent.toLowerCase();
-          
-          if (size === 'all') {
-            product.style.display = 'block';
-          } else {
-            const shouldShow = productName.includes(size + '"') || productName.includes(size + ' ');
-            product.style.display = shouldShow ? 'block' : 'none';
-          }
-        });
-        updateResultsCount();
-      }
-
-      // Sort products
-      document.querySelector('.sort-select').addEventListener('change', function() {
-        const sortBy = this.value;
-        const productsGrid = document.querySelector('.products-grid');
-        const products = Array.from(document.querySelectorAll('.product-card'));
-        
-        products.sort((a, b) => {
-          switch (sortBy) {
-            case 'price-low':
-              const priceA = parseInt(a.querySelector('.current-price').textContent.replace(/[$,]/g, ''));
-              const priceB = parseInt(b.querySelector('.current-price').textContent.replace(/[$,]/g, ''));
-              return priceA - priceB;
-            
-            case 'price-high':
-              const priceA2 = parseInt(a.querySelector('.current-price').textContent.replace(/[$,]/g, ''));
-              const priceB2 = parseInt(b.querySelector('.current-price').textContent.replace(/[$,]/g, ''));
-              return priceB2 - priceA2;
-            
-            case 'name':
-              const nameA = a.querySelector('h4').textContent;
-              const nameB = b.querySelector('h4').textContent;
-              return nameA.localeCompare(nameB);
-            
-            case 'rating':
-              const ratingA = a.querySelector('.stars').textContent.split('★').length - 1;
-              const ratingB = b.querySelector('.stars').textContent.split('★').length - 1;
-              return ratingB - ratingA;
-            
-            default:
-              return 0;
-          }
-        });
-        
-        // Clear and re-append sorted products
-        productsGrid.innerHTML = '';
-        products.forEach(product => productsGrid.appendChild(product));
-      });
     </script>
   </body>
 </html>
