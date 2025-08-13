@@ -124,13 +124,19 @@
         <!-- Search Bar -->
         <div class="shop-search-section">
           <div class="search-container">
-            <input type="text" id="product-search" class="search-input" placeholder="Search products...">
-            <button type="button" class="search-button" onclick="searchProducts()">
+            <input type="text" id="product-search" class="search-input" placeholder="Search products..." autocomplete="off">
+            <button type="button" class="clear-search-btn" id="clear-search" title="Clear search" style="display: none;">
+              <svg class="clear-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+            <button type="button" class="search-button" id="search-btn">
               <svg class="search-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
               </svg>
             </button>
           </div>
+          <div id="search-status" class="search-status" style="display: none;"></div>
         </div>
         
         <div class="shop-layout">
@@ -228,6 +234,15 @@
 
       // Load products when page loads
       document.addEventListener('DOMContentLoaded', function() {
+        // Initialize filters
+        currentFilters = {
+          category: 'all',
+          search: '',
+          minPrice: 0,
+          maxPrice: null,
+          sortBy: 'id',
+          sortOrder: 'DESC'
+        };
         loadProducts();
         setupEventListeners();
       });
@@ -236,11 +251,46 @@
       function setupEventListeners() {
         // Search functionality
         const searchInput = document.getElementById('product-search');
-        searchInput.addEventListener('input', debounce(function() {
-          currentFilters.search = this.value;
-          currentPage = 1;
-          loadProducts();
-        }, 500));
+        const searchButton = document.getElementById('search-btn');
+        const clearButton = document.getElementById('clear-search');
+        
+        if (searchInput) {
+          // Real-time search as user types (debounced)
+          searchInput.addEventListener('input', debounce(function() {
+            const value = this.value ? this.value.trim() : '';
+            currentFilters.search = value;
+            currentPage = 1;
+            
+            // Show/hide clear button
+            if (clearButton) {
+              clearButton.style.display = value ? 'flex' : 'none';
+            }
+            
+            loadProducts();
+          }, 500));
+
+          // Search on Enter key press
+          searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+              e.preventDefault();
+              performSearch();
+            }
+          });
+        }
+
+        // Search button click
+        if (searchButton) {
+          searchButton.addEventListener('click', function() {
+            performSearch();
+          });
+        }
+
+        // Clear search button click
+        if (clearButton) {
+          clearButton.addEventListener('click', function() {
+            clearSearch();
+          });
+        }
 
         // Sort functionality
         const sortSelect = document.querySelector('.sort-select');
@@ -275,6 +325,24 @@
         });
       }
 
+      // Perform search function
+      function performSearch() {
+        const searchInput = document.getElementById('product-search');
+        if (searchInput) {
+          const searchValue = searchInput.value ? searchInput.value.trim() : '';
+          currentFilters.search = searchValue;
+          currentPage = 1;
+          
+          // Show/hide clear button
+          const clearButton = document.getElementById('clear-search');
+          if (clearButton) {
+            clearButton.style.display = searchValue ? 'flex' : 'none';
+          }
+          
+          loadProducts();
+        }
+      }
+
       // Debounce function for search
       function debounce(func, wait) {
         let timeout;
@@ -294,16 +362,16 @@
         
         try {
           const params = new URLSearchParams({
-            category: currentFilters.category,
-            search: currentFilters.search,
-            min_price: currentFilters.minPrice,
-            sort_by: currentFilters.sortBy,
-            sort_order: currentFilters.sortOrder,
+            category: currentFilters.category || 'all',
+            search: currentFilters.search || '',
+            min_price: currentFilters.minPrice || 0,
+            sort_by: currentFilters.sortBy || 'id',
+            sort_order: currentFilters.sortOrder || 'DESC',
             limit: productsPerPage,
             offset: (currentPage - 1) * productsPerPage
           });
 
-          if (currentFilters.maxPrice) {
+          if (currentFilters.maxPrice && currentFilters.maxPrice > 0) {
             params.append('max_price', currentFilters.maxPrice);
           }
 
@@ -333,7 +401,21 @@
         const grid = document.getElementById('products-grid');
         
         if (products.length === 0) {
-          grid.innerHTML = '<div class="no-products"><h3>No products found</h3><p>Try adjusting your filters or search terms.</p></div>';
+          const searchTerm = currentFilters.search.trim();
+          const isSearching = searchTerm !== '';
+          
+          let message = '<div class="no-products"><h3>No products found</h3>';
+          
+          if (isSearching) {
+            message += `<p>No products match your search for "<strong>${escapeHtml(searchTerm)}</strong>"</p>`;
+            message += '<p>Try adjusting your search terms or browse all products.</p>';
+            message += `<button class="clear-search-button" onclick="clearSearch()">Clear Search</button>`;
+          } else {
+            message += '<p>Try adjusting your filters or check back later for new products.</p>';
+          }
+          
+          message += '</div>';
+          grid.innerHTML = message;
           return;
         }
 
@@ -517,11 +599,27 @@
         window.scrollTo({ top: 0, behavior: 'smooth' });
       }
 
-      // Update results count
+      // Update results count and search status
       function updateResultsCount(total) {
         const countElement = document.querySelector('.results-count strong');
+        const searchStatus = document.getElementById('search-status');
+        
         if (countElement) {
           countElement.textContent = total;
+        }
+
+        // Show search status if there's an active search
+        if (searchStatus && currentFilters.search.trim()) {
+          const searchTerm = currentFilters.search.trim();
+          searchStatus.innerHTML = `
+            <div class="search-results-info">
+              <span class="search-term">Search results for: "<strong>${escapeHtml(searchTerm)}</strong>"</span>
+              <span class="search-count">${total} ${total === 1 ? 'product' : 'products'} found</span>
+            </div>
+          `;
+          searchStatus.style.display = 'block';
+        } else if (searchStatus) {
+          searchStatus.style.display = 'none';
         }
       }
 
@@ -571,13 +669,14 @@
 
       // Legacy functions for navbar compatibility
       function searchProducts() {
-        const searchTerm = document.getElementById('product-search').value;
-        currentFilters.search = searchTerm;
-        currentPage = 1;
-        loadProducts();
+        performSearch();
       }
 
       function filterByBrand(brand) {
+        const searchInput = document.getElementById('product-search');
+        if (searchInput) {
+          searchInput.value = brand;
+        }
         currentFilters.search = brand;
         currentPage = 1;
         loadProducts();
@@ -585,6 +684,23 @@
 
       function filterProducts(category) {
         filterByCategory(category);
+      }
+
+      // Clear search function
+      function clearSearch() {
+        const searchInput = document.getElementById('product-search');
+        const clearButton = document.getElementById('clear-search');
+        
+        if (searchInput) {
+          searchInput.value = '';
+        }
+        if (clearButton) {
+          clearButton.style.display = 'none';
+        }
+        
+        currentFilters.search = '';
+        currentPage = 1;
+        loadProducts();
       }
     </script>
   </body>
