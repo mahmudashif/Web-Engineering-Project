@@ -134,20 +134,35 @@
             </div>
         </section>
 
-        <!-- Order Status Section -->
-        <section class="order-status-section">
+        <!-- Quick Actions Section -->
+        <section class="quick-actions-section">
             <div class="container">
-                <div class="order-status-wrapper">
-                    <div class="section-header">
-                        <h2>Your Recent Orders</h2>
-                        <p>Track your order status and view order details</p>
-                    </div>
-
-                    <div class="orders-container" id="orders-container">
-                        <!-- Orders will be loaded here -->
-                        <div class="loading-orders">
-                            <div class="spinner-small"></div>
-                            <span>Loading your orders...</span>
+                <div class="quick-actions-wrapper">
+                    <div class="quick-actions-card">
+                        <div class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                </svg>
+                            </div>
+                            <div class="quick-action-content">
+                                <h3>Track Your Orders</h3>
+                                <p>View order history and track delivery status</p>
+                                <a href="../pages/orders.php" class="btn-quick-action">View All Orders</a>
+                            </div>
+                        </div>
+                        
+                        <div class="quick-action-item">
+                            <div class="quick-action-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path>
+                                </svg>
+                            </div>
+                            <div class="quick-action-content">
+                                <h3>Continue Shopping</h3>
+                                <p>Browse our collection of products</p>
+                                <a href="../pages/shop.php" class="btn-quick-action">Browse Products</a>
+                            </div>
                         </div>
                     </div>
                 </div>
