@@ -98,7 +98,7 @@
                             </div>
 
                             <!-- Checkout Button -->
-                            <button class="btn-checkout" id="checkout-btn" disabled>
+                            <button class="btn-checkout" id="checkout-btn" disabled onclick="proceedToCheckout()">
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                     <path d="M9 12l2 2 4-4"/>
                                     <path d="M21 12c0 4.97-4.03 9-9 9s-9-4.03-9-9 4.03-9 9-9c2.39 0 4.68.94 6.36 2.64"/>
@@ -167,6 +167,28 @@
                 cartCountElement.textContent = totalItems;
             }
         });
+        
+        // Global checkout function
+        function proceedToCheckout() {
+            // Check if user is logged in first
+            fetch('../api/check-auth.php')
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        // User is logged in, proceed to checkout
+                        window.location.href = '../pages/checkout.php';
+                    } else {
+                        // User not logged in, redirect to login
+                        alert('Please login to proceed with checkout');
+                        window.location.href = '../pages/auth/login.php';
+                    }
+                })
+                .catch(error => {
+                    console.error('Error checking authentication:', error);
+                    alert('Please login to proceed with checkout');
+                    window.location.href = '../pages/auth/login.php';
+                });
+        }
     </script>
     <script src="components/cart-global.js"></script>
     <script src="components/cart/cart.js"></script>

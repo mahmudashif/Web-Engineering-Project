@@ -270,9 +270,9 @@ function bindEventListeners() {
                     return;
                 }
                 
-                showInfo('Redirecting to checkout... (Checkout functionality to be implemented)');
-                // In a real app, redirect to checkout page
-                // window.location.href = 'checkout.php';
+                showInfo('Redirecting to checkout...');
+                // Redirect to checkout page
+                window.location.href = '../pages/checkout.php';
             }
         });
     }
