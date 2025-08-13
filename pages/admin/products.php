@@ -10,6 +10,7 @@ require_once '../../includes/admin-auth.php';
     <title>Manage Products | Admin Dashboard</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/admin-dashboard.css">
+    <link rel="stylesheet" href="../../assets/css/product-management.css">
 </head>
 <body>
     <!-- Admin header with logo -->
@@ -49,20 +50,125 @@ require_once '../../includes/admin-auth.php';
             </div>
             
             <div class="admin-card">
-                <div class="placeholder-content">
-                    <h3>Product Management</h3>
-                    <p>This is a placeholder for the Product Management functionality.</p>
-                    <p>In the future, you can implement features like:</p>
-                    <ul>
-                        <li>View all products</li>
-                        <li>Add new products</li>
-                        <li>Edit product details</li>
-                        <li>Delete products</li>
-                        <li>Manage product categories</li>
-                        <li>Update product images and inventory</li>
-                    </ul>
+                <div class="product-management">
+                    <!-- Header with Actions -->
+                    <div class="products-header">
+                        <h3 class="products-title">Product Management</h3>
+                        <div class="products-actions">
+                            <button class="btn btn-success" id="addCategoryBtn">Add Category</button>
+                            <button class="btn btn-primary" id="addProductBtn">Add Product</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Filters -->
+                    <div class="products-filters">
+                        <div class="filter-group">
+                            <label for="searchProducts">Search Products</label>
+                            <input type="text" id="searchProducts" class="filter-input" placeholder="Search by name, description, or category...">
+                        </div>
+                        <div class="filter-group">
+                            <label for="categoryFilter">Category</label>
+                            <select id="categoryFilter" class="filter-select">
+                                <option value="">All Categories</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <!-- Products Grid -->
+                    <div class="products-grid" id="productsContainer">
+                        <div class="loading">Loading products...</div>
+                    </div>
+                    
+                    <!-- Pagination -->
+                    <div class="pagination-container" id="paginationContainer">
+                        <!-- Pagination will be rendered here -->
+                    </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Product Modal -->
+    <div class="modal" id="productModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title" id="productModalTitle">Add New Product</h3>
+                <button type="button" class="close-modal">&times;</button>
+            </div>
+            <form id="productForm" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="productName">Product Name *</label>
+                        <input type="text" id="productName" name="productName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productDescription">Description</label>
+                        <textarea id="productDescription" name="productDescription" class="form-control" rows="4"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productPrice">Price *</label>
+                        <input type="number" id="productPrice" name="productPrice" class="form-control" min="0" step="0.01" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productStock">Stock Quantity</label>
+                        <input type="number" id="productStock" name="productStock" class="form-control" min="0" value="0">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productCategory">Category</label>
+                        <select id="productCategory" name="productCategory" class="form-control">
+                            <option value="">Select Category</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="productImage">Product Image</label>
+                        <div class="image-upload-group">
+                            <div class="image-upload-input">
+                                <input type="file" id="productImage" name="productImage" class="form-control" accept="image/*">
+                                <small class="form-text text-muted">Accepted formats: JPEG, PNG, GIF. Max size: 5MB</small>
+                            </div>
+                            <div class="image-preview" id="imagePreview">
+                                <div class="preview-placeholder">No image selected</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Product</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Category Modal -->
+    <div class="modal" id="categoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Add New Category</h3>
+                <button type="button" class="close-modal">&times;</button>
+            </div>
+            <form id="categoryForm">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="categoryName">Category Name *</label>
+                        <input type="text" id="categoryName" name="categoryName" class="form-control" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="categoryDescription">Description</label>
+                        <textarea id="categoryDescription" name="categoryDescription" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary close-modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save Category</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -71,6 +177,7 @@ require_once '../../includes/admin-auth.php';
 
     <!-- Scripts -->
     <script src="../../assets/js/admin-components.js"></script>
+    <script src="../../assets/js/product-manager.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Wait for UserAuth to be available
