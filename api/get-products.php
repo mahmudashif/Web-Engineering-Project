@@ -36,12 +36,13 @@ try {
         $param_types .= 's';
     }
     
-    // Search filter
+    // Search filter - search in name, description, and brand
     if (!empty($search)) {
-        $where_conditions[] = "(name LIKE ? OR description LIKE ?)";
+        $where_conditions[] = "(name LIKE ? OR description LIKE ? OR brand LIKE ?)";
         $params[] = "%$search%";
         $params[] = "%$search%";
-        $param_types .= 'ss';
+        $params[] = "%$search%";
+        $param_types .= 'sss';
     }
     
     // Price filter
@@ -80,7 +81,7 @@ try {
     $total_products = $count_result->fetch_assoc()['total'];
     
     // Get products
-    $sql = "SELECT id, name, description, price, image, stock_quantity, category, created_at 
+    $sql = "SELECT id, name, description, price, image, stock_quantity, brand, category, created_at 
             FROM products 
             WHERE $where_clause 
             ORDER BY $sort_by $sort_order 

@@ -91,8 +91,14 @@ try {
     $description = isset($input['description']) ? trim($input['description']) : '';
     $price = floatval($input['price']);
     $stock_quantity = isset($input['stock_quantity']) ? intval($input['stock_quantity']) : 0;
+    $brand = isset($input['brand']) ? trim($input['brand']) : '';
     $category = isset($input['category']) ? trim($input['category']) : '';
     $category_id = isset($input['category_id']) ? intval($input['category_id']) : null;
+    
+    // Validate required fields
+    if (empty($brand)) {
+        throw new Exception('Brand is required');
+    }
     
     // Ensure we have a valid category - default to 'electronics' if empty
     if (empty($category) && ($category_id === null || $category_id === 0)) {
@@ -161,8 +167,8 @@ try {
     }
     
     // Insert product
-    $stmt = $conn->prepare("INSERT INTO products (name, description, price, stock_quantity, image, category, category_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
-    $stmt->bind_param("ssdissi", $name, $description, $price, $stock_quantity, $imagePath, $category, $category_id);
+    $stmt = $conn->prepare("INSERT INTO products (name, description, price, stock_quantity, image, brand, category, category_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
+    $stmt->bind_param("ssdisssi", $name, $description, $price, $stock_quantity, $imagePath, $brand, $category, $category_id);
     
     if ($stmt->execute()) {
         $productId = $conn->insert_id;

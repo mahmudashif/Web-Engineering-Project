@@ -4,10 +4,10 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orebi - Shop</title>
-    <link rel="stylesheet" href="../assets/css/style.css" />
-    <link rel="stylesheet" href="../assets/css/shop.css" />
-    <link rel="stylesheet" href="../assets/css/shop-nav.css" />
-    <script src="../components/components.js"></script>
+    <link rel="stylesheet" href="../assets/css/style.css?v=2" />
+    <link rel="stylesheet" href="../assets/css/shop.css?v=2" />
+    <link rel="stylesheet" href="../assets/css/shop-nav.css?v=2" />
+    <script src="../components/components.js?v=2"></script>
   </head>
   <body>
     <!-- Navbar Placeholder -->
@@ -446,6 +446,7 @@
               </div>
             </div>
             <div class="product-info">
+              <div class="product-brand">${escapeHtml(product.brand || 'Unknown Brand')}</div>
               <h4>${escapeHtml(product.name)}</h4>
               <p class="product-description">${escapeHtml(product.description || 'No description available')}</p>
               <div class="product-price">

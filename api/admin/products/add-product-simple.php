@@ -56,7 +56,13 @@ try {
     $description = trim($_POST['description'] ?? '');
     $price = floatval($_POST['price'] ?? 0);
     $stock_quantity = intval($_POST['stock_quantity'] ?? 0);
+    $brand = trim($_POST['brand'] ?? '');
     $category_id = intval($_POST['category_id'] ?? 0) ?: null;
+    
+    // Validate required fields
+    if (empty($brand)) {
+        throw new Exception('Brand is required');
+    }
     
     // Ensure we have a valid category_id - default to electronics category
     if (!$category_id) {
@@ -131,8 +137,8 @@ try {
     }
     
     // Insert product
-    $stmt = $conn->prepare("INSERT INTO products (name, description, price, stock_quantity, image, category, category_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
-    $stmt->bind_param("ssdissi", $name, $description, $price, $stock_quantity, $imagePath, $category, $category_id);
+    $stmt = $conn->prepare("INSERT INTO products (name, description, price, stock_quantity, image, brand, category, category_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
+    $stmt->bind_param("ssdisssi", $name, $description, $price, $stock_quantity, $imagePath, $brand, $category, $category_id);
     
     if (!$stmt->execute()) {
         throw new Exception('Failed to save product: ' . $stmt->error);

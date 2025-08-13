@@ -8,9 +8,9 @@ require_once '../../includes/admin-auth.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manage Products | Admin Dashboard</title>
-    <link rel="stylesheet" href="../../assets/css/style.css">
-    <link rel="stylesheet" href="../../assets/css/admin-dashboard.css">
-    <link rel="stylesheet" href="../../assets/css/product-management.css">
+    <link rel="stylesheet" href="../../assets/css/style.css?v=2">
+    <link rel="stylesheet" href="../../assets/css/admin-dashboard.css?v=2">
+    <link rel="stylesheet" href="../../assets/css/product-management.css?v=2">
 </head>
 <body>
     <!-- Admin header with logo -->
@@ -125,6 +125,11 @@ require_once '../../includes/admin-auth.php';
                     </div>
                     
                     <div class="form-group">
+                        <label for="productBrand">Brand *</label>
+                        <input type="text" id="productBrand" name="productBrand" class="form-control" placeholder="Enter brand name" required>
+                    </div>
+                    
+                    <div class="form-group">
                         <label for="productImage">Product Image</label>
                         <div class="image-upload-group">
                             <div class="image-upload-input">
@@ -177,7 +182,7 @@ require_once '../../includes/admin-auth.php';
 
     <!-- Scripts -->
     <script src="../../assets/js/admin-components.js"></script>
-    <script src="../../assets/js/product-manager.js"></script>
+    <script src="../../assets/js/product-manager.js?v=2"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Wait for UserAuth to be available

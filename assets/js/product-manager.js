@@ -182,6 +182,7 @@ class ProductManager {
                     }
                 </div>
                 <div class="product-info">
+                    <div class="product-brand">${this.escapeHtml(product.brand || 'Unknown Brand')}</div>
                     <h3 class="product-name">${this.escapeHtml(product.name)}</h3>
                     <p class="product-description">${this.escapeHtml(product.description || '')}</p>
                     <div class="product-details">
@@ -287,6 +288,7 @@ class ProductManager {
             form.productDescription.value = product.description || '';
             form.productPrice.value = product.price;
             form.productStock.value = product.stock_quantity;
+            form.productBrand.value = product.brand || '';
         }
         
         // Populate category dropdown first, then set the selected value
@@ -391,6 +393,7 @@ class ProductManager {
         formData.append('description', form.productDescription.value.trim());
         formData.append('price', form.productPrice.value);
         formData.append('stock_quantity', form.productStock.value);
+        formData.append('brand', form.productBrand.value.trim());
         
         // Handle category - use empty string if no category selected
         const categoryValue = form.productCategory.value;

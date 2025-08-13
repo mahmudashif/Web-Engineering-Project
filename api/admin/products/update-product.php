@@ -78,8 +78,14 @@ try {
     $description = isset($input['description']) ? trim($input['description']) : $existingProduct['description'];
     $price = isset($input['price']) ? floatval($input['price']) : floatval($existingProduct['price']);
     $stock_quantity = isset($input['stock_quantity']) ? intval($input['stock_quantity']) : intval($existingProduct['stock_quantity']);
+    $brand = isset($input['brand']) ? trim($input['brand']) : $existingProduct['brand'];
     $category = isset($input['category']) ? trim($input['category']) : $existingProduct['category'];
     $category_id = isset($input['category_id']) ? intval($input['category_id']) : intval($existingProduct['category_id']);
+    
+    // Validate required fields
+    if (empty($brand)) {
+        throw new Exception('Brand is required');
+    }
     
     // Ensure we have a valid category - default to 'electronics' if empty or invalid
     if (empty($category) && ($category_id === 0 || $category_id === null)) {
@@ -115,8 +121,8 @@ try {
     }
     
     // Update product
-    $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock_quantity = ?, category = ?, category_id = ?, updated_at = NOW() WHERE id = ?");
-    $stmt->bind_param("ssdiisi", $name, $description, $price, $stock_quantity, $category, $category_id, $productId);
+    $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock_quantity = ?, brand = ?, category = ?, category_id = ?, updated_at = NOW() WHERE id = ?");
+    $stmt->bind_param("ssdisiis", $name, $description, $price, $stock_quantity, $brand, $category, $category_id, $productId);
     
     if ($stmt->execute()) {
         // Get the updated product

@@ -428,6 +428,15 @@ body {
   padding: 20px 18px;
 }
 
+.product-brand {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6D28D9;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
 .product-info h4 {
   font-size: 18px;
   font-weight: 700;

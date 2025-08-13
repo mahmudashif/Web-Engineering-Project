@@ -83,6 +83,12 @@ try {
     $description = isset($input['description']) ? trim($input['description']) : $existingProduct['description'];
     $price = isset($input['price']) && $input['price'] > 0 ? floatval($input['price']) : floatval($existingProduct['price']);
     $stock_quantity = isset($input['stock_quantity']) && $input['stock_quantity'] >= 0 ? intval($input['stock_quantity']) : intval($existingProduct['stock_quantity']);
+    $brand = isset($input['brand']) && trim($input['brand']) !== '' ? trim($input['brand']) : $existingProduct['brand'];
+    
+    // Validate required fields
+    if (empty($brand)) {
+        throw new Exception('Brand is required');
+    }
     
     // Handle image update
     $image = $existingProduct['image']; // Keep existing image by default
@@ -141,8 +147,8 @@ try {
     }
     
     // Update product
-    $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock_quantity = ?, image = ?, category = ?, category_id = ?, updated_at = NOW() WHERE id = ?");
-    $stmt->bind_param("ssdisisi", $name, $description, $price, $stock_quantity, $image, $category, $category_id, $productId);
+    $stmt = $conn->prepare("UPDATE products SET name = ?, description = ?, price = ?, stock_quantity = ?, image = ?, brand = ?, category = ?, category_id = ?, updated_at = NOW() WHERE id = ?");
+    $stmt->bind_param("ssdissisi", $name, $description, $price, $stock_quantity, $image, $brand, $category, $category_id, $productId);
     
     if (!$stmt->execute()) {
         throw new Exception('Failed to update product: ' . $stmt->error);
