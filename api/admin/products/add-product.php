@@ -157,7 +157,7 @@ try {
     
     // Insert product
     $stmt = $conn->prepare("INSERT INTO products (name, description, price, stock_quantity, image, category, category_id, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?, NOW(), NOW())");
-    $stmt->bind_param("ssdisin", $name, $description, $price, $stock_quantity, $imagePath, $category, $category_id);
+    $stmt->bind_param("ssdissi", $name, $description, $price, $stock_quantity, $imagePath, $category, $category_id);
     
     if ($stmt->execute()) {
         $productId = $conn->insert_id;
