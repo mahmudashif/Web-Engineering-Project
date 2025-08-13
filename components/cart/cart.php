@@ -134,6 +134,26 @@
             </div>
         </section>
 
+        <!-- Order Status Section -->
+        <section class="order-status-section">
+            <div class="container">
+                <div class="order-status-wrapper">
+                    <div class="section-header">
+                        <h2>Your Recent Orders</h2>
+                        <p>Track your order status and view order details</p>
+                    </div>
+
+                    <div class="orders-container" id="orders-container">
+                        <!-- Orders will be loaded here -->
+                        <div class="loading-orders">
+                            <div class="spinner-small"></div>
+                            <span>Loading your orders...</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Empty Cart State (Shown by default) -->
         <section class="empty-cart" id="empty-cart-section">
             <div class="container">

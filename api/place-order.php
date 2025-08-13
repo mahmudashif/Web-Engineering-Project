@@ -61,7 +61,8 @@ try {
         $productIds = array_column($items, 'product_id');
         
         $stmt = $conn->prepare("
-            SELECT ci.product_id, ci.quantity, p.name, p.price, p.stock_quantity 
+            SELECT ci.product_id, ci.quantity, p.name, p.price, p.stock_quantity, 
+                   p.brand, p.image, p.description 
             FROM cart_items ci 
             JOIN products p ON ci.product_id = p.id 
             WHERE ci.user_id = ? AND ci.product_id IN ($placeholderIds)
@@ -148,8 +149,11 @@ try {
 
         // Add order items
         $stmt = $conn->prepare("
-            INSERT INTO order_items (order_id, product_id, quantity, price, created_at) 
-            VALUES (?, ?, ?, ?, NOW())
+            INSERT INTO order_items (
+                order_id, product_id, quantity, price, 
+                product_name, product_brand, product_image, product_description,
+                created_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())
         ");
         
         foreach ($items as $item) {
@@ -157,11 +161,15 @@ try {
             $cartItem = $cartItems[$productId];
             
             $stmt->bind_param(
-                'iiid', 
+                'iiidssss', 
                 $orderId, 
                 $productId, 
                 $item['quantity'], 
-                $cartItem['price']
+                $cartItem['price'],
+                $cartItem['name'],
+                $cartItem['brand'],
+                $cartItem['image'],
+                $cartItem['description']
             );
             
             if (!$stmt->execute()) {
