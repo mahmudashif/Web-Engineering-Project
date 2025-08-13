@@ -94,6 +94,11 @@ try {
     $category = isset($input['category']) ? trim($input['category']) : '';
     $category_id = isset($input['category_id']) ? intval($input['category_id']) : null;
     
+    // Ensure we have a valid category - default to 'electronics' if empty
+    if (empty($category) && ($category_id === null || $category_id === 0)) {
+        $category = 'electronics';
+    }
+    
     if ($price < 0) {
         throw new Exception('Price cannot be negative');
     }

@@ -20,7 +20,12 @@ try {
     $offset = $_GET['offset'] ?? 0;
     
     // Build query
-    $where_conditions = ["stock_quantity > 0"]; // Only show products in stock
+    $where_conditions = [
+        "stock_quantity > 0",
+        "category IS NOT NULL",
+        "category != ''",
+        "category != '0'"
+    ]; // Only show products in stock with valid categories
     $params = [];
     $param_types = '';
     
@@ -129,11 +134,18 @@ try {
     }
     
     // Get unique categories for filter
-    $categories_sql = "SELECT DISTINCT category FROM products WHERE stock_quantity > 0 ORDER BY category";
+    $categories_sql = "SELECT DISTINCT category FROM products 
+                      WHERE stock_quantity > 0 
+                      AND category IS NOT NULL 
+                      AND category != '' 
+                      AND category != '0'
+                      ORDER BY category";
     $categories_result = $conn->query($categories_sql);
     $categories = [];
     while ($cat_row = $categories_result->fetch_assoc()) {
-        $categories[] = $cat_row['category'];
+        if (!empty($cat_row['category']) && $cat_row['category'] !== '0') {
+            $categories[] = $cat_row['category'];
+        }
     }
     
     $response = [

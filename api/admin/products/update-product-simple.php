@@ -107,9 +107,28 @@ try {
         }
         $stmt->close();
     } else {
-        // Keep existing category
+        // Keep existing category, but validate it's not empty or "0"
         $category_id = $existingProduct['category_id'];
         $category = $existingProduct['category'];
+        
+        // If existing category is invalid, default to electronics
+        if (empty($category) || $category === '0' || $category_id === 0 || $category_id === null) {
+            // Find or create electronics category
+            $stmt = $conn->prepare("SELECT id FROM product_categories WHERE name = 'electronics'");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if ($result->num_rows > 0) {
+                $category_id = $result->fetch_assoc()['id'];
+                $category = 'electronics';
+            } else {
+                // Create electronics category if it doesn't exist
+                $stmt = $conn->prepare("INSERT INTO product_categories (name, created_at, updated_at) VALUES ('electronics', NOW(), NOW())");
+                $stmt->execute();
+                $category_id = $conn->insert_id;
+                $category = 'electronics';
+            }
+            $stmt->close();
+        }
     }
     
     // Validate

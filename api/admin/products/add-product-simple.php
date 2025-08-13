@@ -58,6 +58,23 @@ try {
     $stock_quantity = intval($_POST['stock_quantity'] ?? 0);
     $category_id = intval($_POST['category_id'] ?? 0) ?: null;
     
+    // Ensure we have a valid category_id - default to electronics category
+    if (!$category_id) {
+        // Find or create electronics category
+        $stmt = $conn->prepare("SELECT id FROM product_categories WHERE name = 'electronics'");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        if ($result->num_rows > 0) {
+            $category_id = $result->fetch_assoc()['id'];
+        } else {
+            // Create electronics category if it doesn't exist
+            $stmt = $conn->prepare("INSERT INTO product_categories (name, created_at, updated_at) VALUES ('electronics', NOW(), NOW())");
+            $stmt->execute();
+            $category_id = $conn->insert_id;
+        }
+        $stmt->close();
+    }
+    
     // Validate required fields
     if (empty($name)) {
         throw new Exception('Product name is required');
