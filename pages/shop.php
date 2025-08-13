@@ -217,6 +217,21 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
+    <!-- Product Details Modal -->
+    <div class="modal" id="productDetailsModal">
+      <div class="modal-backdrop"></div>
+      <div class="modal-content product-modal">
+        <button class="modal-close" onclick="closeProductModal()">&times;</button>
+        <div class="modal-loading" id="modalLoading">
+          <div class="spinner"></div>
+          <p>Loading product details...</p>
+        </div>
+        <div class="product-details-content" id="productDetailsContent" style="display: none;">
+          <!-- Product details will be loaded here -->
+        </div>
+      </div>
+    </div>
+
     <script>
       // Global variables
       let currentProducts = [];
@@ -657,16 +672,285 @@
       }
 
       // Add to cart function
-      function addToCart(productId) {
-        // TODO: Implement add to cart functionality
-        alert(`Product ${productId} added to cart! (Cart functionality coming soon)`);
+      async function addToCart(productId, quantity = 1) {
+        try {
+          const response = await fetch('../api/add-to-cart.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              product_id: productId,
+              quantity: quantity
+            })
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            showNotification(data.message, 'success');
+            updateCartCount(data.data.cart_count);
+          } else {
+            showNotification(data.message, 'error');
+          }
+        } catch (error) {
+          console.error('Error adding to cart:', error);
+          showNotification('Failed to add item to cart. Please try again.', 'error');
+        }
       }
 
       // View product details
-      function viewProduct(productId) {
-        // TODO: Implement product details page
-        alert(`View product ${productId} details (Product page coming soon)`);
+      async function viewProduct(productId) {
+        const modal = document.getElementById('productDetailsModal');
+        const loading = document.getElementById('modalLoading');
+        const content = document.getElementById('productDetailsContent');
+        
+        modal.style.display = 'block';
+        loading.style.display = 'flex';
+        content.style.display = 'none';
+        
+        try {
+          const response = await fetch(`../api/get-product-details.php?id=${productId}`);
+          const data = await response.json();
+          
+          if (data.success) {
+            renderProductDetails(data.product, data.related_products);
+            loading.style.display = 'none';
+            content.style.display = 'block';
+          } else {
+            throw new Error(data.message);
+          }
+        } catch (error) {
+          console.error('Error loading product details:', error);
+          closeProductModal();
+          showNotification('Failed to load product details. Please try again.', 'error');
+        }
       }
+      
+      // Render product details in modal
+      function renderProductDetails(product, relatedProducts) {
+        const content = document.getElementById('productDetailsContent');
+        
+        const relatedProductsHtml = relatedProducts.length > 0 ? `
+          <div class="related-products-section">
+            <h3 class="related-products-title">Related Products</h3>
+            <div class="related-products-grid">
+              ${relatedProducts.map(related => `
+                <div class="related-product-card" onclick="viewProduct(${related.id})">
+                  <div class="related-product-image">
+                    ${related.image ? 
+                      `<img src="${related.image_url}" alt="${related.name}" onerror="this.src='../assets/images/placeholder-product.svg'">` :
+                      '<div class="image-placeholder">📦</div>'
+                    }
+                  </div>
+                  <div class="related-product-brand">${escapeHtml(related.brand || 'Unknown')}</div>
+                  <div class="related-product-name">${escapeHtml(related.name)}</div>
+                  <div class="related-product-price">${related.formatted_price}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        ` : '';
+        
+        content.innerHTML = `
+          <div class="product-image-section">
+            <div class="main-product-image">
+              ${product.image ? 
+                `<img src="${product.image_url}" alt="${product.name}" onerror="this.src='../assets/images/placeholder-product.svg'">` :
+                '<div class="image-placeholder">📦</div>'
+              }
+            </div>
+          </div>
+          
+          <div class="product-info-section">
+            <div class="product-brand-modal">${escapeHtml(product.brand || 'Unknown Brand')}</div>
+            <h1 class="product-title-modal">${escapeHtml(product.name)}</h1>
+            <div class="product-price-modal">${product.formatted_price}</div>
+            
+            ${product.description ? `
+              <div class="product-description-modal">${escapeHtml(product.description)}</div>
+            ` : ''}
+            
+            <div class="product-stock-modal ${product.stock_status}">
+              ${product.stock_text}
+            </div>
+            
+            ${product.stock_quantity > 0 ? `
+              <div class="quantity-selector">
+                <label for="quantityModal">Quantity:</label>
+                <div class="quantity-controls">
+                  <button type="button" class="quantity-btn" onclick="changeQuantity(-1)" ${product.stock_quantity <= 1 ? 'disabled' : ''}>−</button>
+                  <input type="number" id="quantityModal" class="quantity-input" value="1" min="1" max="${product.stock_quantity}" onchange="validateQuantity()">
+                  <button type="button" class="quantity-btn" onclick="changeQuantity(1)" ${product.stock_quantity <= 1 ? 'disabled' : ''}>+</button>
+                </div>
+              </div>
+            ` : ''}
+            
+            <div class="modal-buttons">
+              ${product.stock_quantity > 0 ? `
+                <button class="btn-add-to-cart-modal" onclick="addToCartFromModal(${product.id})">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <circle cx="9" cy="21" r="1"/>
+                    <circle cx="20" cy="21" r="1"/>
+                    <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+                  </svg>
+                  Add to Cart
+                </button>
+              ` : `
+                <button class="btn-add-to-cart-modal" disabled>Out of Stock</button>
+              `}
+              <button class="btn-continue-shopping" onclick="closeProductModal()">Continue Shopping</button>
+            </div>
+          </div>
+          
+          ${relatedProductsHtml}
+        `;
+      }
+      
+      // Close product modal
+      function closeProductModal() {
+        const modal = document.getElementById('productDetailsModal');
+        modal.style.display = 'none';
+      }
+      
+      // Change quantity in modal
+      function changeQuantity(delta) {
+        const input = document.getElementById('quantityModal');
+        if (!input) return;
+        
+        const currentValue = parseInt(input.value) || 1;
+        const newValue = Math.max(1, Math.min(parseInt(input.max), currentValue + delta));
+        input.value = newValue;
+        
+        // Update button states
+        const decreaseBtn = input.parentElement.querySelector('.quantity-btn:first-child');
+        const increaseBtn = input.parentElement.querySelector('.quantity-btn:last-child');
+        
+        decreaseBtn.disabled = newValue <= 1;
+        increaseBtn.disabled = newValue >= parseInt(input.max);
+      }
+      
+      // Validate quantity input
+      function validateQuantity() {
+        const input = document.getElementById('quantityModal');
+        if (!input) return;
+        
+        const value = parseInt(input.value) || 1;
+        const min = parseInt(input.min) || 1;
+        const max = parseInt(input.max) || 999;
+        
+        input.value = Math.max(min, Math.min(max, value));
+        
+        // Update button states
+        const decreaseBtn = input.parentElement.querySelector('.quantity-btn:first-child');
+        const increaseBtn = input.parentElement.querySelector('.quantity-btn:last-child');
+        
+        decreaseBtn.disabled = input.value <= min;
+        increaseBtn.disabled = input.value >= max;
+      }
+      
+      // Add to cart from modal
+      async function addToCartFromModal(productId) {
+        const quantityInput = document.getElementById('quantityModal');
+        const quantity = quantityInput ? parseInt(quantityInput.value) || 1 : 1;
+        
+        await addToCart(productId, quantity);
+      }
+      
+      // Update cart count in navbar
+      function updateCartCount(count) {
+        // Try to find cart count elements in navbar
+        const cartCountElements = document.querySelectorAll('.cart-count, .cart_count');
+        cartCountElements.forEach(element => {
+          element.textContent = count;
+          element.style.display = count > 0 ? 'inline' : 'none';
+        });
+      }
+      
+      // Show notification
+      function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.innerHTML = `
+          <div class="notification-content">
+            <span class="notification-message">${message}</span>
+            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+          </div>
+        `;
+        
+        // Add CSS if not exists
+        if (!document.querySelector('#notification-styles')) {
+          const style = document.createElement('style');
+          style.id = 'notification-styles';
+          style.textContent = `
+            .notification {
+              position: fixed;
+              top: 20px;
+              right: 20px;
+              max-width: 400px;
+              background: white;
+              border-radius: 8px;
+              box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+              z-index: 10000;
+              animation: slideInRight 0.3s ease;
+            }
+            .notification-success { border-left: 4px solid #10B981; }
+            .notification-error { border-left: 4px solid #EF4444; }
+            .notification-info { border-left: 4px solid #3B82F6; }
+            .notification-content {
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              padding: 16px;
+            }
+            .notification-message { flex: 1; font-weight: 500; }
+            .notification-close {
+              background: none;
+              border: none;
+              font-size: 18px;
+              cursor: pointer;
+              color: #9CA3AF;
+              margin-left: 12px;
+            }
+            .notification-close:hover { color: #374151; }
+            @keyframes slideInRight {
+              from { transform: translateX(100%); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        document.body.appendChild(notification);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.remove();
+          }
+        }, 5000);
+      }
+      
+      // Close modal when clicking backdrop
+      document.addEventListener('click', function(e) {
+        const modal = document.getElementById('productDetailsModal');
+        if (e.target === modal || e.target.classList.contains('modal-backdrop')) {
+          closeProductModal();
+        }
+      });
+      
+      // Load cart count on page load
+      document.addEventListener('DOMContentLoaded', async function() {
+        try {
+          const response = await fetch('../api/get-cart.php');
+          const data = await response.json();
+          if (data.success) {
+            updateCartCount(data.total_items);
+          }
+        } catch (error) {
+          console.error('Error loading cart count:', error);
+        }
+      });
 
       // Legacy functions for navbar compatibility
       function searchProducts() {
