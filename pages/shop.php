@@ -450,7 +450,7 @@
         const cardClass = isOutOfStock ? 'product-card out-of-stock' : 'product-card';
 
         return `
-          <div class="${cardClass}" data-category="${product.category}" data-product-id="${product.id}">
+          <div class="${cardClass}" data-category="${product.category}" data-product-id="${product.id}" onclick="navigateToProduct(${product.id}, event)">
             <div class="product-image">
               ${product.image ? 
                 `<img src="${product.image_url}" alt="${product.name}" onerror="this.src='../assets/images/placeholder-product.svg'">` :
@@ -471,10 +471,10 @@
                 <span class="stock-text ${product.stock_status}">${product.stock_text}</span>
               </div>
               <div class="product-buttons">
-                <button class="add-to-cart" onclick="addToCart(${product.id}, 1)" ${buttonDisabled}>
+                <button class="add-to-cart" onclick="addToCart(${product.id}, 1); event.stopPropagation();" ${buttonDisabled}>
                   ${isOutOfStock ? 'Out of Stock' : 'Add to Cart'}
                 </button>
-                <button class="view-details" onclick="viewProduct(${product.id})">View Details</button>
+                <a href="product-details.php?id=${product.id}" class="view-details" onclick="event.stopPropagation();">View Details</a>
               </div>
             </div>
           </div>
@@ -750,7 +750,7 @@
             <h3 class="related-products-title">Related Products</h3>
             <div class="related-products-grid">
               ${relatedProducts.map(related => `
-                <div class="related-product-card" onclick="viewProduct(${related.id})">
+                <div class="related-product-card" onclick="window.location.href='product-details.php?id=${related.id}'">>
                   <div class="related-product-image">
                     ${related.image ? 
                       `<img src="${related.image_url}" alt="${related.name}" onerror="this.src='../assets/images/placeholder-product.svg'">` :
@@ -1000,6 +1000,16 @@
 
       function filterProducts(category) {
         filterByCategory(category);
+      }
+
+      // Navigate to product details page
+      function navigateToProduct(productId, event) {
+        // Don't navigate if user clicked on a button or link
+        if (event && (event.target.tagName === 'BUTTON' || event.target.tagName === 'A' || event.target.closest('button') || event.target.closest('a'))) {
+          return;
+        }
+        
+        window.location.href = `product-details.php?id=${productId}`;
       }
 
       // Clear search function
