@@ -437,6 +437,20 @@
         grid.innerHTML = products.map(product => createProductCard(product)).join('');
       }
 
+      // Helper function to truncate description to few words
+      function truncateDescription(description, wordLimit = 8) {
+        if (!description || description === 'No description available') {
+          return 'No description available';
+        }
+        
+        const words = description.split(' ');
+        if (words.length <= wordLimit) {
+          return description;
+        }
+        
+        return words.slice(0, wordLimit).join(' ') + '...';
+      }
+
       // Create product card HTML
       function createProductCard(product) {
         const stockBadge = product.stock_quantity <= 5 && product.stock_quantity > 0 
@@ -448,6 +462,9 @@
         const isOutOfStock = product.stock_quantity === 0;
         const buttonDisabled = isOutOfStock ? 'disabled' : '';
         const cardClass = isOutOfStock ? 'product-card out-of-stock' : 'product-card';
+
+        // Truncate description to show only few words for better card layout
+        const shortDescription = truncateDescription(product.description || 'No description available', 8);
 
         return `
           <div class="${cardClass}" data-category="${product.category}" data-product-id="${product.id}" onclick="navigateToProduct(${product.id}, event)">
@@ -463,7 +480,7 @@
             <div class="product-info">
               <div class="product-brand">${escapeHtml(product.brand || 'Unknown Brand')}</div>
               <h4>${escapeHtml(product.name)}</h4>
-              <p class="product-description">${escapeHtml(product.description || 'No description available')}</p>
+              <p class="product-description">${escapeHtml(shortDescription)}</p>
               <div class="product-price">
                 <span class="current-price">${product.formatted_price}</span>
               </div>
