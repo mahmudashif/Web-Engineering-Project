@@ -392,9 +392,13 @@ document.addEventListener('DOMContentLoaded', function() {
     function setupGoogleButton() {
         const googleBtn = document.querySelector('.auth-btn.google');
         if (googleBtn) {
-            googleBtn.addEventListener('click', function() {
-                alert('Google Sign-in would be implemented here! (No functionality implemented)');
-            });
+            // Remove any existing event listeners by cloning the element
+            const newGoogleBtn = googleBtn.cloneNode(true);
+            googleBtn.parentNode.replaceChild(newGoogleBtn, googleBtn);
+            
+            // The onclick="signInWithGoogle()" in HTML will handle the Google login
+            // No additional JavaScript needed here
+            console.log('Google button setup completed - using HTML onclick handler');
         }
     }
     
