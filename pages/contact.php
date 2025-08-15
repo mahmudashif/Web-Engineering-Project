@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Orebi - Contact Us</title>
+  <title>Gadget Shop - Contact Us</title>
     <link rel="stylesheet" href="../assets/css/style.css" />
     <link rel="stylesheet" href="../assets/css/contact.css" />
     <script src="../components/components.js"></script>
@@ -37,7 +37,7 @@
           <div class="info-card">
             <div class="info-icon">✉️</div>
             <h3>Email Us</h3>
-            <p>support@orebi.com<br>sales@orebi.com<br>info@orebi.com</p>
+            <p>support@gadgetshop.com<br>sales@gadgetshop.com<br>info@gadgetshop.com</p>
           </div>
         </div>
       </div>

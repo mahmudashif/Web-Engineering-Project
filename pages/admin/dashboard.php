@@ -7,7 +7,7 @@ require_once '../../includes/admin-auth.php';
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Orebi</title>
+    <title>Admin Dashboard | Gadget Shop</title>
     <link rel="stylesheet" href="../../assets/css/style.css">
     <link rel="stylesheet" href="../../assets/css/admin-dashboard.css">
 </head>
@@ -15,7 +15,9 @@ require_once '../../includes/admin-auth.php';
     <!-- Admin header with logo -->
     <div class="admin-top-header">
         <div class="admin-logo">
-            <a href="../../index.php">Orebi</a>
+            <a href="../../index.php">
+                <img src="https://i.ibb.co.com/pjYGFbKr/logo.png" id="admin-logo" alt="Gadget Shop" style="height:72px; display:inline-block; vertical-align:middle;">
+            </a>
         </div>
         <div class="admin-title">Admin Dashboard</div>
     </div>

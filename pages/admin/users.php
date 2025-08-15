@@ -14,8 +14,10 @@ require_once '../../includes/admin-auth.php';
 <body>
     <!-- Admin header with logo -->
     <div class="admin-top-header">
-        <div class="admin-logo">
-            <a href="../../index.php">Orebi</a>
+            <div class="admin-logo">
+            <a href="../../index.php">
+                <img src="https://i.ibb.co.com/pjYGFbKr/logo.png" id="admin-logo" alt="Gadget Shop" style="height:72px; display:inline-block; vertical-align:middle;">
+            </a>
         </div>
         <div class="admin-title">Admin Dashboard</div>
     </div>

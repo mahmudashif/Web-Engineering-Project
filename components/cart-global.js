@@ -153,6 +153,7 @@ window.GlobalCart = {
     // Clear old localStorage data (migration function)
     clearOldStorage() {
         localStorage.removeItem('orebiCart');
+        localStorage.removeItem('gadgetShopCart');
     },
     
     // Show notification when item is added

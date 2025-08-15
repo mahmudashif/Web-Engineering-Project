@@ -222,6 +222,14 @@ function setNavigationLinks() {
   if (footerContact) footerContact.href = basePath + 'pages/contact.php';
   if (footerJournal) footerJournal.href = basePath + 'pages/journal.php';
 }
+    const siteLogo = document.getElementById('site-logo');
+    const footerLogo = document.getElementById('footer-logo');
+    const adminLogo = document.getElementById('admin-logo');
+    // Set brand logo (shared). Prefer existing src (absolute URL set in HTML); otherwise use local logo path.
+    const defaultLogoUrl = 'https://i.ibb.co.com/pjYGFbKr/logo.png';
+    if (siteLogo && !siteLogo.src) siteLogo.src = defaultLogoUrl;
+    if (footerLogo && !footerLogo.src) footerLogo.src = defaultLogoUrl;
+    if (adminLogo && !adminLogo.src) adminLogo.src = defaultLogoUrl;
 
 // Load components when DOM is ready
 document.addEventListener('DOMContentLoaded', loadSharedComponents);

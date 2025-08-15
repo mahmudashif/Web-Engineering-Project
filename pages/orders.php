@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Orders - Orebi</title>
+    <title>My Orders - Gadget Shop</title>
     <base href="../">
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="components/navbar/navbar.css">
