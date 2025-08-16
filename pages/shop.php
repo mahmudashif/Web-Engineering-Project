@@ -300,7 +300,7 @@
           });
         }
 
-        // Clear search button click
+        // Clear search button clic
         if (clearButton) {
           clearButton.addEventListener('click', function() {
             clearSearch();
