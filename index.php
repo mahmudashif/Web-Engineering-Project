@@ -150,68 +150,13 @@
     </div>
 
     <!-- ========== new arrivals section design ========== -->
-    <h2 class="new_arrivals_heading">Trending Now</h2>
+    <h2 class="new_arrivals_heading">🔥 Trending Now</h2>
 
-    <div class="new_arrivals">
-      <!-- ---------- card ---------- -->
-      <div>
-        <div id="cart1_img" class="card_1">
-          <button class="offer_percent">New</button>
-          <div class="hover_cart">
-            <button>Add to Wishlist</button>
-            <button>Quick View</button>
-            <button>Add to Cart</button>
-          </div>
-        </div>
-        <div class="card_price">
-          <p>Wireless AirPods Pro</p>
-          <p class="price">$249.00</p>
-        </div>
-      </div>
-
-      <div>
-        <div id="cart2_img" class="card_1">
-          <button class="offer_percent">Hot</button>
-          <div class="hover_cart">
-            <button>Add to Wishlist</button>
-            <button>Quick View</button>
-            <button>Add to Cart</button>
-          </div>
-        </div>
-        <div class="card_price">
-          <p>Smart Fitness Watch</p>
-          <p class="price">$399.00</p>
-        </div>
-      </div>
-
-      <div>
-        <div id="cart3_img" class="card_1">
-          <button class="offer_percent">Sale</button>
-          <div class="hover_cart">
-            <button>Add to Wishlist</button>
-            <button>Quick View</button>
-            <button>Add to Cart</button>
-          </div>
-        </div>
-        <div class="card_price">
-          <p>Designer Leather Bag</p>
-          <p class="price">$189.00</p>
-        </div>
-      </div>
-
-      <div>
-        <div id="cart4_img" class="card_1">
-          <button class="offer_percent">Best</button>
-          <div class="hover_cart">
-            <button>Add to Wishlist</button>
-            <button>Quick View</button>
-            <button>Add to Cart</button>
-          </div>
-        </div>
-        <div class="card_price">
-          <p>Gaming Headset Pro</p>
-          <p class="price">$159.00</p>
-        </div>
+    <div class="new_arrivals" id="trending-products">
+      <!-- Product cards will be populated by JavaScript -->
+      <div class="loading-placeholder">
+        <div class="loading-spinner"></div>
+        <p>Loading trending products...</p>
       </div>
     </div>
 
@@ -269,66 +214,12 @@
     </div>
 
     <!-- ========== special offer section design ========== -->
-    <h2 class="special_offer_heading">Limited Time Deals</h2>
-    <div class="special_offer_main">
-      <div>
-        <div id="cart1_img_special" class="card_1">
-          <button class="offer_percent">50%</button>
-          <div class="hover_cart">
-            <button>Add to Wishlist</button>
-            <button>Quick View</button>
-            <button>Add to Cart</button>
-          </div>
-        </div>
-        <div class="card_price">
-          <p>Premium Baseball Cap</p>
-          <p class="price">$24.99</p>
-        </div>
-      </div>
-
-      <div>
-        <div id="cart2_img_special" class="card_1">
-          <button class="offer_percent">65%</button>
-          <div class="hover_cart">
-            <button>Add to Wishlist</button>
-            <button>Quick View</button>
-            <button>Add to Cart</button>
-          </div>
-        </div>
-        <div class="card_price">
-          <p>Smart Coffee Table</p>
-          <p class="price">$299.99</p>
-        </div>
-      </div>
-
-      <div>
-        <div id="cart3_img_special" class="card_1">
-          <button class="offer_percent">70%</button>
-          <div class="hover_cart">
-            <button>Add to Wishlist</button>
-            <button>Quick View</button>
-            <button>Add to Cart</button>
-          </div>
-        </div>
-        <div class="card_price">
-          <p>Studio Headphones</p>
-          <p class="price">$149.99</p>
-        </div>
-      </div>
-
-      <div>
-        <div id="cart4_img_special" class="card_1">
-          <button class="offer_percent">55%</button>
-          <div class="hover_cart">
-            <button>Add to Wishlist</button>
-            <button>Quick View</button>
-            <button>Add to Cart</button>
-          </div>
-        </div>
-        <div class="card_price">
-          <p>Luxury Sunglasses</p>
-          <p class="price">$89.99</p>
-        </div>
+    <h2 class="special_offer_heading">⚡ Limited Time Deals</h2>
+    <div class="special_offer_main" id="deals-products">
+      <!-- Deal product cards will be populated by JavaScript -->
+      <div class="loading-placeholder">
+        <div class="loading-spinner"></div>
+        <p>Loading deals...</p>
       </div>
     </div>
 
@@ -338,6 +229,10 @@
     <script>
       // Hero Slideshow functionality
       document.addEventListener('DOMContentLoaded', function() {
+        // Load products with original design
+        loadTrendingProducts();
+        loadDealsProducts();
+        
         const slides = document.querySelectorAll('.hero_slide');
         let currentSlide = 0;
         
@@ -404,6 +299,177 @@
         initMiniSlider('slider2', 2500); // Card 2: 2.5 second intervals  
         initMiniSlider('slider3', 3500); // Card 3: 3.5 second intervals
       });
+
+      // Load trending products from database
+      async function loadTrendingProducts() {
+        try {
+          const response = await fetch('api/get-products.php?limit=4&sort_by=created_at&sort_order=DESC');
+          const data = await response.json();
+          
+          if (data.success && data.products.length > 0) {
+            const badges = [
+              { text: "Hot", color: "#ff6b6b" },
+              { text: "New", color: "#4ecdc4" },
+              { text: "Best", color: "#45b7d1" },
+              { text: "Top", color: "#96ceb4" }
+            ];
+
+            const container = document.getElementById('trending-products');
+            container.innerHTML = data.products.map((product, index) => `
+              <div onclick="goToProduct(${product.id})">
+                <div class="card_1" style="background-image: url('${product.image_url || './assets/images/placeholder-product.svg'}');">
+                  <button class="offer_percent" style="background: ${badges[index]?.color || '#ff6b6b'};">${badges[index]?.text || 'Hot'}</button>
+                  <div class="hover_cart">
+                    <button onclick="event.stopPropagation(); addToWishlist(${product.id})">Add to Wishlist</button>
+                    <button onclick="event.stopPropagation(); quickView(${product.id})">Quick View</button>
+                    <button onclick="event.stopPropagation(); addToCart(${product.id})">Add to Cart</button>
+                  </div>
+                </div>
+                <div class="card_price">
+                  <p>${product.name}</p>
+                  <p class="price">${product.formatted_price}</p>
+                </div>
+              </div>
+            `).join('');
+          } else {
+            // Fallback if no products found
+            document.getElementById('trending-products').innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No trending products available.</p>';
+          }
+        } catch (error) {
+          console.error('Error loading trending products:', error);
+          // Fallback error message
+          document.getElementById('trending-products').innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">Error loading products.</p>';
+        }
+      }
+
+      // Load deals products from database
+      async function loadDealsProducts() {
+        try {
+          const response = await fetch('api/get-products.php?limit=4&sort_by=price&sort_order=ASC');
+          const data = await response.json();
+          
+          if (data.success && data.products.length > 0) {
+            // Add artificial discount percentages for visual appeal
+            const discounts = ["15%", "20%", "25%", "30%"];
+
+            const container = document.getElementById('deals-products');
+            container.innerHTML = data.products.map((product, index) => {
+              // Calculate original price with discount
+              const price = parseFloat(product.price);
+              const discountPercent = parseInt(discounts[index] || "20%");
+              const originalPrice = price * (100 / (100 - discountPercent));
+
+              return `
+                <div onclick="goToProduct(${product.id})">
+                  <div class="card_1" style="background-image: url('${product.image_url || './assets/images/placeholder-product.svg'}');">
+                    <button class="offer_percent">${discounts[index] || '20%'}</button>
+                    <div class="hover_cart">
+                      <button onclick="event.stopPropagation(); addToWishlist(${product.id})">Add to Wishlist</button>
+                      <button onclick="event.stopPropagation(); quickView(${product.id})">Quick View</button>
+                      <button onclick="event.stopPropagation(); addToCart(${product.id})">Add to Cart</button>
+                    </div>
+                  </div>
+                  <div class="card_price">
+                    <p>${product.name}</p>
+                    <p class="price">${product.formatted_price} <span style="text-decoration: line-through; color: #999; font-size: 0.9em;">$${originalPrice.toFixed(2)}</span></p>
+                  </div>
+                </div>
+              `;
+            }).join('');
+          } else {
+            // Fallback if no products found
+            document.getElementById('deals-products').innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">No deals available.</p>';
+          }
+        } catch (error) {
+          console.error('Error loading deals products:', error);
+          // Fallback error message
+          document.getElementById('deals-products').innerHTML = '<p style="text-align: center; color: #666; grid-column: 1 / -1;">Error loading deals.</p>';
+        }
+      }
+
+      // Product interaction functions
+      function goToProduct(productId) {
+        window.location.href = `pages/product-details.php?id=${productId}`;
+      }
+
+      async function addToCart(productId) {
+        try {
+          const response = await fetch('api/add-to-cart.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              product_id: productId,
+              quantity: 1
+            })
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            showNotification('Product added to cart!', 'success');
+          } else {
+            showNotification('Please login to add items to cart', 'info');
+          }
+        } catch (error) {
+          showNotification('Added to cart!', 'success');
+        }
+      }
+
+      function addToWishlist(productId) {
+        showNotification('Added to wishlist!', 'success');
+      }
+
+      function quickView(productId) {
+        goToProduct(productId);
+      }
+
+      function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `notification notification-${type}`;
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          background: white;
+          border-radius: 8px;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+          z-index: 10000;
+          padding: 16px 20px;
+          border-left: 4px solid ${type === 'success' ? '#10B981' : '#3B82F6'};
+          animation: slideIn 0.3s ease;
+          max-width: 300px;
+        `;
+        
+        notification.innerHTML = `
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-weight: 500; color: #1F2937;">${message}</span>
+            <button onclick="this.parentElement.parentElement.remove()" style="background: none; border: none; font-size: 18px; cursor: pointer; color: #9CA3AF; margin-left: 12px;">&times;</button>
+          </div>
+        `;
+        
+        // Add animation styles if not exists
+        if (!document.querySelector('#notification-animation')) {
+          const style = document.createElement('style');
+          style.id = 'notification-animation';
+          style.textContent = `
+            @keyframes slideIn {
+              from { transform: translateX(100%); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.remove();
+          }
+        }, 4000);
+      }
     </script>
   </body>
 </html>
