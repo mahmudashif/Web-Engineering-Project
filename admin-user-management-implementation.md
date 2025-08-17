@@ -42,18 +42,13 @@ Successfully implemented **Make Admin** and **Remove Admin** functionality in th
 
 ### For Regular Users:
 - **Make Admin** button (green) - Promotes user to administrator
-- **Edit** button - User editing functionality
-- **Delete** button - User deletion functionality
 
 ### For Admin Users:
 - **Remove Admin** button (orange) - Demotes admin to regular user
-- **Edit** button - User editing functionality  
-- **Delete** button - User deletion functionality
 
 ### For Current Admin (Self):
 - **Current Admin** label (blue) - Indicates logged-in admin
-- **Edit** button only - Cannot modify own admin status
-- No delete option for self-protection
+- No modification options for self-protection
 
 ## Security Features
 

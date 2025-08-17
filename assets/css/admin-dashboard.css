@@ -425,24 +425,6 @@
     background-color: #e0e0e0;
 }
 
-.edit-btn {
-    background-color: #e3f2fd;
-    color: #2196f3;
-}
-
-.edit-btn:hover {
-    background-color: #bbdefb;
-}
-
-.delete-btn {
-    background-color: #ffebee;
-    color: #f44336;
-}
-
-.delete-btn:hover {
-    background-color: #ffcdd2;
-}
-
 .make-admin-btn {
     background-color: #e8f5e8;
     color: #4caf50;
@@ -469,7 +451,7 @@
 }
 
 .actions-cell {
-    min-width: 200px;
+    min-width: 120px;
     white-space: nowrap;
 }
 

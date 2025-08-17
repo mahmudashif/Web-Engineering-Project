@@ -174,21 +174,16 @@ document.addEventListener('DOMContentLoaded', function() {
                             if (isSelfAccount) {
                                 actionButtons = `
                                     <span class="self-admin-note">Current Admin</span>
-                                    <button class="action-btn edit-btn" data-id="${user.id}">Edit</button>
                                 `;
                             } else {
                                 actionButtons = `
                                     <button class="action-btn remove-admin-btn" data-id="${user.id}" data-name="${user.full_name}">Remove Admin</button>
-                                    <button class="action-btn edit-btn" data-id="${user.id}">Edit</button>
-                                    <button class="action-btn delete-btn" data-id="${user.id}">Delete</button>
                                 `;
                             }
                         } else {
                             // For regular users, show make admin button
                             actionButtons = `
                                 <button class="action-btn make-admin-btn" data-id="${user.id}" data-name="${user.full_name}">Make Admin</button>
-                                <button class="action-btn edit-btn" data-id="${user.id}">Edit</button>
-                                <button class="action-btn delete-btn" data-id="${user.id}">Delete</button>
                             `;
                         }
                         
@@ -252,24 +247,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 if (confirm(`Are you sure you want to remove administrator privileges from ${userName}?\n\nThey will no longer have access to the admin dashboard.`)) {
                     updateUserRole(userId, 'user', userName);
-                }
-            });
-        });
-        
-        // Edit buttons
-        document.querySelectorAll('.edit-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const userId = this.getAttribute('data-id');
-                alert(`Edit user with ID: ${userId} (To be implemented)`);
-            });
-        });
-        
-        // Delete buttons
-        document.querySelectorAll('.delete-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const userId = this.getAttribute('data-id');
-                if (confirm(`Are you sure you want to delete user with ID: ${userId}?`)) {
-                    alert(`Delete user with ID: ${userId} (To be implemented)`);
                 }
             });
         });
