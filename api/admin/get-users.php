@@ -23,8 +23,8 @@ try {
             'id' => $row['id'],
             'full_name' => $row['full_name'],
             'email' => $row['email'],
-            'is_admin' => (bool)$row['is_admin'],
-            'role' => $row['role'],
+            'is_admin' => $row['role'] === 'admin', // Convert role to is_admin boolean for compatibility
+            'role' => $row['role'] ?? 'user', // Default to 'user' if null
             'profile_picture' => $row['profile_picture'],
             'bio' => $row['bio'],
             'phone' => $row['phone'],

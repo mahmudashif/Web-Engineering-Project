@@ -17,6 +17,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Store current admin user info
+    let currentAdminUser = null;
+    
     // Wait for UserAuth to be available
     const checkUserAuth = setInterval(function() {
         if (window.userAuth) {
@@ -27,6 +30,8 @@ document.addEventListener('DOMContentLoaded', function() {
             
             userAuth.requireAdminAuth().then(user => {
                 if (user) {
+                    // Store current admin user
+                    currentAdminUser = user;
                     // Update admin name
                     const adminNameElement = document.getElementById('admin-name');
                     if (adminNameElement) {
@@ -160,6 +165,33 @@ document.addEventListener('DOMContentLoaded', function() {
                             '<span class="user-role role-admin">Admin</span>' : 
                             '<span class="user-role role-user">User</span>';
                         
+                        // Create action buttons based on role
+                        let actionButtons = '';
+                        const isSelfAccount = currentAdminUser && user.id === currentAdminUser.id;
+                        
+                        if (isAdmin) {
+                            // For admin users, show remove admin button (unless it's the current admin)
+                            if (isSelfAccount) {
+                                actionButtons = `
+                                    <span class="self-admin-note">Current Admin</span>
+                                    <button class="action-btn edit-btn" data-id="${user.id}">Edit</button>
+                                `;
+                            } else {
+                                actionButtons = `
+                                    <button class="action-btn remove-admin-btn" data-id="${user.id}" data-name="${user.full_name}">Remove Admin</button>
+                                    <button class="action-btn edit-btn" data-id="${user.id}">Edit</button>
+                                    <button class="action-btn delete-btn" data-id="${user.id}">Delete</button>
+                                `;
+                            }
+                        } else {
+                            // For regular users, show make admin button
+                            actionButtons = `
+                                <button class="action-btn make-admin-btn" data-id="${user.id}" data-name="${user.full_name}">Make Admin</button>
+                                <button class="action-btn edit-btn" data-id="${user.id}">Edit</button>
+                                <button class="action-btn delete-btn" data-id="${user.id}">Delete</button>
+                            `;
+                        }
+                        
                         row.innerHTML = `
                             <td>${user.id}</td>
                             <td>${avatarHTML}</td>
@@ -167,10 +199,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <td>${user.email}</td>
                             <td>${roleBadge}</td>
                             <td>${formattedDate}</td>
-                            <td>
-                                <button class="action-btn edit-btn" data-id="${user.id}">Edit</button>
-                                <button class="action-btn delete-btn" data-id="${user.id}">Delete</button>
-                            </td>
+                            <td class="actions-cell">${actionButtons}</td>
                         `;
                         
                         tableBody.appendChild(row);
@@ -203,6 +232,30 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Function to add event listeners to action buttons
     function addActionButtonListeners() {
+        // Make Admin buttons
+        document.querySelectorAll('.make-admin-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const userId = this.getAttribute('data-id');
+                const userName = this.getAttribute('data-name');
+                
+                if (confirm(`Are you sure you want to make ${userName} an administrator?\n\nThis will give them full access to the admin dashboard and all administrative functions.`)) {
+                    updateUserRole(userId, 'admin', userName);
+                }
+            });
+        });
+        
+        // Remove Admin buttons
+        document.querySelectorAll('.remove-admin-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const userId = this.getAttribute('data-id');
+                const userName = this.getAttribute('data-name');
+                
+                if (confirm(`Are you sure you want to remove administrator privileges from ${userName}?\n\nThey will no longer have access to the admin dashboard.`)) {
+                    updateUserRole(userId, 'user', userName);
+                }
+            });
+        });
+        
         // Edit buttons
         document.querySelectorAll('.edit-btn').forEach(button => {
             button.addEventListener('click', function() {
@@ -219,6 +272,51 @@ document.addEventListener('DOMContentLoaded', function() {
                     alert(`Delete user with ID: ${userId} (To be implemented)`);
                 }
             });
+        });
+    }
+    
+    // Function to update user role
+    function updateUserRole(userId, role, userName) {
+        // Show loading state
+        const button = document.querySelector(`[data-id="${userId}"].${role === 'admin' ? 'make-admin-btn' : 'remove-admin-btn'}`);
+        const originalText = button.textContent;
+        button.textContent = role === 'admin' ? 'Making Admin...' : 'Removing Admin...';
+        button.disabled = true;
+        
+        fetch('../../api/admin/update-user-role.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                user_id: parseInt(userId),
+                role: role
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Show success message
+                alert(data.message);
+                
+                // Reload the users data to reflect changes
+                loadUsersData();
+            } else {
+                // Show error message
+                alert('Error: ' + data.message);
+                
+                // Restore button state
+                button.textContent = originalText;
+                button.disabled = false;
+            }
+        })
+        .catch(error => {
+            console.error('Error updating user role:', error);
+            alert('An error occurred while updating the user role. Please try again.');
+            
+            // Restore button state
+            button.textContent = originalText;
+            button.disabled = false;
         });
     }
 });
