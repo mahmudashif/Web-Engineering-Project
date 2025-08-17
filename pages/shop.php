@@ -18,99 +18,99 @@
       <div class="shop-nav-container">
         <ul class="shop-nav-menu">
           <li class="shop-nav-item">
-            <a href="#" class="shop-nav-link">Smartphones</a>
+            <a href="#" class="shop-nav-link" onclick="filterByCategory('smartphones')">Smartphones</a>
             <div class="shop-dropdown">
               <div class="dropdown-content">
-                <a href="#" onclick="filterByBrand('apple')">Apple iPhone</a>
-                <a href="#" onclick="filterByBrand('samsung')">Samsung Galaxy</a>
-                <a href="#" onclick="filterByBrand('google')">Google Pixel</a>
-                <a href="#" onclick="filterByBrand('oneplus')">OnePlus</a>
-                <a href="#" onclick="filterByBrand('xiaomi')">Xiaomi</a>
-                <a href="#" onclick="filterByBrand('huawei')">Huawei</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartphones', 'apple', 'Apple iPhone')">Apple iPhone</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartphones', 'samsung', 'Samsung Galaxy')">Samsung Galaxy</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartphones', 'google', 'Google Pixel')">Google Pixel</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartphones', 'oneplus', 'OnePlus')">OnePlus</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartphones', 'xiaomi', 'Xiaomi')">Xiaomi</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartphones', 'huawei', 'Huawei')">Huawei</a>
               </div>
             </div>
           </li>
 
           <li class="shop-nav-item">
-            <a href="#" class="shop-nav-link">Laptops</a>
+            <a href="#" class="shop-nav-link" onclick="filterByCategory('laptops')">Laptops</a>
             <div class="shop-dropdown">
               <div class="dropdown-content">
-                <a href="#" onclick="filterByBrand('apple')">Apple MacBook</a>
-                <a href="#" onclick="filterByBrand('dell')">Dell</a>
-                <a href="#" onclick="filterByBrand('hp')">HP</a>
-                <a href="#" onclick="filterByBrand('lenovo')">Lenovo</a>
-                <a href="#" onclick="filterByBrand('asus')">ASUS</a>
-                <a href="#" onclick="filterByBrand('microsoft')">Microsoft Surface</a>
+                <a href="#" onclick="filterByCategoryAndBrand('laptops', 'apple', 'Apple MacBook')">Apple MacBook</a>
+                <a href="#" onclick="filterByCategoryAndBrand('laptops', 'dell', 'Dell')">Dell</a>
+                <a href="#" onclick="filterByCategoryAndBrand('laptops', 'hp', 'HP')">HP</a>
+                <a href="#" onclick="filterByCategoryAndBrand('laptops', 'lenovo', 'Lenovo')">Lenovo</a>
+                <a href="#" onclick="filterByCategoryAndBrand('laptops', 'asus', 'ASUS')">ASUS</a>
+                <a href="#" onclick="filterByCategoryAndBrand('laptops', 'microsoft', 'Microsoft Surface')">Microsoft Surface</a>
               </div>
             </div>
           </li>
 
           <li class="shop-nav-item">
-            <a href="#" class="shop-nav-link">Headphones</a>
+            <a href="#" class="shop-nav-link" onclick="filterByCategory('headphones')">Headphones</a>
             <div class="shop-dropdown">
               <div class="dropdown-content">
-                <a href="#" onclick="filterByBrand('apple')">Apple AirPods</a>
-                <a href="#" onclick="filterByBrand('sony')">Sony</a>
-                <a href="#" onclick="filterByBrand('bose')">Bose</a>
-                <a href="#" onclick="filterByBrand('sennheiser')">Sennheiser</a>
-                <a href="#" onclick="filterByBrand('beats')">Beats</a>
-                <a href="#" onclick="filterByBrand('jbl')">JBL</a>
+                <a href="#" onclick="filterByCategoryAndBrand('headphones', 'apple', 'Apple AirPods')">Apple AirPods</a>
+                <a href="#" onclick="filterByCategoryAndBrand('headphones', 'sony', 'Sony')">Sony</a>
+                <a href="#" onclick="filterByCategoryAndBrand('headphones', 'bose', 'Bose')">Bose</a>
+                <a href="#" onclick="filterByCategoryAndBrand('headphones', 'sennheiser', 'Sennheiser')">Sennheiser</a>
+                <a href="#" onclick="filterByCategoryAndBrand('headphones', 'beats', 'Beats')">Beats</a>
+                <a href="#" onclick="filterByCategoryAndBrand('headphones', 'jbl', 'JBL')">JBL</a>
               </div>
             </div>
           </li>
 
           <li class="shop-nav-item">
-            <a href="#" class="shop-nav-link">Smart Watches</a>
+            <a href="#" class="shop-nav-link" onclick="filterByCategory('smartwatches')">Smart Watches</a>
             <div class="shop-dropdown">
               <div class="dropdown-content">
-                <a href="#" onclick="filterByBrand('apple')">Apple Watch</a>
-                <a href="#" onclick="filterByBrand('samsung')">Samsung Galaxy Watch</a>
-                <a href="#" onclick="filterByBrand('garmin')">Garmin</a>
-                <a href="#" onclick="filterByBrand('fitbit')">Fitbit</a>
-                <a href="#" onclick="filterByBrand('fossil')">Fossil</a>
-                <a href="#" onclick="filterByBrand('amazfit')">Amazfit</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartwatches', 'apple', 'Apple Watch')">Apple Watch</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartwatches', 'samsung', 'Samsung Galaxy Watch')">Samsung Galaxy Watch</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartwatches', 'garmin', 'Garmin')">Garmin</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartwatches', 'fitbit', 'Fitbit')">Fitbit</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartwatches', 'fossil', 'Fossil')">Fossil</a>
+                <a href="#" onclick="filterByCategoryAndBrand('smartwatches', 'amazfit', 'Amazfit')">Amazfit</a>
               </div>
             </div>
           </li>
 
           <li class="shop-nav-item">
-            <a href="#" class="shop-nav-link">Accessories</a>
+            <a href="#" class="shop-nav-link" onclick="filterByCategory('accessories')">Accessories</a>
             <div class="shop-dropdown">
               <div class="dropdown-content">
-                <a href="#" onclick="filterByBrand('apple')">Apple</a>
-                <a href="#" onclick="filterByBrand('anker')">Anker</a>
-                <a href="#" onclick="filterByBrand('belkin')">Belkin</a>
-                <a href="#" onclick="filterByBrand('logitech')">Logitech</a>
-                <a href="#" onclick="filterByBrand('razer')">Razer</a>
-                <a href="#" onclick="filterByBrand('samsung')">Samsung</a>
+                <a href="#" onclick="filterByCategoryAndBrand('accessories', 'apple', 'Apple Accessories')">Apple Accessories</a>
+                <a href="#" onclick="filterByCategoryAndBrand('accessories', 'anker', 'Anker')">Anker</a>
+                <a href="#" onclick="filterByCategoryAndBrand('accessories', 'belkin', 'Belkin')">Belkin</a>
+                <a href="#" onclick="filterByCategoryAndBrand('accessories', 'logitech', 'Logitech')">Logitech</a>
+                <a href="#" onclick="filterByCategoryAndBrand('accessories', 'razer', 'Razer')">Razer</a>
+                <a href="#" onclick="filterByCategoryAndBrand('accessories', 'samsung', 'Samsung Accessories')">Samsung Accessories</a>
               </div>
             </div>
           </li>
 
           <li class="shop-nav-item">
-            <a href="#" class="shop-nav-link">PC Accessories</a>
+            <a href="#" class="shop-nav-link" onclick="filterByCategory('pc_accessories')">PC Accessories</a>
             <div class="shop-dropdown">
               <div class="dropdown-content">
-                <a href="#" onclick="filterByBrand('logitech')">Logitech</a>
-                <a href="#" onclick="filterByBrand('corsair')">Corsair</a>
-                <a href="#" onclick="filterByBrand('razer')">Razer</a>
-                <a href="#" onclick="filterByBrand('steelseries')">SteelSeries</a>
-                <a href="#" onclick="filterByBrand('hyperx')">HyperX</a>
-                <a href="#" onclick="filterByBrand('dell')">Dell</a>
+                <a href="#" onclick="filterByCategoryAndBrand('pc_accessories', 'logitech', 'Logitech')">Logitech</a>
+                <a href="#" onclick="filterByCategoryAndBrand('pc_accessories', 'corsair', 'Corsair')">Corsair</a>
+                <a href="#" onclick="filterByCategoryAndBrand('pc_accessories', 'razer', 'Razer')">Razer</a>
+                <a href="#" onclick="filterByCategoryAndBrand('pc_accessories', 'steelseries', 'SteelSeries')">SteelSeries</a>
+                <a href="#" onclick="filterByCategoryAndBrand('pc_accessories', 'hyperx', 'HyperX')">HyperX</a>
+                <a href="#" onclick="filterByCategoryAndBrand('pc_accessories', 'dell', 'Dell')">Dell</a>
               </div>
             </div>
           </li>
 
           <li class="shop-nav-item">
-            <a href="#" class="shop-nav-link">Gaming</a>
+            <a href="#" class="shop-nav-link" onclick="filterByCategory('gaming')">Gaming</a>
             <div class="shop-dropdown">
               <div class="dropdown-content">
-                <a href="#" onclick="filterByBrand('razer')">Razer</a>
-                <a href="#" onclick="filterByBrand('asus')">ASUS ROG</a>
-                <a href="#" onclick="filterByBrand('msi')">MSI Gaming</a>
-                <a href="#" onclick="filterByBrand('corsair')">Corsair</a>
-                <a href="#" onclick="filterByBrand('steelseries')">SteelSeries</a>
-                <a href="#" onclick="filterByBrand('alienware')">Alienware</a>
+                <a href="#" onclick="filterByCategoryAndBrand('gaming', 'razer', 'Razer')">Razer</a>
+                <a href="#" onclick="filterByCategoryAndBrand('gaming', 'asus', 'ASUS ROG')">ASUS ROG</a>
+                <a href="#" onclick="filterByCategoryAndBrand('gaming', 'msi', 'MSI Gaming')">MSI Gaming</a>
+                <a href="#" onclick="filterByCategoryAndBrand('gaming', 'corsair', 'Corsair')">Corsair</a>
+                <a href="#" onclick="filterByCategoryAndBrand('gaming', 'steelseries', 'SteelSeries')">SteelSeries</a>
+                <a href="#" onclick="filterByCategoryAndBrand('gaming', 'alienware', 'Alienware')">Alienware</a>
               </div>
             </div>
           </li>
@@ -237,6 +237,7 @@
       let currentProducts = [];
       let currentFilters = {
         category: 'all',
+        brand: '',
         search: '',
         minPrice: 0,
         maxPrice: null,
@@ -256,6 +257,7 @@
         // Initialize filters
         currentFilters = {
           category: 'all',
+          brand: '',
           search: urlSearch,
           minPrice: 0,
           maxPrice: null,
@@ -395,6 +397,7 @@
         try {
           const params = new URLSearchParams({
             category: currentFilters.category || 'all',
+            brand: currentFilters.brand || '',
             search: currentFilters.search || '',
             min_price: currentFilters.minPrice || 0,
             sort_by: currentFilters.sortBy || 'id',
@@ -658,7 +661,7 @@
           countElement.textContent = total;
         }
 
-        // Show search status if there's an active search
+        // Show search status only if there's an active search with actual text
         if (searchStatus && currentFilters.search.trim()) {
           const searchTerm = currentFilters.search.trim();
           searchStatus.innerHTML = `
@@ -1022,12 +1025,120 @@
         performSearch();
       }
 
+      // New optimized filtering functions
+      function filterByCategoryAndBrand(category, brand, displayName) {
+        // Clear search input when filtering by category and brand
+        const searchInput = document.getElementById('product-search');
+        const clearButton = document.getElementById('clear-search');
+        if (searchInput) {
+          searchInput.value = '';
+        }
+        if (clearButton) {
+          clearButton.style.display = 'none';
+        }
+        
+        currentFilters.category = category;
+        currentFilters.brand = brand;
+        currentFilters.search = '';
+        currentPage = 1;
+        loadProducts();
+      }
+
+      function filterByCategory(category) {
+        // Clear search input when filtering by category only
+        const searchInput = document.getElementById('product-search');
+        const clearButton = document.getElementById('clear-search');
+        if (searchInput) {
+          searchInput.value = '';
+        }
+        if (clearButton) {
+          clearButton.style.display = 'none';
+        }
+        
+        currentFilters.category = category;
+        currentFilters.brand = ''; // Clear brand filter when filtering by category only
+        currentFilters.search = '';
+        currentPage = 1;
+        
+        // Update active class in sidebar
+        document.querySelectorAll('.category-list a').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-category') === category) {
+            link.classList.add('active');
+          }
+        });
+        
+        loadProducts();
+      }
+
+      // Update filter status display
+      function updateFilterStatus() {
+        // This function is disabled - no filter status display needed
+        const searchStatus = document.getElementById('search-status');
+        if (!searchStatus) return;
+
+        // Only show search status when there's actual search text
+        if (currentFilters.search !== '') {
+          const searchTerm = currentFilters.search.trim();
+          searchStatus.innerHTML = `
+            <div class="search-results-info">
+              <span class="search-term">Search results for: "<strong>${escapeHtml(searchTerm)}</strong>"</span>
+              <span class="search-count">${totalProducts} ${totalProducts === 1 ? 'product' : 'products'} found</span>
+            </div>
+          `;
+          searchStatus.style.display = 'block';
+        } else {
+          searchStatus.style.display = 'none';
+        }
+      }
+
+      // Clear all filters
+      function clearAllFilters() {
+        const searchInput = document.getElementById('product-search');
+        const clearButton = document.getElementById('clear-search');
+        
+        if (searchInput) {
+          searchInput.value = '';
+        }
+        if (clearButton) {
+          clearButton.style.display = 'none';
+        }
+        
+        currentFilters = {
+          category: 'all',
+          brand: '',
+          search: '',
+          minPrice: 0,
+          maxPrice: null,
+          sortBy: 'id',
+          sortOrder: 'DESC'
+        };
+        currentPage = 1;
+        
+        // Update active class in sidebar
+        document.querySelectorAll('.category-list a').forEach(link => {
+          link.classList.remove('active');
+          if (link.getAttribute('data-category') === 'all') {
+            link.classList.add('active');
+          }
+        });
+        
+        loadProducts();
+      }
+
+      // Utility function to capitalize first letter
+      function capitalizeFirst(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1);
+      }
+
       function filterByBrand(brand) {
         const searchInput = document.getElementById('product-search');
         if (searchInput) {
           searchInput.value = brand;
         }
         currentFilters.search = brand;
+        currentFilters.category = 'all';
+        currentFilters.brand = '';
         currentPage = 1;
         loadProducts();
       }

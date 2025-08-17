@@ -11,6 +11,7 @@ try {
     
     // Get filter parameters
     $category = $_GET['category'] ?? '';
+    $brand = $_GET['brand'] ?? '';
     $search = $_GET['search'] ?? '';
     $min_price = $_GET['min_price'] ?? 0;
     $max_price = $_GET['max_price'] ?? PHP_INT_MAX;
@@ -26,20 +27,92 @@ try {
     $params = [];
     $param_types = '';
     
-    // Category filter
+    // Category filter with flexible matching
     if (!empty($category) && $category !== 'all') {
-        $where_conditions[] = "category = ?";
-        $params[] = $category;
-        $param_types .= 's';
+        // Handle common variations (laptops/laptop, smartphones/smartphone, etc.)
+        $category_variations = [$category];
+        
+        // Add singular/plural variations
+        if (substr($category, -1) === 's') {
+            $category_variations[] = rtrim($category, 's'); // Remove 's' for singular
+        } else {
+            $category_variations[] = $category . 's'; // Add 's' for plural
+        }
+        
+        // Special cases
+        $special_mappings = [
+            'smartwatches' => ['smartwatch', 'smart_watch', 'smart_watches'],
+            'pc_accessories' => ['pc_accessory', 'pc accessory', 'pc accessories']
+        ];
+        
+        if (isset($special_mappings[$category])) {
+            $category_variations = array_merge($category_variations, $special_mappings[$category]);
+        }
+        
+        // Create OR condition for all variations
+        $category_placeholders = str_repeat('LOWER(category) = LOWER(?) OR ', count($category_variations));
+        $category_placeholders = rtrim($category_placeholders, ' OR ');
+        $where_conditions[] = "($category_placeholders)";
+        
+        foreach ($category_variations as $variation) {
+            $params[] = $variation;
+            $param_types .= 's';
+        }
     }
     
-    // Search filter - search in name, description, and brand
+    // Brand filter with flexible matching
+    if (!empty($brand)) {
+        // Handle common brand variations and aliases
+        $brand_variations = [trim($brand)];
+        
+        // Add common variations based on the brand
+        $brand_lower = strtolower(trim($brand));
+        
+        if ($brand_lower === 'hp') {
+            $brand_variations = ['hp', 'HP', 'Hp', 'hewlett-packard', 'Hewlett-Packard', 'HP Inc.', 'HP Inc', 'hewlett packard'];
+        } elseif ($brand_lower === 'apple') {
+            $brand_variations = ['apple', 'Apple', 'APPLE', 'Apple Inc.', 'Apple Inc'];
+        } elseif ($brand_lower === 'microsoft') {
+            $brand_variations = ['microsoft', 'Microsoft', 'MICROSOFT', 'Microsoft Corporation'];
+        } else {
+            // For other brands, just add common case variations
+            $brand_variations = [
+                $brand,
+                strtolower($brand),
+                strtoupper($brand),
+                ucfirst(strtolower($brand))
+            ];
+        }
+        
+        // Remove duplicates
+        $brand_variations = array_unique($brand_variations);
+        
+        // Create OR condition for all variations, with trimming for spaces
+        $brand_conditions = [];
+        foreach ($brand_variations as $variation) {
+            $brand_conditions[] = "TRIM(LOWER(brand)) = TRIM(LOWER(?))";
+            $params[] = $variation;
+            $param_types .= 's';
+        }
+        
+        $where_conditions[] = "(" . implode(" OR ", $brand_conditions) . ")";
+    }
+    
+    // Search filter - search in name, description, and brand (only if no specific brand filter)
     if (!empty($search)) {
-        $where_conditions[] = "(name LIKE ? OR description LIKE ? OR brand LIKE ?)";
-        $params[] = "%$search%";
-        $params[] = "%$search%";
-        $params[] = "%$search%";
-        $param_types .= 'sss';
+        if (empty($brand)) {
+            $where_conditions[] = "(name LIKE ? OR description LIKE ? OR brand LIKE ?)";
+            $params[] = "%$search%";
+            $params[] = "%$search%";
+            $params[] = "%$search%";
+            $param_types .= 'sss';
+        } else {
+            // If brand is already filtered, only search in name and description
+            $where_conditions[] = "(name LIKE ? OR description LIKE ?)";
+            $params[] = "%$search%";
+            $params[] = "%$search%";
+            $param_types .= 'ss';
+        }
     }
     
     // Price filter
