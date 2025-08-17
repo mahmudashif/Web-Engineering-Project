@@ -94,9 +94,6 @@ function setActiveNavigation() {
     case 'contact.php':
       activeNavId = 'nav-contact';
       break;
-    case 'journal.php':
-      activeNavId = 'nav-journal';
-      break;
     default:
       activeNavId = 'nav-home';
   }
@@ -170,13 +167,11 @@ function setNavigationLinks() {
   const navShop = document.getElementById('nav-shop');
   const navAbout = document.getElementById('nav-about');
   const navContact = document.getElementById('nav-contact');
-  const navJournal = document.getElementById('nav-journal');
   
   if (navHome) navHome.href = basePath + 'index.php';
   if (navShop) navShop.href = basePath + 'pages/shop.php';
   if (navAbout) navAbout.href = basePath + 'pages/about.php';
   if (navContact) navContact.href = basePath + 'pages/contact.php';
-  if (navJournal) navJournal.href = basePath + 'pages/journal.php';
   
   // Set auth links
   const loginLink = document.getElementById('login-link');
@@ -214,13 +209,11 @@ function setNavigationLinks() {
   const footerShop = document.getElementById('footer-shop');
   const footerAbout = document.getElementById('footer-about');
   const footerContact = document.getElementById('footer-contact');
-  const footerJournal = document.getElementById('footer-journal');
   
   if (footerHome) footerHome.href = basePath + 'index.php';
   if (footerShop) footerShop.href = basePath + 'pages/shop.php';
   if (footerAbout) footerAbout.href = basePath + 'pages/about.php';
   if (footerContact) footerContact.href = basePath + 'pages/contact.php';
-  if (footerJournal) footerJournal.href = basePath + 'pages/journal.php';
 }
     const siteLogo = document.getElementById('site-logo');
     const footerLogo = document.getElementById('footer-logo');

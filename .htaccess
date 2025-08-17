@@ -6,7 +6,6 @@ RewriteRule ^index\.html$ index.php [R=301,L]
 RewriteRule ^shop\.html$ shop.php [R=301,L]
 RewriteRule ^about\.html$ about.php [R=301,L]
 RewriteRule ^contact\.html$ contact.php [R=301,L]
-RewriteRule ^journal\.html$ journal.php [R=301,L]
 RewriteRule ^error404\.html$ error404.php [R=301,L]
 RewriteRule ^cart/cart\.html$ cart/cart.php [R=301,L]
 
