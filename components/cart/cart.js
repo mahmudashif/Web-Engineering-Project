@@ -184,32 +184,47 @@ function renderCartItems() {
         const availabilityWarning = !item.isAvailable ? 
             `<div class="stock-warning">⚠️ Only ${item.stockQuantity} items available</div>` : '';
         
+        const badge = item.name.includes('Pro') ? 'Hot' : item.name.includes('Air') ? 'New' : '';
+        const badgeHTML = badge ? `<div class="item-badge ${badge.toLowerCase()}">${badge}</div>` : '';
+        
         const cartItemHTML = `
             <div class="cart-item ${!item.isAvailable ? 'unavailable' : ''}" data-item-id="${item.id}">
                 <div class="item-image">
                     <img src="${item.image}" alt="${item.name}" onerror="this.src='../assets/images/placeholder-product.svg'">
+                    ${badgeHTML}
                 </div>
                 <div class="item-details">
                     <div class="item-brand">${escapeHtml(item.brand || 'Unknown Brand')}</div>
                     <h3>${escapeHtml(item.name)}</h3>
                     <p class="item-description">${escapeHtml(item.description)}</p>
                     ${availabilityWarning}
+                    <div class="item-specs">
+                        ${item.brand ? `<span>${item.brand}</span>` : ''}
+                    </div>
                     <div class="item-actions">
-                        <button class="btn-danger btn-sm" onclick="removeItem(${item.id})">Remove</button>
+                        <button class="btn-remove" onclick="removeItem(${item.id})">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                <path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"></path>
+                            </svg>
+                            Remove
+                        </button>
                     </div>
                 </div>
-                <div class="item-quantity">
-                    <label>Quantity</label>
-                    <div class="quantity-controls">
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''}>-</button>
-                        <input type="number" value="${item.quantity}" min="1" max="${item.maxQuantity}" id="qty-${item.id}" onchange="handleQuantityChange(${item.id}, this.value)">
-                        <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)" ${item.quantity >= item.maxQuantity ? 'disabled' : ''}>+</button>
+                <div class="item-price-quantity">
+                    <div class="item-price">
+                        <div class="current-price">${item.formattedItemTotal}</div>
+                        ${item.quantity > 1 ? `<div class="unit-price">${item.formattedPrice} × ${item.quantity}</div>` : ''}
+                        <div class="discount">Free shipping</div>
                     </div>
-                    <small>Max: ${item.maxQuantity}</small>
-                </div>
-                <div class="item-price">
-                    <div class="current-price">${item.formattedItemTotal}</div>
-                    ${item.quantity > 1 ? `<div class="unit-price">${item.formattedPrice} × ${item.quantity}</div>` : ''}
+                    <div class="item-quantity">
+                        <label>Quantity</label>
+                        <div class="quantity-controls">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, -1)" ${item.quantity <= 1 ? 'disabled' : ''}>−</button>
+                            <input type="number" value="${item.quantity}" min="1" max="${item.maxQuantity}" id="qty-${item.id}" onchange="handleQuantityChange(${item.id}, this.value)">
+                            <button class="qty-btn" onclick="updateQuantity(${item.id}, 1)" ${item.quantity >= item.maxQuantity ? 'disabled' : ''}>+</button>
+                        </div>
+                        <div class="quantity-max">Max: ${item.maxQuantity}</div>
+                    </div>
                 </div>
             </div>
         `;
