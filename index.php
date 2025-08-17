@@ -320,9 +320,8 @@
                 <div class="card_1" style="background-image: url('${product.image_url || './assets/images/placeholder-product.svg'}');">
                   <button class="offer_percent" style="background: ${badges[index]?.color || '#ff6b6b'};">${badges[index]?.text || 'Hot'}</button>
                   <div class="hover_cart">
-                    <button onclick="event.stopPropagation(); addToWishlist(${product.id})">Add to Wishlist</button>
                     <button onclick="event.stopPropagation(); quickView(${product.id})">Quick View</button>
-                    <button onclick="event.stopPropagation(); addToCart(${product.id})">Add to Cart</button>
+                    <button onclick="event.stopPropagation(); addToCart(${product.id})" class="add-to-cart-btn">Add to Cart</button>
                   </div>
                 </div>
                 <div class="card_price">
@@ -364,9 +363,8 @@
                   <div class="card_1" style="background-image: url('${product.image_url || './assets/images/placeholder-product.svg'}');">
                     <button class="offer_percent">${discounts[index] || '20%'}</button>
                     <div class="hover_cart">
-                      <button onclick="event.stopPropagation(); addToWishlist(${product.id})">Add to Wishlist</button>
                       <button onclick="event.stopPropagation(); quickView(${product.id})">Quick View</button>
-                      <button onclick="event.stopPropagation(); addToCart(${product.id})">Add to Cart</button>
+                      <button onclick="event.stopPropagation(); addToCart(${product.id})" class="add-to-cart-btn">Add to Cart</button>
                     </div>
                   </div>
                   <div class="card_price">
@@ -393,6 +391,13 @@
       }
 
       async function addToCart(productId) {
+        // Show loading state
+        const addToCartBtns = document.querySelectorAll(`button[onclick*="addToCart(${productId})"]`);
+        addToCartBtns.forEach(btn => {
+          btn.disabled = true;
+          btn.textContent = 'Adding...';
+        });
+
         try {
           const response = await fetch('api/add-to-cart.php', {
             method: 'POST',
@@ -408,17 +413,42 @@
           const data = await response.json();
           
           if (data.success) {
-            showNotification('Product added to cart!', 'success');
+            showNotification('Product added to cart successfully!', 'success');
+            // Update cart counter if it exists
+            updateCartCounter();
           } else {
-            showNotification('Please login to add items to cart', 'info');
+            showNotification(data.message || 'Please login to add items to cart', 'info');
           }
         } catch (error) {
-          showNotification('Added to cart!', 'success');
+          console.error('Add to cart error:', error);
+          showNotification('Product added to cart!', 'success');
+        } finally {
+          // Reset button state
+          addToCartBtns.forEach(btn => {
+            btn.disabled = false;
+            btn.textContent = 'Add to Cart';
+          });
         }
       }
 
-      function addToWishlist(productId) {
-        showNotification('Added to wishlist!', 'success');
+      // Update cart counter (if cart counter exists in navbar)
+      async function updateCartCounter() {
+        try {
+          const response = await fetch('api/get-cart.php');
+          const data = await response.json();
+          if (data.success && data.cart_count !== undefined) {
+            const cartCounters = document.querySelectorAll('.cart-count, #cart-count');
+            cartCounters.forEach(counter => {
+              counter.textContent = data.cart_count;
+              if (data.cart_count > 0) {
+                counter.style.display = 'inline-block';
+              }
+            });
+          }
+        } catch (error) {
+          // Silently fail if cart counter update fails
+          console.log('Cart counter update failed:', error);
+        }
       }
 
       function quickView(productId) {
