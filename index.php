@@ -455,6 +455,7 @@
         goToProduct(productId);
       }
 
+      // Show notification
       function showNotification(message, type = 'info') {
         const notification = document.createElement('div');
         notification.className = `notification notification-${type}`;

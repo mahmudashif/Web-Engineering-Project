@@ -65,6 +65,9 @@ async function loadSharedComponents() {
     if (window.UserAuth) {
       window.userAuth = new window.UserAuth();
     }
+
+    // Initialize navbar search functionality
+    initializeNavbarSearch();
   } catch (error) {
     console.error('Error loading shared components:', error);
   }
@@ -223,6 +226,188 @@ function setNavigationLinks() {
     if (siteLogo && !siteLogo.src) siteLogo.src = defaultLogoUrl;
     if (footerLogo && !footerLogo.src) footerLogo.src = defaultLogoUrl;
     if (adminLogo && !adminLogo.src) adminLogo.src = defaultLogoUrl;
+
+// Initialize navbar search functionality
+function initializeNavbarSearch() {
+  const navbarSearchInput = document.querySelector('.nav_search .search_input');
+  const navbarSearchButton = document.querySelector('.nav_search .search_button');
+  const searchDropdown = document.getElementById('search-dropdown');
+  
+  if (navbarSearchInput && navbarSearchButton && searchDropdown) {
+    let searchTimeout;
+    let currentSearchTerm = '';
+
+    // Search on input (debounced)
+    navbarSearchInput.addEventListener('input', function() {
+      const searchTerm = this.value.trim();
+      
+      clearTimeout(searchTimeout);
+      
+      if (searchTerm.length >= 2) {
+        searchTimeout = setTimeout(() => {
+          currentSearchTerm = searchTerm;
+          performSearchDropdown(searchTerm);
+        }, 300);
+      } else {
+        hideSearchDropdown();
+      }
+    });
+
+    // Search on enter key - redirect to shop page
+    navbarSearchInput.addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        const searchTerm = this.value.trim();
+        if (searchTerm) {
+          redirectToShopWithSearch(searchTerm);
+        }
+      }
+    });
+
+    // Search on button click - redirect to shop page
+    navbarSearchButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      const searchTerm = navbarSearchInput.value.trim();
+      if (searchTerm) {
+        redirectToShopWithSearch(searchTerm);
+      }
+    });
+
+    // Hide dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+      if (!navbarSearchInput.contains(e.target) && !searchDropdown.contains(e.target)) {
+        hideSearchDropdown();
+      }
+    });
+
+    // Hide dropdown on escape key
+    navbarSearchInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        hideSearchDropdown();
+        this.blur();
+      }
+    });
+  }
+}
+
+// Perform search and show dropdown results
+async function performSearchDropdown(searchTerm) {
+  const searchDropdown = document.getElementById('search-dropdown');
+  const searchLoading = document.querySelector('.search_loading');
+  const searchResults = document.getElementById('search-results');
+  const searchNoResults = document.getElementById('search-no-results');
+  const searchViewAll = document.getElementById('search-view-all');
+  
+  if (!searchDropdown) return;
+
+  // Show dropdown and loading state
+  showSearchDropdown();
+  searchLoading.style.display = 'flex';
+  searchResults.innerHTML = '';
+  searchNoResults.style.display = 'none';
+  searchViewAll.style.display = 'none';
+
+  try {
+    const basePath = getBasePath();
+    const response = await fetch(`${basePath}api/get-products.php?search=${encodeURIComponent(searchTerm)}&limit=5`);
+    const data = await response.json();
+    
+    searchLoading.style.display = 'none';
+    
+    if (data.success && data.products.length > 0) {
+      // Show results
+      searchResults.innerHTML = data.products.map(product => createSearchResultItem(product)).join('');
+      
+      // Show "View all results" if there are more products
+      if (data.total > 5) {
+        searchViewAll.style.display = 'block';
+        const viewAllLink = document.getElementById('view-all-results');
+        if (viewAllLink) {
+          viewAllLink.href = `${basePath}pages/shop.php?search=${encodeURIComponent(searchTerm)}`;
+          viewAllLink.textContent = `View all ${data.total} results →`;
+        }
+      }
+    } else {
+      // Show no results
+      searchNoResults.style.display = 'block';
+    }
+  } catch (error) {
+    console.error('Search error:', error);
+    searchLoading.style.display = 'none';
+    searchNoResults.style.display = 'block';
+  }
+}
+
+// Create search result item HTML
+function createSearchResultItem(product) {
+  const basePath = getBasePath();
+  const imageUrl = product.image_url 
+    ? product.image_url.replace('../', basePath)
+    : `${basePath}assets/images/placeholder-product.svg`;
+  
+  return `
+    <a href="${basePath}pages/product-details.php?id=${product.id}" class="search_result_item">
+      <div class="search_result_image ${product.image ? '' : 'placeholder'}">
+        ${product.image 
+          ? `<img src="${imageUrl}" alt="${product.name}" onerror="this.parentElement.innerHTML='📦'; this.parentElement.classList.add('placeholder');">`
+          : '📦'
+        }
+      </div>
+      <div class="search_result_info">
+        <div class="search_result_name">${escapeHtml(product.name)}</div>
+        <div class="search_result_details">
+          <span class="search_result_brand">${escapeHtml(product.brand || 'Unknown')}</span>
+          <span class="search_result_price">${product.formatted_price}</span>
+        </div>
+      </div>
+    </a>
+  `;
+}
+
+// Show search dropdown
+function showSearchDropdown() {
+  const searchDropdown = document.getElementById('search-dropdown');
+  if (searchDropdown) {
+    searchDropdown.style.display = 'block';
+  }
+}
+
+// Hide search dropdown
+function hideSearchDropdown() {
+  const searchDropdown = document.getElementById('search-dropdown');
+  if (searchDropdown) {
+    searchDropdown.style.display = 'none';
+  }
+}
+
+// Redirect to shop page with search
+function redirectToShopWithSearch(searchTerm) {
+  const basePath = getBasePath();
+  window.location.href = `${basePath}pages/shop.php?search=${encodeURIComponent(searchTerm)}`;
+}
+
+// Escape HTML to prevent XSS
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return String(text).replace(/[&<>"']/g, function(m) { return map[m]; });
+}
+
+// Perform navbar search (legacy function)
+function performNavbarSearch() {
+  const navbarSearchInput = document.querySelector('.nav_search .search_input');
+  if (!navbarSearchInput) return;
+
+  const searchTerm = navbarSearchInput.value.trim();
+  if (!searchTerm) return;
+
+  redirectToShopWithSearch(searchTerm);
+}
 
 // Load components when DOM is ready
 document.addEventListener('DOMContentLoaded', loadSharedComponents);

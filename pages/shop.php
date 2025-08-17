@@ -249,15 +249,32 @@
 
       // Load products when page loads
       document.addEventListener('DOMContentLoaded', function() {
+        // Get URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const urlSearch = urlParams.get('search') || '';
+        
         // Initialize filters
         currentFilters = {
           category: 'all',
-          search: '',
+          search: urlSearch,
           minPrice: 0,
           maxPrice: null,
           sortBy: 'id',
           sortOrder: 'DESC'
         };
+        
+        // Set search input value if coming from URL
+        if (urlSearch) {
+          const searchInput = document.getElementById('product-search');
+          if (searchInput) {
+            searchInput.value = urlSearch;
+            const clearButton = document.getElementById('clear-search');
+            if (clearButton) {
+              clearButton.style.display = 'flex';
+            }
+          }
+        }
+        
         loadProducts();
         setupEventListeners();
       });
