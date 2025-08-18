@@ -3,7 +3,7 @@ function getBasePath() {
   const path = window.location.pathname;
   const depth = (path.match(/\//g) || []).length - 1;
   
-  if (path.includes('/pages/auth/')) {
+  if (path.includes('/pages/legal/') || path.includes('/pages/auth/')) {
     return '../../';
   } else if (path.includes('/pages/') || path.includes('/components/') || path.includes('/error/')) {
     return '../';
@@ -212,11 +212,15 @@ function setNavigationLinks() {
   const footerShop = document.getElementById('footer-shop');
   const footerAbout = document.getElementById('footer-about');
   const footerContact = document.getElementById('footer-contact');
+  const footerPrivacyPolicy = document.getElementById('footer-privacy-policy');
+  const footerTerms = document.getElementById('footer-terms');
   
   if (footerHome) footerHome.href = basePath + 'index.php';
   if (footerShop) footerShop.href = basePath + 'pages/shop.php';
   if (footerAbout) footerAbout.href = basePath + 'pages/about.php';
   if (footerContact) footerContact.href = basePath + 'pages/contact.php';
+  if (footerPrivacyPolicy) footerPrivacyPolicy.href = basePath + 'pages/legal/privacy.php';
+  if (footerTerms) footerTerms.href = basePath + 'pages/legal/terms.php';
 }
     const siteLogo = document.getElementById('site-logo');
     const footerLogo = document.getElementById('footer-logo');

@@ -43,7 +43,7 @@
                 <div class="checkbox-group">
                     <input type="checkbox" id="terms" name="terms" required>
                     <label for="terms" class="checkbox-label">
-                        I agree to the <a href="#">Terms and Conditions</a> and <a href="#">Privacy Policy</a>
+                        I agree to the <a href="../legal/terms.php">Terms and Conditions</a> and <a href="../legal/privacy.php">Privacy Policy</a>
                     </label>
                 </div>
 
