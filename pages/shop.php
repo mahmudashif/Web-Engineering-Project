@@ -245,7 +245,7 @@
         sortOrder: 'DESC'
       };
       let currentPage = 1;
-      let productsPerPage = 12;
+      let productsPerPage = 9;
       let totalProducts = 0;
 
       // Load products when page loads
