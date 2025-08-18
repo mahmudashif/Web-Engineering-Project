@@ -473,11 +473,7 @@
 
       // Create product card HTML
       function createProductCard(product) {
-        const stockBadge = product.stock_quantity <= 5 && product.stock_quantity > 0 
-          ? '<span class="badge low-stock">Low Stock</span>' 
-          : product.stock_quantity > 50 
-          ? '<span class="badge in-stock">In Stock</span>' 
-          : '';
+        const stockBadge = '';
 
         const isOutOfStock = product.stock_quantity === 0;
         const buttonDisabled = isOutOfStock ? 'disabled' : '';
