@@ -79,7 +79,7 @@
               <div class="dropdown-content">
                 <a href="#" onclick="filterByCategoryAndBrand('accessories', 'apple', 'Apple Accessories')">Apple Accessories</a>
                 <a href="#" onclick="filterByCategoryAndBrand('accessories', 'anker', 'Anker')">Anker</a>
-                <a href="#" onclick="filterByCategoryAndBrand('accessories', 'belkin', 'Belkin')">Belkin</a>
+                <a href="#" onclick="filterByCategoryAndBrand('accessories', 'benks', 'Benks')">Benks</a>
                 <a href="#" onclick="filterByCategoryAndBrand('accessories', 'logitech', 'Logitech')">Logitech</a>
                 <a href="#" onclick="filterByCategoryAndBrand('accessories', 'razer', 'Razer')">Razer</a>
                 <a href="#" onclick="filterByCategoryAndBrand('accessories', 'samsung', 'Samsung Accessories')">Samsung Accessories</a>
