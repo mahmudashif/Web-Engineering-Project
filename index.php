@@ -174,45 +174,6 @@
       </div>
     </div>
 
-    <!-- ========== testimonials section ========== -->
-    <div class="testimonials_section">
-      <div class="testimonials_container">
-        <h2>What Our Customers Say</h2>
-        <div class="testimonials_grid">
-          <div class="testimonial_card">
-            <div class="testimonial_content">
-              <p>"Absolutely amazing service! Got my iPhone 15 Pro delivered next day. The quality is outstanding and customer support was incredibly helpful."</p>
-            </div>
-            <div class="testimonial_author">
-              <strong>Sarah Johnson</strong>
-              <span>Verified Buyer</span>
-              <div class="rating">★★★★★</div>
-            </div>
-          </div>
-          <div class="testimonial_card">
-            <div class="testimonial_content">
-              <p>"Best tech store I've ever used. Competitive prices, authentic products, and lightning-fast shipping. Highly recommend for all electronics!"</p>
-            </div>
-            <div class="testimonial_author">
-              <strong>Michael Chen</strong>
-              <span>Premium Member</span>
-              <div class="rating">★★★★★</div>
-            </div>
-          </div>
-          <div class="testimonial_card">
-            <div class="testimonial_content">
-              <p>"Returned a laptop after 2 weeks - no hassle at all! The return process was smooth and I got my refund within 3 days. Excellent experience."</p>
-            </div>
-            <div class="testimonial_author">
-              <strong>Emma Davis</strong>
-              <span>Happy Customer</span>
-              <div class="rating">★★★★★</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- ========== special offer section design ========== -->
     <h2 class="special_offer_heading">⚡ Limited Time Deals</h2>
     <div class="special_offer_main" id="deals-products">
