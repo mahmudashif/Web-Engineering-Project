@@ -322,15 +322,15 @@ async function performSearchDropdown(searchTerm) {
       // Show results
       searchResults.innerHTML = data.products.map(product => createSearchResultItem(product)).join('');
       
-      // Show "View all results" if there are more products
-      if (data.total > 5) {
-        searchViewAll.style.display = 'block';
-        const viewAllLink = document.getElementById('view-all-results');
-        if (viewAllLink) {
-          viewAllLink.href = `${basePath}pages/shop.php?search=${encodeURIComponent(searchTerm)}`;
-          viewAllLink.textContent = `View all ${data.total} results →`;
-        }
-      }
+      // Hide "View all results" section as requested
+      // if (data.total > 5) {
+      //   searchViewAll.style.display = 'block';
+      //   const viewAllLink = document.getElementById('view-all-results');
+      //   if (viewAllLink) {
+      //     viewAllLink.href = `${basePath}pages/shop.php?search=${encodeURIComponent(searchTerm)}`;
+      //     viewAllLink.textContent = `View all ${data.total} results →`;
+      //   }
+      // }
     } else {
       // Show no results
       searchNoResults.style.display = 'block';
@@ -351,9 +351,9 @@ function createSearchResultItem(product) {
   
   return `
     <a href="${basePath}pages/product-details.php?id=${product.id}" class="search_result_item">
-      <div class="search_result_image ${product.image ? '' : 'placeholder'}">
-        ${product.image 
-          ? `<img src="${imageUrl}" alt="${product.name}" onerror="this.parentElement.innerHTML='📦'; this.parentElement.classList.add('placeholder');">`
+      <div class="search_result_image ${!product.image_url ? 'placeholder' : ''}">
+        ${product.image_url 
+          ? `<img src="${imageUrl}" alt="${product.name}" onerror="this.style.display='none'; this.parentElement.innerHTML='📦'; this.parentElement.classList.add('placeholder');">`
           : '📦'
         }
       </div>
