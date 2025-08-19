@@ -241,23 +241,37 @@ function initializeNavbarSearch() {
     let searchTimeout;
     let currentSearchTerm = '';
 
-    // Search on input (debounced)
+    // Search on input (enhanced with better debouncing)
     navbarSearchInput.addEventListener('input', function() {
       const searchTerm = this.value.trim();
       
       clearTimeout(searchTimeout);
       
+      if (searchTerm.length === 0) {
+        hideSearchDropdown();
+        currentSearchTerm = '';
+        return;
+      }
+      
       if (searchTerm.length >= 2) {
+        // Show loading immediately for better UX
+        if (searchTerm !== currentSearchTerm) {
+          showSearchDropdown();
+          document.querySelector('.search_loading').style.display = 'flex';
+          document.getElementById('search-results').innerHTML = '';
+        }
+        
         searchTimeout = setTimeout(() => {
           currentSearchTerm = searchTerm;
           performSearchDropdown(searchTerm);
-        }, 300);
+        }, 200); // Reduced from 300ms for faster response
       } else {
         hideSearchDropdown();
+        currentSearchTerm = '';
       }
     });
 
-    // Search on enter key - redirect to shop page
+    // Enhanced search with enter key - redirect to shop page
     navbarSearchInput.addEventListener('keypress', function(e) {
       if (e.key === 'Enter') {
         e.preventDefault();
@@ -265,6 +279,8 @@ function initializeNavbarSearch() {
         if (searchTerm) {
           redirectToShopWithSearch(searchTerm);
         }
+        hideSearchDropdown();
+        this.blur();
       }
     });
 
@@ -294,7 +310,7 @@ function initializeNavbarSearch() {
   }
 }
 
-// Perform search and show dropdown results
+// Perform search and show dropdown results with improved relevance
 async function performSearchDropdown(searchTerm) {
   const searchDropdown = document.getElementById('search-dropdown');
   const searchLoading = document.querySelector('.search_loading');
@@ -313,17 +329,22 @@ async function performSearchDropdown(searchTerm) {
 
   try {
     const basePath = getBasePath();
-    const response = await fetch(`${basePath}api/get-products.php?search=${encodeURIComponent(searchTerm)}&limit=5`);
+    // Increased limit to 8 for better search results
+    const response = await fetch(`${basePath}api/get-products.php?search=${encodeURIComponent(searchTerm)}&limit=8`);
     const data = await response.json();
     
     searchLoading.style.display = 'none';
     
     if (data.success && data.products.length > 0) {
-      // Show results
+      // Show results with improved relevance sorting
       searchResults.innerHTML = data.products.map(product => createSearchResultItem(product)).join('');
       
-      // Hide "View all results" section as requested
-      // if (data.total > 5) {
+      // Show search statistics
+      const searchStats = `<div class="search_stats">Found ${data.total} ${data.total === 1 ? 'product' : 'products'} matching "${searchTerm}"</div>`;
+      searchResults.insertAdjacentHTML('afterbegin', searchStats);
+      
+      // Hide "View all results" section as previously requested
+      // if (data.total > 8) {
       //   searchViewAll.style.display = 'block';
       //   const viewAllLink = document.getElementById('view-all-results');
       //   if (viewAllLink) {
@@ -332,22 +353,34 @@ async function performSearchDropdown(searchTerm) {
       //   }
       // }
     } else {
-      // Show no results
+      // Show enhanced no results message
+      searchNoResults.innerHTML = `
+        <p>No products found for "${searchTerm}"</p>
+        <small>Try different keywords or check spelling</small>
+      `;
       searchNoResults.style.display = 'block';
     }
   } catch (error) {
     console.error('Search error:', error);
     searchLoading.style.display = 'none';
+    searchNoResults.innerHTML = `
+      <p>Search temporarily unavailable</p>
+      <small>Please try again in a moment</small>
+    `;
     searchNoResults.style.display = 'block';
   }
 }
 
-// Create search result item HTML
+// Create search result item HTML with search term highlighting
 function createSearchResultItem(product) {
   const basePath = getBasePath();
   const imageUrl = product.image_url 
     ? product.image_url.replace('../', basePath)
     : `${basePath}assets/images/placeholder-product.svg`;
+  
+  // Get current search term for highlighting
+  const currentSearch = document.querySelector('.search_input').value.trim();
+  const highlightedName = highlightSearchTerm(product.name, currentSearch);
   
   return `
     <a href="${basePath}pages/product-details.php?id=${product.id}" class="search_result_item">
@@ -358,7 +391,7 @@ function createSearchResultItem(product) {
         }
       </div>
       <div class="search_result_info">
-        <div class="search_result_name">${escapeHtml(product.name)}</div>
+        <div class="search_result_name">${highlightedName}</div>
         <div class="search_result_details">
           <span class="search_result_brand">${escapeHtml(product.brand || 'Unknown')}</span>
           <span class="search_result_price">${product.formatted_price}</span>
@@ -366,6 +399,19 @@ function createSearchResultItem(product) {
       </div>
     </a>
   `;
+}
+
+// Highlight search term in text
+function highlightSearchTerm(text, searchTerm) {
+  if (!searchTerm || searchTerm.length < 2) return escapeHtml(text);
+  
+  const escapedText = escapeHtml(text);
+  const escapedSearchTerm = escapeHtml(searchTerm);
+  
+  // Create a case-insensitive regex to find the search term
+  const regex = new RegExp(`(${escapedSearchTerm.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi');
+  
+  return escapedText.replace(regex, '<mark class="search_highlight">$1</mark>');
 }
 
 // Show search dropdown

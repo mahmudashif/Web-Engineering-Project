@@ -98,20 +98,67 @@ try {
         $where_conditions[] = "(" . implode(" OR ", $brand_conditions) . ")";
     }
     
-    // Search filter - search in name, description, and brand (only if no specific brand filter)
+    // Search filter - improved search with relevance scoring
     if (!empty($search)) {
+        $search_term = trim($search);
+        $search_lower = strtolower($search_term);
+        
+        // Create relevance-based search with scoring
+        $relevance_select = "
+            (
+                CASE 
+                    -- Exact match in name (highest priority)
+                    WHEN LOWER(name) = LOWER(?) THEN 100
+                    -- Name starts with search term
+                    WHEN LOWER(name) LIKE ? THEN 90
+                    -- Name contains search term
+                    WHEN LOWER(name) LIKE ? THEN 80
+                    -- Brand exact match
+                    WHEN LOWER(brand) = LOWER(?) THEN 70
+                    -- Brand starts with search term
+                    WHEN LOWER(brand) LIKE ? THEN 60
+                    -- Brand contains search term
+                    WHEN LOWER(brand) LIKE ? THEN 50
+                    -- Description contains search term
+                    WHEN LOWER(description) LIKE ? THEN 30
+                    -- Category matches
+                    WHEN LOWER(category) LIKE ? THEN 20
+                    ELSE 0
+                END
+            ) as relevance_score";
+        
         if (empty($brand)) {
-            $where_conditions[] = "(name LIKE ? OR description LIKE ? OR brand LIKE ?)";
-            $params[] = "%$search%";
-            $params[] = "%$search%";
-            $params[] = "%$search%";
-            $param_types .= 'sss';
+            $where_conditions[] = "(LOWER(name) LIKE ? OR LOWER(description) LIKE ? OR LOWER(brand) LIKE ? OR LOWER(category) LIKE ?)";
+            $params[] = "%$search_lower%";
+            $params[] = "%$search_lower%";
+            $params[] = "%$search_lower%";
+            $params[] = "%$search_lower%";
+            $param_types .= 'ssss';
         } else {
-            // If brand is already filtered, only search in name and description
-            $where_conditions[] = "(name LIKE ? OR description LIKE ?)";
-            $params[] = "%$search%";
-            $params[] = "%$search%";
-            $param_types .= 'ss';
+            // If brand is already filtered, only search in name, description, and category
+            $where_conditions[] = "(LOWER(name) LIKE ? OR LOWER(description) LIKE ? OR LOWER(category) LIKE ?)";
+            $params[] = "%$search_lower%";
+            $params[] = "%$search_lower%";
+            $params[] = "%$search_lower%";
+            $param_types .= 'sss';
+        }
+        
+        // Add relevance parameters (for the SELECT clause)
+        $relevance_params = [
+            $search_term,                    // exact name match
+            $search_lower . '%',             // name starts with
+            '%' . $search_lower . '%',       // name contains
+            $search_term,                    // exact brand match
+            $search_lower . '%',             // brand starts with  
+            '%' . $search_lower . '%',       // brand contains
+            '%' . $search_lower . '%',       // description contains
+            '%' . $search_lower . '%'        // category contains
+        ];
+        
+        // Override sort to prioritize relevance when searching
+        if (!empty($search)) {
+            $sort_by = 'relevance_score';
+            $sort_order = 'DESC';
         }
     }
     
@@ -131,12 +178,20 @@ try {
     $where_clause = implode(' AND ', $where_conditions);
     
     // Validate sort parameters
-    $allowed_sort_fields = ['id', 'name', 'price', 'stock_quantity', 'created_at'];
+    $allowed_sort_fields = ['id', 'name', 'price', 'stock_quantity', 'created_at', 'relevance_score'];
     if (!in_array($sort_by, $allowed_sort_fields)) {
         $sort_by = 'id';
     }
     
     $sort_order = strtoupper($sort_order) === 'ASC' ? 'ASC' : 'DESC';
+    
+    // Build SELECT clause
+    $select_clause = "id, name, description, price, image, stock_quantity, brand, category, created_at";
+    
+    // Add relevance score if searching
+    if (!empty($search)) {
+        $select_clause .= ", " . $relevance_select;
+    }
     
     // Get total count for pagination
     $count_sql = "SELECT COUNT(*) as total FROM products WHERE $where_clause";
@@ -151,7 +206,7 @@ try {
     $total_products = $count_result->fetch_assoc()['total'];
     
     // Get products
-    $sql = "SELECT id, name, description, price, image, stock_quantity, brand, category, created_at 
+    $sql = "SELECT $select_clause
             FROM products 
             WHERE $where_clause 
             ORDER BY $sort_by $sort_order 
@@ -159,13 +214,24 @@ try {
     
     $stmt = $conn->prepare($sql);
     
-    // Add limit and offset parameters
-    $params[] = (int)$limit;
-    $params[] = (int)$offset;
-    $param_types .= 'ii';
+    // Prepare all parameters including relevance parameters if searching
+    $all_params = $params;
+    $all_param_types = $param_types;
     
-    if (!empty($params)) {
-        $stmt->bind_param($param_types, ...$params);
+    // Add relevance parameters if we're searching
+    if (!empty($search)) {
+        // Insert relevance parameters at the beginning (for SELECT clause)
+        $all_params = array_merge($relevance_params, $all_params);
+        $all_param_types = 'ssssssss' . $all_param_types;
+    }
+    
+    // Add limit and offset parameters at the end
+    $all_params[] = (int)$limit;
+    $all_params[] = (int)$offset;
+    $all_param_types .= 'ii';
+    
+    if (!empty($all_params)) {
+        $stmt->bind_param($all_param_types, ...$all_params);
     }
     
     $stmt->execute();
