@@ -128,8 +128,10 @@
                 </div>
               </div>
             </div>
-
-            
+          </div>
+        </div>
+      </div>
+    </section>
 
     <!-- FAQ Section -->
     <section class="faq-section">
@@ -208,7 +210,7 @@
               </svg>
             </button>
             <div class="faq-answer">
-              <p>Yes, all our products come with manufacturer warranty. Warranty periods vary by product and brand, typically ranging from 1-3 years. We also offer extended warranty options for additional coverage.</p>
+              <p>Yes, all our products come with manufacturer warranty. Warranty periods vary by product and brand, typically ranging from 1-3 years. We also offer extended warranty options for extended coverage.</p>
             </div>
           </div>
         </div>
